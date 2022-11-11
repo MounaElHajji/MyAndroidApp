@@ -3,9 +3,11 @@ package Models;
 public class Service {
     private int id;
     private String label;
+    private int image;
 
-    public Service(String label) {
+    public Service(String label, int image) {
         this.label = label;
+        this.image = image;
     }
 
     public int getId() {
@@ -18,5 +20,13 @@ public class Service {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 }
