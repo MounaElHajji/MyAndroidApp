@@ -3,6 +3,7 @@ package com.example.myandroidapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class listeServices extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_services);
         ButterKnife.bind(this);
