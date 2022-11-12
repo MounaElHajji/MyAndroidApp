@@ -7,15 +7,50 @@
     android:background="#4485C0"
     tools:context=".listeServices"
     >
-
-    <ListView
-        android:id="@+id/lisSer"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/customshape"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="56dp"
-        />
+        android:orientation="vertical"
+      >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="101dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="#EAEAEA"
+            app:cardCornerRadius="30dp"
+            >
+            <ImageView
+                android:id="@+id/imageSer"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                tools:srcCompat="@drawable/lg"
+                />
+
+            <TextView
+                android:id="@+id/labelSer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Choisissez une catégorie"
+                android:textSize="26dp" />
+        </androidx.cardview.widget.CardView>
+
+        <ListView
+            android:id="@+id/lisSer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="56dp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
