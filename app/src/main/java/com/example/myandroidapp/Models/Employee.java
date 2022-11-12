@@ -1,8 +1,8 @@
 package com.example.myandroidapp.Models;
 
 public class Employee {
-    private String id, ville, nom, description, image, prenom, rue, codeP, tel, password;
-    private String rating;
+    private String id, ville, nom, description, image;
+
 
     public Employee(String id, String nom, String ville, String description) {
         this.id= id;
@@ -51,51 +51,7 @@ public class Employee {
         this.image = image;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
 
-    public String getRue() {
-        return rue;
-    }
 
-    public void setRue(String rue) {
-        this.rue = rue;
-    }
-
-    public String getCodeP() {
-        return codeP;
-    }
-
-    public void setCodeP(String codeP) {
-        this.codeP = codeP;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
 }
