@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.EmployeesDetails;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 import com.squareup.picasso.Picasso;
@@ -54,7 +53,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, EmployeesDetails.class);
+                Intent i = new Intent(context, currentProfile.class);
                 context.startActivity(i);
             }
         });
