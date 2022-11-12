@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyAndroidApp</string>
     <string-array name="filtrage">
-        <item>Filter Par</item>
+        <item>Filtrer Par</item>
         <item>Nom</item>
         <item>Ville</item>
     </string-array>
