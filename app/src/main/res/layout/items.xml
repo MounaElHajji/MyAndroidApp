@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/text_description"
                 android:layout_width="260dp"
-                android:layout_height="50dp"
+                android:layout_height="45dp"
                 android:maxLines="6"
                 android:text="Je suis un employee de qualiite qui va accomplir tous les travails avec success"
                 android:textColor="@color/black"
@@ -76,7 +76,7 @@
                 android:id="@+id/btnVoir"
                 android:layout_width="80dp"
                 android:layout_height="27dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/button_back"
                 android:text="voir tout"
                 android:textColor="@color/black"
