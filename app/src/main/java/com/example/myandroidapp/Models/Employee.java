@@ -4,10 +4,10 @@ public class Employee {
     private String id, ville, nom, description, image, prenom, rue, codeP, tel, password;
     private String rating;
 
-    public Employee(String id, String ville, String nom, String description) {
+    public Employee(String id, String nom, String ville, String description) {
         this.id= id;
-        this.ville = ville;
         this.nom = nom;
+        this.ville = ville;
         this.description = description;
     }
 

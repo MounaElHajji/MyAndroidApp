@@ -74,7 +74,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         }
     }
 
-
     @Override
     public int getItemCount() {
         return EmployeeList.size();
