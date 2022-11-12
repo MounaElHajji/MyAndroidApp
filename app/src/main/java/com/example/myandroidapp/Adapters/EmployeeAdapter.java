@@ -46,11 +46,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.ville.setText(post.getVille());
         holder.descritpion.setText(post.getDescription());
 
-        if(EmployeeList.get(position).getImage()!=null)
-        {
-            Picasso.get().load(EmployeeList.get(position).getImage()).into(holder.image);
-        }
-
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
