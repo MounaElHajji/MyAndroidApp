@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.CurrentProfile;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
