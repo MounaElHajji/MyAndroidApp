@@ -23,7 +23,8 @@ public class footer extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemReselectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.home:
-                    replaceFragment(new HomeFragment());
+                    Intent intent = new Intent(footer.this,OtherActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.messages:
                     replaceFragment(new MessagesFragment());

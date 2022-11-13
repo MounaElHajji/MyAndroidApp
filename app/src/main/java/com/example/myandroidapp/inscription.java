@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class inscription extends AppCompatActivity {
-    /*
+
     String[] profile_type = { "client", "employé"};
     TextView mytextview;
     Button inscription;
@@ -62,5 +62,5 @@ public class inscription extends AppCompatActivity {
 
 
 
-    }*/
+    }
 }
