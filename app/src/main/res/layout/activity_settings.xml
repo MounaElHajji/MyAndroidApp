@@ -173,10 +173,6 @@
             android:text="Se déconnecter"
             android:textColor="@color/black" />
 
-        <include
-            layout="@layout/activity_footer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </RelativeLayout>
 </RelativeLayout>
