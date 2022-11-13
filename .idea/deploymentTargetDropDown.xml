@@ -7,11 +7,19 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
+<<<<<<< HEAD
             <value value="C:\Users\ASMAE\.android\avd\Nexus_One_API_33.avd" />
+=======
+            <value value="C:\Users\HP\.android\avd\Pixel_3_API_27.avd" />
+>>>>>>> footer
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
+<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2022-11-12T14:41:53.334692100Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2022-11-12T00:50:17.063309300Z" />
+>>>>>>> footer
   </component>
 </project>
