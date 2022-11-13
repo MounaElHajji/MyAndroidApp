@@ -27,17 +27,17 @@ public class footer extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case R.id.messages:
-                    replaceFragment(new MessagesFragment());
+
 
                     break;
                 case R.id.settigns:
-                    replaceFragment(new SettingsFragment());
+
                     break;
                 case R.id.profile:
-                    replaceFragment(new ProfileFragment());
+
                     break;
                 case R.id.favoris:
-                    replaceFragment(new fragment_favoris());
+
                     break;
             }
 
