@@ -1,4 +1,4 @@
-package Adapters;
+package com.example.myandroidapp.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,10 +11,9 @@ import android.widget.TextView;
 import com.example.myandroidapp.R;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import Models.Service;
+import com.example.myandroidapp.Models.Service;
 
 public class ServiceAdapter extends ArrayAdapter<Service> {
     private ArrayList<Service> services;

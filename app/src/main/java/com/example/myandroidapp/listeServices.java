@@ -8,8 +8,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import Adapters.ServiceAdapter;
-import Models.Service;
+import com.example.myandroidapp.Adapters.ServiceAdapter;
+import com.example.myandroidapp.Models.Service;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

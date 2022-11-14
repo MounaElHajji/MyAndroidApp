@@ -1,4 +1,4 @@
-package Models;
+package com.example.myandroidapp.Models;
 
 public class Service {
     private int id;
