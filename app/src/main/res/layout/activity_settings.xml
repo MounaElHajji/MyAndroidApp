@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroudLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".models.Settings"
+    android:background="#4485C0"
+    >
+
+    <ImageButton
+        android:id="@+id/arrow_back"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:layout_gravity="left"
+        android:background="@drawable/ic_arrow_back"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:clickable="true"
+        android:onClick="onBackClick"/>
+
+    <TextView
+        android:id="@+id/settingsTitle"
+        style="@style/Widget.AppCompat.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:shadowColor="#33CDCD"
+        android:shadowDx="20"
+        android:text="Paramètres"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textStyle="bold" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="100dp"
+        android:layout_below="@+id/settingsTitle"
+        android:layout_marginTop="15dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/settings_back"
+            android:elevation="1dp"
+            android:background="@color/white"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="548dp"
+        android:layout_below="@+id/settingsTitle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="103dp"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/editIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/edit_icon"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="95dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/editIcon"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:onClick="onEditClick"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:text="Modifier votre compte"
+            android:textColor="@color/black" />
+
+        <ImageButton
+            android:id="@+id/deleteIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/editIcon"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/delete_icon"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/editButton"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/deleteIcon"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:text="Supprimer votre compte"
+            android:textColor="@color/black" />
+
+        <ImageButton
+            android:id="@+id/switchIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/deleteIcon"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/switch_icon"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/switchButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/deleteButton"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/switchIcon"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:text="Switcher profil"
+            android:textColor="@color/black" />
+
+        <ImageButton
+            android:id="@+id/logoutIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/switchIcon"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/logout_icon"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/switchButton"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/deleteIcon"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:text="Se déconnecter"
+            android:textColor="@color/black" />
+
+
+    </RelativeLayout>
+</RelativeLayout>
+
