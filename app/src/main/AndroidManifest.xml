@@ -21,27 +21,36 @@
                 android:value="" />
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".Models.Settings"
             android:exported="true">
+=======
+            android:name=".listeServices"
+            android:exported="false">
+>>>>>>> listeServices
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+<<<<<<< HEAD
 
 
         <activity
             android:name=".EmployeelistActivity"
+=======
+        <activity
+            android:name=".MainActivity"
+>>>>>>> listeServices
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+<<<<<<< HEAD
         <activity
             android:name=".Otheractivity"
             android:exported="false">
@@ -56,6 +65,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+=======
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+>>>>>>> listeServices
     </application>
 </manifest>
 
