@@ -19,13 +19,13 @@ public class footer extends AppCompatActivity {
         binding= FooterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //whenever the app opens for the first time the home fragment should be shown on the screen
-        Intent intent = new Intent(footer.this,OtherActivity.class);
+        Intent intent = new Intent(footer.this,Otheractivity.class);
         startActivity(intent);
         binding.bottomNavigationView.setOnItemReselectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.home:
-                    Intent intent = new Intent(footer.this,OtherActivity.class);
-                    startActivity(intent);
+                    Intent i = new Intent(footer.this, Otheractivity.class);
+                    startActivity(i);
                     break;
                 case R.id.messages:
 
