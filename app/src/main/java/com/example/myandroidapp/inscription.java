@@ -27,7 +27,7 @@ public class inscription extends AppCompatActivity {
         mytextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inscription.this,OtherActivity.class);
+                Intent intent = new Intent(inscription.this,Otheractivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +37,7 @@ public class inscription extends AppCompatActivity {
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inscription.this,OtherActivity.class);
+                Intent intent = new Intent(inscription.this,Otheractivity.class);
                 startActivity(intent);
             }
         });

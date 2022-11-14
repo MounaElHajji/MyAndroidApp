@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myandroidapp.CurrentProfile;
 import com.example.myandroidapp.EmployeelistActivity;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
@@ -48,7 +49,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, EmployeelistActivity.class);
+                Intent i = new Intent(context, CurrentProfile.class);
                 context.startActivity(i);
             }
         });
