@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 
-public class currentProfile extends AppCompatActivity {
+public class CurrentProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

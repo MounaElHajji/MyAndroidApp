@@ -12,53 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAndroidApp"
         tools:targetApi="31">
+
         <activity
-<<<<<<< HEAD
-            android:name=".currentProfile"
-            android:exported="false">
-=======
-            android:name=".inscription"
+            android:name=".MainActivity2"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
->>>>>>> footer
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-<<<<<<< HEAD
-            android:name=".MainActivity"
-            android:exported="false">
-=======
-            android:name=".OtherActivity"
+            android:name=".Models.Settings"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
->>>>>>> footer
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
         <activity
-<<<<<<< HEAD
             android:name=".EmployeelistActivity"
-=======
-<<<<<<< HEAD
-            android:name=".footer"
->>>>>>> footer
-=======
-            android:name=".models.Settings"
->>>>>>> settings
->>>>>>> 7b7a1e1e4d4743f41041ad2f2e0a5f5eed76e092
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
