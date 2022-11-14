@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyAndroidApp</string>
+    <string-array name="filtrage">
+        <item>Filtrer Par</item>
+        <item>Nom</item>
+        <item>Ville</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
