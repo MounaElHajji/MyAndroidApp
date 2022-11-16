@@ -13,7 +13,7 @@ import com.example.myandroidapp.Models.Service;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class listeServices extends AppCompatActivity {
+public class ListeServices extends AppCompatActivity {
     @BindView(R.id.lisSer)
     ListView listServ;
 
