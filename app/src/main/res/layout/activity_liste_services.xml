@@ -35,7 +35,6 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="32dp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins_bold"
                 android:text="Choisissez une catégorie"
                 android:textSize="26dp" />
         </LinearLayout>

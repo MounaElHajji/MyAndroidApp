@@ -10,6 +10,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.OnClick;
+
 public class inscription extends AppCompatActivity {
 
     String[] profile_type = { "client", "employé"};
@@ -27,7 +29,7 @@ public class inscription extends AppCompatActivity {
         mytextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inscription.this,Otheractivity.class);
+                Intent intent = new Intent(inscription.this,LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +39,7 @@ public class inscription extends AppCompatActivity {
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inscription.this,Otheractivity.class);
+                Intent intent = new Intent(inscription.this,listeServices.class);
                 startActivity(intent);
             }
         });
@@ -60,7 +62,6 @@ public class inscription extends AppCompatActivity {
             }
         });
 
-
-
     }
+
 }

@@ -12,9 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAndroidApp"
         tools:targetApi="31">
-
         <activity
-            android:name=".MainActivity2"
+            android:name=".HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -22,8 +33,7 @@
         </activity>
         <activity
             android:name=".Models.Settings"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".listeServices"
             android:exported="false">
@@ -31,12 +41,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
         <activity
             android:name=".EmployeelistActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".EditProfile"
             android:exported="false">
@@ -45,12 +52,8 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".inscription"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -74,5 +77,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-</manifest>
 
+</manifest>

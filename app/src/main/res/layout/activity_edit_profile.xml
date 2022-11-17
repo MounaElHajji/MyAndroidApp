@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:shadowColor="#33CDCD"
         android:shadowDx="20"
         android:text="Editer Profile"
@@ -27,12 +27,13 @@
         android:paddingBottom="4mm"/>
 
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:cardCornerRadius="80dp"
         android:layout_below="@+id/EditTitle"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="-20dp"
         android:elevation="10dp"
         android:layout_centerHorizontal="true"
         >
@@ -40,20 +41,18 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/profil"
-            android:elevation="1dp"
+            android:layout_height="153dp"
             android:background="@color/white"
-            />
+            android:elevation="1dp"
+            android:src="@drawable/profil" />
 
     </androidx.cardview.widget.CardView>
+
     <ImageButton
         android:id="@+id/arrow_back"
         android:layout_width="35dip"
         android:layout_height="35dip"
         android:layout_gravity="left"
-        android:layout_marginLeft="2mm"
-        android:layout_marginTop="11mm"
         android:background="@drawable/fleche"
         android:clickable="true"
         android:onClick="onBackClick"
@@ -61,17 +60,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="650dp"
         android:layout_marginLeft="0px"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="105dp"
         android:layout_marginRight="0px"
         android:layout_marginBottom="0dp"
-        android:orientation="vertical"
-        android:paddingTop="14mm"
-        android:paddingLeft="4mm"
-        android:paddingRight="4mm"
         android:background="@color/white"
-        >
+        android:orientation="vertical"
+        android:paddingLeft="4mm"
+        android:paddingTop="14mm"
+        android:paddingRight="4mm">
 
 
         <TextView
@@ -94,13 +92,12 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/email"
             android:drawablePadding="20dp"
             android:hint="xxxxxx@gmail.com"
             android:padding="20dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:drawableStart="@drawable/email"
-            />
+            android:textColorHint="@color/black" />
 
         <TextView
             android:id="@+id/txt2"
@@ -123,13 +120,12 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/phone"
             android:drawablePadding="20dp"
             android:hint="06xxxxxxxx"
             android:padding="20dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:drawableStart="@drawable/phone"
-            />
+            android:textColorHint="@color/black" />
 
         <TextView
             android:id="@+id/txt3"
@@ -151,13 +147,12 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/place"
             android:drawablePadding="20dp"
             android:hint="ville"
             android:padding="20dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:drawableStart="@drawable/place"
-            />
+            android:textColorHint="@color/black" />
 
         <TextView
             android:id="@+id/txt5"
@@ -180,14 +175,13 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/pass"
             android:drawablePadding="20dp"
             android:hint="**********"
             android:inputType="textPassword"
             android:padding="20dp"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:drawableStart="@drawable/pass"
-            />
+            android:textColorHint="@color/black" />
 
         <Button
             android:id="@+id/btn"
@@ -203,14 +197,17 @@
             android:textColor="@color/white"
             android:textSize="50px" />
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
+
+
     </LinearLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 </RelativeLayout>

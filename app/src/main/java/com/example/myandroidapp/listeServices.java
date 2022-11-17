@@ -2,6 +2,7 @@ package com.example.myandroidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import com.example.myandroidapp.Adapters.ServiceAdapter;
 import com.example.myandroidapp.Models.Service;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 public class listeServices extends AppCompatActivity {
     @BindView(R.id.lisSer)
@@ -33,5 +35,13 @@ public class listeServices extends AppCompatActivity {
 
         ServiceAdapter serviceAdapter= new ServiceAdapter(getApplicationContext(), R.layout.activity_liste_services, services);
         listServ.setAdapter(serviceAdapter);
+
+
+    }
+
+    @OnItemClick(R.id.lisSer)
+    public void onListTransactionClicked(int position){
+        Intent i = new Intent(this, EmployeelistActivity.class);
+        startActivity(i);
     }
 }
