@@ -1,5 +1,6 @@
 package com.example.myandroidapp.Models;
 
+import com.example.myandroidapp.EditProfile;
 import com.example.myandroidapp.Otheractivity;
 
 import android.content.Intent;
@@ -28,7 +29,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onEditClick(View view) {
-        Intent intent = new Intent(Settings.this, Otheractivity.class);
+        Intent intent = new Intent(Settings.this, EditProfile.class);
         startActivity(intent);
     }
 
