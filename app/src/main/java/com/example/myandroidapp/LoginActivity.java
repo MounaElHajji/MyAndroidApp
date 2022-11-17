@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import butterknife.OnClick;
 
@@ -22,6 +23,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this,listeServices.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView signUp = findViewById(R.id.signUp);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,inscription.class);
                 startActivity(intent);
             }
         });

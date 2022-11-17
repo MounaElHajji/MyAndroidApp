@@ -1,5 +1,6 @@
 package com.example.myandroidapp.Models;
 
+import com.example.myandroidapp.CurrentProfile;
 import com.example.myandroidapp.EditProfile;
 import com.example.myandroidapp.Otheractivity;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myandroidapp.Otheractivity;
 import com.example.myandroidapp.R;
+import com.example.myandroidapp.listeServices;
 
 import butterknife.BindView;
 
@@ -50,7 +52,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
     }
 
@@ -60,7 +62,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onProfilClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
+        Intent intent = new Intent(this, CurrentProfile.class);
         startActivity(intent);
     }
 

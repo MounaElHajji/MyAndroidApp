@@ -22,7 +22,9 @@
             android:layout_marginLeft="15dp"
             android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
             android:textAllCaps="false"
-            android:textSize="7dp" />
+            android:textSize="7dp"
+            android:clickable="true"
+            android:onClick="onBackClick"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -91,14 +93,10 @@
         app:layout_constraintVertical_bias="0.0"
         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+    <include
+        layout="@layout/footer_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent" />
 
 
 

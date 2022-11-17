@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,4 +54,37 @@ public class EmployeelistActivity extends AppCompatActivity {
         }
         return data;
     }
+
+    public void onBackClick(View view) {
+        finish();
+    }
+
+    // -------- Footer icons listeners :
+
+    public void onMessageClick(View view) {
+        Intent intent = new Intent(this, Otheractivity.class);
+        startActivity(intent);
+    }
+
+    public void onFavorisClick(View view) {
+        Intent intent = new Intent(this, Otheractivity.class);
+        startActivity(intent);
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(this, listeServices.class);
+        startActivity(intent);
+    }
+
+    public void onSettingsClick(View view) {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
+    public void onProfilClick(View view) {
+        Intent intent = new Intent(this, CurrentProfile.class);
+        startActivity(intent);
+    }
+
+    // -------- Footer icons listeners /
 }

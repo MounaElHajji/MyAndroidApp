@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:layout_marginTop="1dp"
-            android:text="Email:"
+            android:text="Email / Tel"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -99,33 +99,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
-        <TextView
-            android:id="@+id/txt2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="5dp"
-            android:text="Numero de téléphone:"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/phoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/email"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_edit_text"
-            android:drawableStart="@drawable/phone"
-            android:drawablePadding="20dp"
-            android:hint="06xxxxxxxx"
-            android:padding="20dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
 
         <TextView
             android:id="@+id/txt3"
@@ -141,7 +115,7 @@
             android:id="@+id/ville"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/phoneNumber"
+            android:layout_below="@id/txt3"
             android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="10dp"
@@ -197,14 +171,10 @@
             android:textColor="@color/white"
             android:textSize="50px" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
+        <include
+            layout="@layout/footer_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>

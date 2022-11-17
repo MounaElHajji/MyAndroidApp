@@ -2,8 +2,11 @@ package com.example.myandroidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.myandroidapp.Models.Settings;
 
 import butterknife.ButterKnife;
 
@@ -19,4 +22,33 @@ public class CurrentProfile extends AppCompatActivity {
     public void onBackClick(View view) {
         finish();
     }
+
+    // -------- Footer icons listeners :
+
+    public void onMessageClick(View view) {
+        Intent intent = new Intent(this, Otheractivity.class);
+        startActivity(intent);
+    }
+
+    public void onFavorisClick(View view) {
+        Intent intent = new Intent(this, Otheractivity.class);
+        startActivity(intent);
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(this, listeServices.class);
+        startActivity(intent);
+    }
+
+    public void onSettingsClick(View view) {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
+    public void onProfilClick(View view) {
+        Intent intent = new Intent(this, CurrentProfile.class);
+        startActivity(intent);
+    }
+
+    // -------- Footer icons listeners /
 }
