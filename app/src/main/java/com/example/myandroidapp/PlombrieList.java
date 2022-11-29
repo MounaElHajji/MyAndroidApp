@@ -21,9 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EmployeelistActivity extends AppCompatActivity {
-
-
+public class PlombrieList extends AppCompatActivity {
     private RecyclerView recyclerViewVar;
 
     List<Employee> EmployeeList;
@@ -42,7 +40,7 @@ public class EmployeelistActivity extends AppCompatActivity {
 
     private void spinners() {
         Spinner myspinner = findViewById(R.id.spinner1);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(EmployeelistActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(PlombrieList.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
     }
@@ -55,22 +53,21 @@ public class EmployeelistActivity extends AppCompatActivity {
 
     private void getData() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Employee>> call = apiInterface.getPost();
+        Call<List<Employee>> call = apiInterface.getPlombiers();
         call.enqueue(new Callback<List<Employee>>() {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(EmployeelistActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlombrieList.this, response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<Employee> postList = response.body();
-                employeeAdapter = new EmployeeAdapter(EmployeelistActivity.this, postList);
-//                postAdapter.getFilter().filter("Employee");
+                employeeAdapter = new EmployeeAdapter(PlombrieList.this, postList);
                 recyclerViewVar.setAdapter(employeeAdapter);
             }
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
-                Toast.makeText(EmployeelistActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlombrieList.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
