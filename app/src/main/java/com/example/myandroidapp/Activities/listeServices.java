@@ -10,7 +10,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import com.example.myandroidapp.Adapters.ServiceAdapter;
-import com.example.myandroidapp.Models.Service;
+
+import com.example.myandroidapp.Models.Service1;
 import com.example.myandroidapp.R;
 
 import butterknife.BindView;
@@ -27,13 +28,13 @@ public class listeServices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_services);
         ButterKnife.bind(this);
-        ArrayList<Service> services= new ArrayList<Service>();
-        services.add(new Service("Plomberie",R.drawable.pl));
-        services.add(new Service("Electricité",R.drawable.ele));
-        services.add(new Service("Peinture",R.drawable.pei));
-        services.add(new Service("Climatisation",R.drawable.cli));
-        services.add(new Service("Bricolage",R.drawable.bri));
-        services.add(new Service("Femme de ménage",R.drawable.fe));
+        ArrayList<Service1> services= new ArrayList<Service1>();
+        services.add(new Service1("Plomberie",R.drawable.pl));
+        services.add(new Service1("Electricité",R.drawable.ele));
+        services.add(new Service1("Peinture",R.drawable.pei));
+        services.add(new Service1("Climatisation",R.drawable.cli));
+        services.add(new Service1("Bricolage",R.drawable.bri));
+        services.add(new Service1("Femme de ménage",R.drawable.fe));
 
         ServiceAdapter serviceAdapter= new ServiceAdapter(getApplicationContext(), R.layout.activity_liste_services, services);
         listServ.setAdapter(serviceAdapter);

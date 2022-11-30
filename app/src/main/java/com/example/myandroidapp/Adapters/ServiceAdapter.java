@@ -8,17 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myandroidapp.Models.Service1;
 import com.example.myandroidapp.R;
 
 
 import java.util.ArrayList;
 
-import com.example.myandroidapp.Models.Service;
 
-public class ServiceAdapter extends ArrayAdapter<Service> {
-    private ArrayList<Service> services;
+public class ServiceAdapter extends ArrayAdapter<Service1> {
+    private ArrayList<Service1> services;
 
-    public ServiceAdapter(Context context,int ressource, ArrayList<Service> services){
+    public ServiceAdapter(Context context,int ressource, ArrayList<Service1> services){
         super(context, ressource, services);
         this.services=services;
     }

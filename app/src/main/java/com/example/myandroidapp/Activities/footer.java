@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myandroidapp.Models.Settings;
 import com.example.myandroidapp.R;
+import com.example.myandroidapp.databinding.FooterBinding;
 
 public class footer extends AppCompatActivity {
   FooterBinding binding;

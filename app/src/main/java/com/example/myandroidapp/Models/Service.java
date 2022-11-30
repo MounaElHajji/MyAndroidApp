@@ -1,32 +1,27 @@
 package com.example.myandroidapp.Models;
 
-public class Service {
-    private int id;
-    private String label;
-    private int image;
+import java.util.Set;
 
-    public Service(String label, int image) {
-        this.label = label;
-        this.image = image;
+
+public class Service{
+
+    private Long service_id;
+    private Set<Person> personnes;
+    private String service_title;
+
+    public Set<Person> getPersonnes() {
+        return personnes;
     }
 
-    public int getId() {
-        return id;
+    public String getService_title() {
+        return service_title;
     }
 
-    public String getLabel() {
-        return label;
+    public void setPersonnes(Set<Person> personnes) {
+        this.personnes = personnes;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public void setService_title(String service_title) {
+        this.service_title = service_title;
     }
 }

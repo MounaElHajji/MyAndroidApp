@@ -6,37 +6,66 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myandroidapp.Api.AccountApi;
+import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.R;
+import com.example.myandroidapp.Retrofit.RetrofitS;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+
+    @BindView(R.id.editTextTextPersonName)
+    EditText username;
+
+    @BindView(R.id.editTextNumberPassword)
+    EditText pwd;
+
+    @BindView(R.id.button2)
+    Button loginButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Button login = findViewById(R.id.button2);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,listeServices.class);
-                startActivity(intent);
-            }
-        });
-
-        TextView signUp = findViewById(R.id.signUp);
-
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,inscription.class);
-                startActivity(intent);
-            }
-        });
+        ButterKnife.bind(this);
     }
 
-
+    @OnClick(R.id.button2)
+    public  void loginClick(){
+        RetrofitS retrofitS= new RetrofitS();
+        AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
+        String passwd=String.valueOf(pwd.getText());
+        String usrname=String.valueOf(username.getText());
+        Account account= new Account();
+        account.setPassword(passwd);
+        account.setUsername(usrname);
+        Intent i= new Intent(this, listeServices.class);
+        api.loginAccount(account) .enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+    ;
+}
 }
