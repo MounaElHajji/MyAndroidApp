@@ -1,4 +1,4 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myandroidapp.Models.Settings;
-import com.example.myandroidapp.databinding.FooterBinding;
+import com.example.myandroidapp.R;
 
 public class footer extends AppCompatActivity {
   FooterBinding binding;

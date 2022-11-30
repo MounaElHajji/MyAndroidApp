@@ -1,4 +1,4 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.Settings;
+import com.example.myandroidapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

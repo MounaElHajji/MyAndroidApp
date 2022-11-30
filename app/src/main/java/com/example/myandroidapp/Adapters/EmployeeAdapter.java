@@ -12,8 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.CurrentProfile;
-import com.example.myandroidapp.EmployeelistActivity;
+import com.example.myandroidapp.Activities.CurrentProfile;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 

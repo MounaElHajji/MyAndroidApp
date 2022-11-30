@@ -1,4 +1,4 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import com.example.myandroidapp.Adapters.ServiceAdapter;
 import com.example.myandroidapp.Models.Service;
+import com.example.myandroidapp.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;

@@ -1,4 +1,4 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import butterknife.OnClick;
+import com.example.myandroidapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
