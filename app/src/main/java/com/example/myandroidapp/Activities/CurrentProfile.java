@@ -33,10 +33,11 @@ public class CurrentProfile extends AppCompatActivity {
 
     }
     private void getVardFromLayout() {
+
         villeTxt = findViewById(R.id.textView4);
-        nomTxt = findViewById(R.id.textView);
+        nomTxt = findViewById(R.id.textView10);
         adressTxt = findViewById(R.id.textView8);
-        emploiTxt = findViewById(R.id.textView10);
+        emploiTxt = findViewById(R.id.textView);
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
     }
@@ -53,16 +54,20 @@ public class CurrentProfile extends AppCompatActivity {
 
                 //get the data from the response
                 Employee reponseEmp = response.body();
+                String cin= reponseEmp.getCin();
+                String empNom = reponseEmp.getFirstName();
+                String empEmploie = reponseEmp.getLastName();
                 String empVille = reponseEmp.getCity();
                 String empTel = response.body().getTel();
-                String empNom = reponseEmp.getFirst_name();
-                String empEmploie = reponseEmp.getType_profile();
+                String empfunction = response.body().getFunction();
+
 
                 //set the data in the layout to the dat coming from the backend
                 villeTxt.setText(empVille);
                 telTxt.setText(empTel);
-                nomTxt.setText(empNom);
-                emploiTxt.setText(empEmploie);
+                nomTxt.setText(empfunction);
+                emploiTxt.setText(empEmploie+""+empNom);
+                descTxt.setText(cin);
             }
 
             @Override

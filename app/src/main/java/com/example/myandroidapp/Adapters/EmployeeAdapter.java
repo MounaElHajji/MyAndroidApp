@@ -42,7 +42,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
         Employee post = EmployeeList.get(position);
-        holder.nom.setText(post.getFirst_name());
+        holder.nom.setText(post.getFirstName());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
 
