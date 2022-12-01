@@ -1,4 +1,4 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities.myandroidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myandroidapp.Models.Settings;
+import com.example.myandroidapp.Activities.myandroidapp.Models.Settings;
+import com.example.myandroidapp.R;
 import com.example.myandroidapp.databinding.FooterBinding;
 
 public class footer extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class footer extends AppCompatActivity {
         binding= FooterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //whenever the app opens for the first time the home fragment should be shown on the screen
-        Intent intent = new Intent(footer.this,EmployeelistActivity.class);
+        Intent intent = new Intent(footer.this, EmployeelistActivity.class);
         startActivity(intent);
         binding.bottomNavigationView.setOnItemReselectedListener(item -> {
             switch(item.getItemId()){

@@ -1,6 +1,4 @@
-package com.example.myandroidapp.Models;
-
-import com.example.myandroidapp.Otheractivity;
+package com.example.myandroidapp.Activities.myandroidapp.Models;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myandroidapp.Activities.listeServices;
+import com.example.myandroidapp.Otheractivity;
 import com.example.myandroidapp.R;
 
 import butterknife.BindView;

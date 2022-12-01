@@ -1,6 +1,4 @@
-package com.example.myandroidapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.myandroidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +8,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import butterknife.OnClick;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myandroidapp.R;
 
 public class inscription extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class inscription extends AppCompatActivity {
         mytextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inscription.this,LoginActivity.class);
+                Intent intent = new Intent(inscription.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class inscription extends AppCompatActivity {
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(inscription.this,listeServices.class);
+                Intent intent = new Intent(inscription.this, listeServices.class);
                 startActivity(intent);
             }
         });

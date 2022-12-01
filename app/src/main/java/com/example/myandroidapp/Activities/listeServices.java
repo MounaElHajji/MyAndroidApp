@@ -1,16 +1,19 @@
-package com.example.myandroidapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.myandroidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myandroidapp.Activities.myandroidapp.Activities.EmployeelistActivity;
+import com.example.myandroidapp.Activities.myandroidapp.Adapters.ServiceAdapter;
+import com.example.myandroidapp.Activities.myandroidapp.Models.Service;
+import com.example.myandroidapp.R;
+
 import java.util.ArrayList;
 
-import com.example.myandroidapp.Adapters.ServiceAdapter;
-import com.example.myandroidapp.Models.Service;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;

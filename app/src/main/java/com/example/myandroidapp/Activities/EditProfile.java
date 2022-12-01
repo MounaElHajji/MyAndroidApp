@@ -1,34 +1,20 @@
-package com.example.myandroidapp.Models;
-
-import com.example.myandroidapp.Otheractivity;
+package com.example.myandroidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myandroidapp.Models.Settings;
 import com.example.myandroidapp.R;
 
-import butterknife.BindView;
-
-public class Settings extends AppCompatActivity {
-
-    @BindView(R.id.editButton)
-    TextView edit;
+public class EditProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-    }
-
-    public void onEditClick(View view) {
-        Intent intent = new Intent(Settings.this, EditProfile.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_edit_profile);
     }
 
     public void onBackClick(View view) {
@@ -63,5 +49,4 @@ public class Settings extends AppCompatActivity {
     }
 
     // -------- Footer icons listeners /
-
 }

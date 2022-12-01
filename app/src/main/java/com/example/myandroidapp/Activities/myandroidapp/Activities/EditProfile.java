@@ -1,12 +1,14 @@
-package com.example.myandroidapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.myandroidapp.Activities.myandroidapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.myandroidapp.Models.Settings;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myandroidapp.Activities.listeServices;
+import com.example.myandroidapp.Activities.myandroidapp.Models.Settings;
+import com.example.myandroidapp.R;
 
 public class EditProfile extends AppCompatActivity {
 

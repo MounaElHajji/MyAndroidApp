@@ -1,4 +1,4 @@
-package com.example.myandroidapp.Adapters;
+package com.example.myandroidapp.Activities.myandroidapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Activities.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
     @NonNull
     @Override
-    public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.items, null);
 
@@ -38,7 +38,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Employee post = EmployeeList.get(position);
         holder.nom.setText(post.getNom());
         holder.ville.setText(post.getVille());
