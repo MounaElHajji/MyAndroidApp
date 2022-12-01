@@ -50,10 +50,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, CurrentProfile.class);
-                i.putExtra("first_name", EmployeeList.get(position).getFirst_name());
-                i.putExtra("city", EmployeeList.get(position).getCity());
-                i.putExtra("tel", EmployeeList.get(position).getTel());
-                i.putExtra("image", EmployeeList.get(position).getImage());
                 context.startActivity(i);
             }
         });
