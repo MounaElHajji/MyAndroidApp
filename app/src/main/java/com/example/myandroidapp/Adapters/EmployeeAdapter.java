@@ -9,11 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.EmployeelistActivity;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 import com.squareup.picasso.Picasso;
