@@ -3,21 +3,74 @@ package com.example.myandroidapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.Settings;
 import com.example.myandroidapp.R;
+import com.example.myandroidapp.retrofit.ApiInterface;
+import com.example.myandroidapp.retrofit.RetrofitClient;
 
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CurrentProfile extends AppCompatActivity {
-
+ Employee emp = new Employee();
+ ApiInterface apiInterface;
+    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_profile);
         ButterKnife.bind(this);
+        getVardFromLayout();
+        getUserDetails();
+
+    }
+    private void getVardFromLayout() {
+        villeTxt = findViewById(R.id.textView4);
+        nomTxt = findViewById(R.id.textView);
+        adressTxt = findViewById(R.id.textView8);
+        emploiTxt = findViewById(R.id.textView10);
+        descTxt = findViewById(R.id.textView12);
+        telTxt = findViewById(R.id.textView6);
+    }
+
+    private void getUserDetails() {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<Employee> call = apiInterface.getProfilePersonne();
+        call.enqueue(new Callback<Employee>() {
+            @Override
+            public void onResponse(Call<Employee> call, Response<Employee> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(CurrentProfile.this, "Success", Toast.LENGTH_LONG).show();
+                }
+
+                //get the data from the response
+                Employee reponseEmp = response.body();
+                String empVille = reponseEmp.getCity();
+                String empTel = response.body().getTel();
+                String empNom = reponseEmp.getFirst_name();
+                String empEmploie = reponseEmp.getType_profile();
+
+                //set the data in the layout to the dat coming from the backend
+                villeTxt.setText(empVille);
+                telTxt.setText(empTel);
+                nomTxt.setText(empNom);
+                emploiTxt.setText(empEmploie);
+            }
+
+            @Override
+            public void onFailure(Call<Employee> call, Throwable t) {
+
+            }
+        });
+
     }
 
     public void onBackClick(View view) {
