@@ -1,19 +1,18 @@
-package com.example.myandroidapp.Activities.myandroidapp;
+package com.example.myandroidapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.myandroidapp.Activities.myandroidapp.Adapters.EmployeeAdapter;
-import com.example.myandroidapp.Activities.myandroidapp.Models.Employee;
-import com.example.myandroidapp.Activities.myandroidapp.retrofit.ApiInterface;
-import com.example.myandroidapp.Activities.myandroidapp.retrofit.RetrofitClient;
-import com.example.myandroidapp.R;
+import com.example.myandroidapp.Adapters.EmployeeAdapter;
+import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.retrofit.ApiInterface;
+import com.example.myandroidapp.retrofit.RetrofitClient;
 
 import java.util.List;
 

@@ -28,4 +28,16 @@ public interface ApiInterface {
 
     @GET("employees/getPeiture")
     Call<List<Employee>> getPeniture();
+
+    @GET("employees/getElectricie")
+    Call<List<Employee>> getElectricite();
+
+    @GET("employees/getClimatisation")
+    Call<List<Employee>> getClimatisation();
+
+    @GET("employees/getBricolage")
+    Call<List<Employee>> getBricolage();
+
+    @GET("employees/getFemmeMenage")
+    Call<List<Employee>> getFemmeMenage();
 }

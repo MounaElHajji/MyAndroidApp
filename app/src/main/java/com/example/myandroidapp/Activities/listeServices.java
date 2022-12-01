@@ -7,8 +7,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myandroidapp.Activities.myandroidapp.Adapters.ServiceAdapter;
-import com.example.myandroidapp.Activities.myandroidapp.Models.Service;
+import com.example.myandroidapp.Adapters.ServiceAdapter;
+import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
 
 import java.util.ArrayList;
