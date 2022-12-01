@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myandroidapp.Activities.CurrentProfile;
 import com.example.myandroidapp.Activities.EditProfile;
+import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Activities.HomeActivity;
 import com.example.myandroidapp.R;
 
@@ -50,7 +51,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
     }
 
