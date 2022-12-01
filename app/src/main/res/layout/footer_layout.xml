@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!-- Root element should wrap to parent size. -->
+
+    <!-- Your view xml codes. -->
+
+    <!--Bottom bar layout should be in root element. Parent should be Relative layout so that we can always align to parent bottom-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:weightSum="4">"
+
+        <ImageButton
+            android:id="@+id/btn_1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/home_icon"
+            android:clickable="true"
+            android:onClick="onHomeClick"/>
+
+        <ImageButton
+            android:id="@+id/btn_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_toLeftOf="@+id/btn_3"
+            android:background="@drawable/favoris_icon"
+            android:clickable="true"
+            android:onClick="onFavorisClick"/>
+
+        <ImageButton
+            android:id="@+id/btn_3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/message_icon"
+            android:clickable="true"
+            android:onClick="onMessageClick" />
+
+        <ImageButton
+            android:id="@+id/btn_4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/btn_3"
+            android:background="@drawable/settings_icon"
+            android:clickable="true"
+            android:onClick="onSettingsClick"/>
+
+        <ImageButton
+            android:id="@+id/btn_5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/profil_icon"
+            android:clickable="true"
+            android:onClick="onProfilClick"/>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

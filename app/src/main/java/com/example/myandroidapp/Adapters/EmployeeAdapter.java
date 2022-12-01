@@ -9,14 +9,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myandroidapp.CurrentProfile;
 import com.example.myandroidapp.EmployeelistActivity;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,9 +24,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     List<Employee> EmployeeList;
     Context context;
 
-    public EmployeeAdapter(Context context, List<Employee> EmployeeList) {
+    public EmployeeAdapter(Context context, List<Employee> posts) {
         this.context = context;
-        this.EmployeeList = EmployeeList;
+        EmployeeList = posts;
     }
 
     @NonNull
@@ -43,29 +42,20 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
         Employee post = EmployeeList.get(position);
-        holder.nom.setText(post.getLast_name());
-        holder.ville.setText(post.getCity());
-        holder.descritpion.setText(post.getTel());
-
-        if (EmployeeList.get(position).getImage() != null) {
-            Picasso.get().load(EmployeeList.get(position).getImage()).into(holder.image);
-        }
+        holder.nom.setText(post.getNom());
+        holder.ville.setText(post.getVille());
+        holder.descritpion.setText(post.getDescription());
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, EmployeelistActivity.class);
-                i.putExtra("nom", EmployeeList.get(position).getLast_name());
-                i.putExtra("ville", EmployeeList.get(position).getCity());
-                i.putExtra("description", EmployeeList.get(position).getTel());
-                i.putExtra("image", EmployeeList.get(position).getImage());
-//                i.putExtra("rating", EmployeeList.get(position).getRating());
+                Intent i = new Intent(context, CurrentProfile.class);
                 context.startActivity(i);
             }
         });
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView id, nom, ville, descritpion;
+        TextView  id, nom, ville, descritpion;
         ImageView image;
         Button btnVoir;
 

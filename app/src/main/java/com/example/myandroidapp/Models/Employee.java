@@ -1,39 +1,46 @@
 package com.example.myandroidapp.Models;
 
 public class Employee {
-    private String cin, city, first_name, function,image, last_name, tel;
-    long id;
+    private String id, ville, nom, description, image;
 
-    public String getCin() {
-        return cin;
+
+    public Employee(String id, String nom, String ville, String description) {
+        this.id= id;
+        this.nom = nom;
+        this.ville = ville;
+        this.description = description;
     }
 
-    public void setCin(String cin) {
-        this.cin = cin;
+    public String getId() {
+        return id;
     }
 
-    public String getCity() {
-        return city;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public String getNom() {
+        return nom;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getVille() {
+        return ville;
     }
 
-    public String getFunction() {
-        return function;
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
-    public void setFunction(String function) {
-        this.function = function;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImage() {
@@ -44,27 +51,7 @@ public class Employee {
         this.image = image;
     }
 
-    public String getLast_name() {
-        return last_name;
-    }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
 
-    public String getTel() {
-        return tel;
-    }
 
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 }
