@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
-    <targetSelectedWithDropDown>
+    <runningDeviceTargetSelectedWithDropDown>
       <Target>
-        <type value="QUICK_BOOT_TARGET" />
+        <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-<<<<<<< HEAD
-            <value value="C:\Users\HP\.android\avd\Pixel_3_API_27.avd" />
-=======
-            <value value="C:\Users\Zineb\.android\avd\Pixel_6_API_22_1.avd" />
->>>>>>> updateUserInformation
+            <type value="SERIAL_NUMBER" />
+            <value value="RZ8R72S9QKK" />
           </Key>
         </deviceKey>
       </Target>
-    </targetSelectedWithDropDown>
-<<<<<<< HEAD
-    <timeTargetWasSelectedWithDropDown value="2022-11-13T16:06:29.315995Z" />
-=======
-    <timeTargetWasSelectedWithDropDown value="2022-11-12T19:21:40.762820700Z" />
->>>>>>> updateUserInformation
+    </runningDeviceTargetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2022-12-01T22:00:12.414528800Z" />
   </component>
 </project>
