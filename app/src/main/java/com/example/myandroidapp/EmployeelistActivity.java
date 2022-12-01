@@ -65,7 +65,6 @@ public class EmployeelistActivity extends AppCompatActivity {
                 }
                 List<Employee> postList = response.body();
                 employeeAdapter = new EmployeeAdapter(EmployeelistActivity.this, postList);
-//                postAdapter.getFilter().filter("Employee");
                 recyclerViewVar.setAdapter(employeeAdapter);
             }
             @Override
