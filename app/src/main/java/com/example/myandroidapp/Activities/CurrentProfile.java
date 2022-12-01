@@ -1,4 +1,4 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myandroidapp.Models.Settings;
+import com.example.myandroidapp.R;
 
-public class EditProfile extends AppCompatActivity {
+import butterknife.ButterKnife;
+
+public class CurrentProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_current_profile);
+        ButterKnife.bind(this);
     }
 
     public void onBackClick(View view) {

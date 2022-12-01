@@ -1,9 +1,11 @@
-package com.example.myandroidapp;
+package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.myandroidapp.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

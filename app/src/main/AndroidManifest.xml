@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activities.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -38,38 +38,38 @@
             android:name=".Models.Settings"
             android:exported="true"></activity>
         <activity
-            android:name=".listeServices"
+            android:name=".Activities.listeServices"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".EmployeelistActivity"
+            android:name=".Activities.EmployeelistActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".EditProfile"
+            android:name=".Activities.EditProfile"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".inscription"
+            android:name=".Activities.inscription"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Otheractivity"
+            android:name=".Activities.Otheractivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CurrentProfile"
+            android:name=".Activities.CurrentProfile"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

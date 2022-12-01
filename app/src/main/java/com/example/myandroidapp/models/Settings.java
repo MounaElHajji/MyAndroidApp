@@ -1,8 +1,8 @@
 package com.example.myandroidapp.Models;
 
-import com.example.myandroidapp.CurrentProfile;
-import com.example.myandroidapp.EditProfile;
-import com.example.myandroidapp.Otheractivity;
+import com.example.myandroidapp.Activities.CurrentProfile;
+import com.example.myandroidapp.Activities.EditProfile;
+import com.example.myandroidapp.Activities.Otheractivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myandroidapp.Otheractivity;
 import com.example.myandroidapp.R;
-import com.example.myandroidapp.listeServices;
+import com.example.myandroidapp.Activities.listeServices;
 
 import butterknife.BindView;
 
