@@ -28,12 +28,12 @@ public class CurrentProfile extends AppCompatActivity {
     // -------- Footer icons listeners :
 
     public void onMessageClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
     }
 
     public void onFavorisClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
     }
 

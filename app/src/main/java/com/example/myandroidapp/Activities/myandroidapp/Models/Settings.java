@@ -7,8 +7,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myandroidapp.Activities.CurrentProfile;
+import com.example.myandroidapp.Activities.EditProfile;
 import com.example.myandroidapp.Activities.listeServices;
-import com.example.myandroidapp.Otheractivity;
 import com.example.myandroidapp.R;
 
 import butterknife.BindView;
@@ -38,12 +39,12 @@ public class Settings extends AppCompatActivity {
     // -------- Footer icons listeners :
 
     public void onMessageClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
     }
 
     public void onFavorisClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
     }
 

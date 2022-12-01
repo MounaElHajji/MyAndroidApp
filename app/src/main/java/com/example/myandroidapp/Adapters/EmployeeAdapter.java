@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myandroidapp.Activities.CurrentProfile;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 
@@ -40,9 +41,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
         Employee post = EmployeeList.get(position);
-        holder.nom.setText(post.getNom());
-        holder.ville.setText(post.getVille());
-        holder.descritpion.setText(post.getDescription());
+        holder.nom.setText(post.getFirst_name());
+        holder.ville.setText(post.getCity());
+        holder.descritpion.setText(post.getTel());
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
