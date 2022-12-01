@@ -4,18 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Models.Employee;
-import com.example.myandroidapp.Models.Settings;
+import com.example.myandroidapp.retrofit.ApiInterface;
+import com.example.myandroidapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EmployeelistActivity extends AppCompatActivity {
 
@@ -23,68 +27,51 @@ public class EmployeelistActivity extends AppCompatActivity {
     private RecyclerView recyclerViewVar;
 
     List<Employee> EmployeeList;
+    ApiInterface apiInterface;
+    EmployeeAdapter employeeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_list_activity);
 
+        spinners();
+        setList();
+        getData();
+    }
+
+    private void spinners() {
         Spinner myspinner = findViewById(R.id.spinner1);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(EmployeelistActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
+    }
 
+    private void setList() {
         recyclerViewVar = findViewById(R.id.recycleView);
         recyclerViewVar.setHasFixedSize(true);
         recyclerViewVar.setLayoutManager(new LinearLayoutManager(this));
-
-        EmployeeAdapter postAdapter = new EmployeeAdapter(EmployeelistActivity.this, getData());
-        recyclerViewVar.setAdapter(postAdapter);
     }
 
-    public static List<Employee> getData() {
-        List<Employee> data = new ArrayList<>();
-        String[] ids = {"310", "313", "320"};
-        String[] noms = {"EL Hajji", "EL Badaoui", "Raki"};
-        String[] villes = {"Kenitra", "Rabat", "Casa"};
-        String[] descriptions = {"Plombier", "Etudiante", "name of three"};
-
-        for (int i=0; i<ids.length; i++) {
-            data.add(new Employee(ids[i], noms[i], villes[i], descriptions[i]));
-        }
-        return data;
+    private void getData() {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<Employee>> call = apiInterface.getPost();
+        call.enqueue(new Callback<List<Employee>>() {
+            @Override
+            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
+                if(!response.isSuccessful()) {
+                    Toast.makeText(EmployeelistActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                List<Employee> postList = response.body();
+                employeeAdapter = new EmployeeAdapter(EmployeelistActivity.this, postList);
+//                postAdapter.getFilter().filter("Employee");
+                recyclerViewVar.setAdapter(employeeAdapter);
+            }
+            @Override
+            public void onFailure(Call<List<Employee>> call, Throwable t) {
+                Toast.makeText(EmployeelistActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
-    public void onBackClick(View view) {
-        finish();
-    }
-
-    // -------- Footer icons listeners :
-
-    public void onMessageClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
-        startActivity(intent);
-    }
-
-    public void onFavorisClick(View view) {
-        Intent intent = new Intent(this, Otheractivity.class);
-        startActivity(intent);
-    }
-
-    public void onHomeClick(View view) {
-        Intent intent = new Intent(this, listeServices.class);
-        startActivity(intent);
-    }
-
-    public void onSettingsClick(View view) {
-        Intent intent = new Intent(this, Settings.class);
-        startActivity(intent);
-    }
-
-    public void onProfilClick(View view) {
-        Intent intent = new Intent(this, CurrentProfile.class);
-        startActivity(intent);
-    }
-
-    // -------- Footer icons listeners /
 }
