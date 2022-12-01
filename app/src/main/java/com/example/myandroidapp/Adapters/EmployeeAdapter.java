@@ -12,10 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.Activities.CurrentProfile;
-import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,12 +44,15 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
+        if (EmployeeList.get(position).getImage() != null) {
+            Picasso.get().load(EmployeeList.get(position).getImage()).into(holder.image);
+        }
+
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, CurrentProfile.class);
-                context.startActivity(i);
+                
             }
         });
     }
