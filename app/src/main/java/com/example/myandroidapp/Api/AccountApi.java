@@ -14,9 +14,9 @@ public interface AccountApi {
     @POST("/account/login")
     Call<Account> loginAccount(@Body Account account);
 
-    @POST("/person/save")
+    @POST("/employees/save")
     Call<Account> signup(@Body Account account);
 
-    @GET("/service/list")
+    @GET("/services/listString")
     Call<List<String>> listServices();
 }

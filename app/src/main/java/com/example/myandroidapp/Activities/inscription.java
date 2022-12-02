@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,12 +73,9 @@ public class inscription extends AppCompatActivity {
     EditText prenom;
     @BindView(R.id.nom)
     EditText nom;
-    @BindView(R.id.username)
-    EditText username;
     @BindView(R.id.mail)
     EditText mail;
-    @BindView(R.id.adresse)
-    EditText adresse;
+
     @BindView(R.id.cin)
     EditText cin;
 
@@ -177,7 +176,6 @@ public class inscription extends AppCompatActivity {
         Person person= new Person();
         Account account= new Account();
         Service service1= new Service();
-        person.setAdresse(adresse.getText().toString());
         person.setDescription(desc.getText().toString());
         person.setCin(cin.getText().toString());
         person.setFirstName(prenom.getText().toString());
@@ -187,7 +185,7 @@ public class inscription extends AppCompatActivity {
         person.setTel(mail.getText().toString());
         person.setTypeProfil(fonction.getSelectedItem().toString());
         account.setPassword(pwd.getText().toString());
-        account.setUsername(username.getText().toString());
+        account.setUsername(mail.getText().toString());
         service1.setService_title(service.getSelectedItem().toString());
         service1.setService_id(service.getSelectedItemPosition());
         person.setService(service1);
@@ -196,12 +194,12 @@ public class inscription extends AppCompatActivity {
         api.signup(account).enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
-                Toast.makeText(inscription.this, "login successful!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(inscription.this, "signed up successfully!", Toast.LENGTH_SHORT).show();
                // startActivity(i);
             }
             @Override
             public void onFailure(Call<Account> call, Throwable t) {
-                Toast.makeText(inscription.this, "login failed!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(inscription.this, "signed up failed!!!", Toast.LENGTH_SHORT).show();
                 Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
             }
         });

@@ -5,16 +5,25 @@ import java.util.Set;
 
 public class Service{
 
-    private Long service_id;
+    private Long id;
     private Set<Person> personnes;
     private String service_title;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public Set<Person> getPersonnes() {
         return personnes;
     }
 
     public void setService_id(long service_id) {
-        this.service_id = service_id;
+        this.id = service_id;
     }
 
     public String getService_title() {

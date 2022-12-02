@@ -113,34 +113,11 @@
         app:layout_constraintVertical_bias="0.076"
         tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="360dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/round_corner"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Nom d'Utilisateur"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bievenue"
-        tools:ignore="MissingConstraints"></EditText>
-
     <Spinner
         android:id="@+id/fonction"
         android:layout_width="339dp"
         android:layout_height="43dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="356dp"
         android:backgroundTint="#0E0C0C"
         android:ems="10"
         android:paddingLeft="20dp"
@@ -149,67 +126,17 @@
         android:paddingBottom="10dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/bievenue"
         tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/msg"
-        android:layout_width="238dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="952dp"
-        android:text=""
-        android:textColor="#B62626"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/checkBox"
-        app:layout_constraintHorizontal_bias="0.363"
-        app:layout_constraintStart_toStartOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/alreadyHaveAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Vous avez un compte?"
-        android:textColor="@color/strong_grey"
-        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-        app:layout_constraintHorizontal_bias="0.177"
-
-        app:layout_constraintStart_toStartOf="@+id/btnRegister"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
-    <EditText
-        android:id="@+id/desc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="736dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/round_corner"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Description"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bievenue"
-        tools:ignore="MissingConstraints"></EditText>
 
     <EditText
         android:id="@+id/mail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="484dp"
+        android:layout_marginTop="416dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_corner"
         android:drawablePadding="10dp"
@@ -227,16 +154,76 @@
         app:layout_constraintTop_toBottomOf="@id/bievenue"
         tools:ignore="MissingConstraints"></EditText>
 
+    <Spinner
+        android:id="@+id/ville"
+        android:layout_width="339dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="477dp"
+        android:backgroundTint="#0E0C0C"
+        android:ems="10"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bievenue"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/service"
+        android:layout_width="339dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="588dp"
+        android:backgroundTint="#0E0C0C"
+        android:ems="10"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bievenue"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/pwd"
+        android:layout_width="339dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="688dp"
+        android:background="@drawable/round_corner"
+        android:hint="   Password"
+        android:inputType="textPassword"
+        android:minWidth="200sp"
+        app:layout_constraintEnd_toEndOf="@+id/service"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/service"
+        app:layout_constraintTop_toTopOf="@+id/bievenue"
+        tools:ignore="MissingConstraints" />
+
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="271dp"
         android:layout_height="38dp"
-        android:layout_marginTop="848dp"
+        android:layout_marginTop="700dp"
         android:text="Afficher le mot de passe"
         app:layout_constraintEnd_toEndOf="@+id/pwd"
-        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintStart_toStartOf="@+id/pwd"
         app:layout_constraintTop_toBottomOf="@+id/bievenue" />
+
+    <TextView
+        android:id="@+id/authentification"
+        android:layout_width="111dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="12dp"
+        android:text="Se connecter"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/alreadyHaveAccount"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -244,74 +231,27 @@
 
         android:layout_height="44dp"
 
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/round_corner"
         android:backgroundTint="@color/blue"
         android:text="S'inscrire"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.418"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pwd"
         tools:ignore="MissingConstraints" />
 
-    <Spinner
-        android:id="@+id/service"
-        android:layout_width="339dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="276dp"
-        android:backgroundTint="#0E0C0C"
-        android:ems="10"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/authentification"
-        android:layout_width="111dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="12dp"
-        android:text="Se connecter"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/alreadyHaveAccount"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
-    <Spinner
-        android:id="@+id/ville"
-        android:layout_width="339dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="152dp"
-        android:backgroundTint="#0E0C0C"
-        android:ems="10"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        tools:ignore="MissingConstraints" />
-
     <EditText
-        android:id="@+id/adresse"
+        android:id="@+id/desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="620dp"
+        android:layout_marginTop="532dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_corner"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Adresse"
+        android:hint="Description"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -319,26 +259,24 @@
         android:paddingBottom="10dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bievenue"
         tools:ignore="MissingConstraints"></EditText>
 
-    <EditText
-        android:id="@+id/pwd"
-        android:layout_width="339dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/round_corner"
-        android:hint="   Password"
-        android:inputType="textPassword"
-        android:minWidth="200sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ville"
-        tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/alreadyHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Vous avez un compte?"
+        android:textColor="@color/strong_grey"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintHorizontal_bias="0.177"
+
+        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -352,6 +290,17 @@
         app:layout_constraintVertical_bias="0.138"
 
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="744dp"
+        android:textColor="#D31A1A"
+        app:layout_constraintEnd_toEndOf="@+id/pwd"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="@+id/pwd"
+        app:layout_constraintTop_toBottomOf="@+id/bievenue" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout></ScrollView>

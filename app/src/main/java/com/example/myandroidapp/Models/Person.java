@@ -11,21 +11,14 @@ public class Person {
     private String tel;
     private String image;
     private String typeProfil;
-    private String adresse;
     private String description;
     private Service service;
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
 
     public String getDescription() {
         return description;
