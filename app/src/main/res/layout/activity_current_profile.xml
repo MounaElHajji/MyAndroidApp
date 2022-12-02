@@ -98,11 +98,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="92dp"
         android:layout_marginTop="128dp"
-        android:text="Ibrahim nahi"
+
         android:textAlignment="center"
         android:textColor="#ffffff"
 
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -175,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Salé"
+
 
                 android:textAlignment="viewStart"
                 android:textColor="@color/black"
@@ -248,7 +248,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
-                android:text="Addresse:"
+                android:text="Service:"
                 android:textColor="#0090ff"
                 android:textSize="20sp" />
 
@@ -257,7 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Hay karima, rue amal"
+
 
                 android:textAlignment="viewEnd"
                 android:textColor="@color/black"
@@ -289,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
-                android:text="L'emploi:"
+                android:text="Fonction:"
                 android:textColor="#0090ff"
                 android:textSize="20sp" />
 
@@ -330,7 +330,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
-                android:text="Description:"
+                android:text="CIN:"
                 android:textColor="#0090ff"
                 android:textSize="20sp" />
 
