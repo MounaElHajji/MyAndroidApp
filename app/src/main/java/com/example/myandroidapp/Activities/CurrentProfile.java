@@ -55,8 +55,8 @@ public class CurrentProfile extends AppCompatActivity {
                 Employee reponseEmp = response.body();
                 String empVille = reponseEmp.getCity();
                 String empTel = response.body().getTel();
-                String empNom = reponseEmp.getFirst_name();
-                String empEmploie = reponseEmp.getType_profile();
+                String empNom = reponseEmp.getFirstName();
+                String empEmploie = reponseEmp.getFunction();
 
                 //set the data in the layout to the dat coming from the backend
                 villeTxt.setText(empVille);
