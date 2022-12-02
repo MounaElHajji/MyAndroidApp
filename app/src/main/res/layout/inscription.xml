@@ -1,12 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".Activities.inscription"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    >
 
+
+    <Spinner
+        android:id="@+id/service"
+        android:layout_width="339dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="272dp"
+        android:backgroundTint="#0E0C0C"
+        android:ems="10"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomUtil"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/adresse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="568dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_corner"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Adresse"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bievenue"
+        tools:ignore="MissingConstraints"></EditText>
 
     <EditText
         android:id="@+id/mail"
@@ -36,7 +82,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="180dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_corner"
         android:drawablePadding="10dp"
@@ -100,6 +146,7 @@
         app:layout_constraintTop_toBottomOf="@id/bievenue"
         tools:ignore="MissingConstraints"></EditText>
 
+
     <TextView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
@@ -110,10 +157,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0045"
+        app:layout_constraintVertical_bias="0.027"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -126,12 +172,10 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.076"
         tools:ignore="HardcodedText" />
-
 
     <Button
         android:id="@+id/btnRegister"
@@ -139,33 +183,103 @@
 
         android:layout_height="44dp"
 
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="88dp"
         android:background="@drawable/round_corner"
         android:backgroundTint="@color/blue"
         android:text="S'inscrire"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.415"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordLayout"
+        app:layout_constraintTop_toBottomOf="@+id/pwd"
         tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etPasswordLayout"
-        android:layout_width="336dp"
-        android:layout_height="47dp"
+    <EditText
+        android:id="@+id/desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="684dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/round_corner"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:passwordToggleEnabled="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="668dp">
+        app:layout_constraintTop_toBottomOf="@id/bievenue"
+        tools:ignore="MissingConstraints"></EditText>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_corner"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="271dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="796dp"
+        android:text="Afficher le mot de passe"
+        app:layout_constraintEnd_toEndOf="@+id/pwd"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="@+id/pwd"
+        app:layout_constraintTop_toBottomOf="@+id/bievenue" />
+
+    <EditText
+        android:id="@+id/pwd"
+        android:layout_width="339dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="204dp"
+        android:background="@drawable/round_corner"
+        android:hint="   Password"
+        android:inputType="textPassword"
+        android:minWidth="200sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ville"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/authentification"
+        android:layout_width="111dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="16dp"
+        android:text="Se connecter"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/alreadyHaveAccount"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <TextView
+        android:id="@+id/alreadyHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Vous avez un compte?"
+        android:textColor="@color/strong_grey"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintHorizontal_bias="0.182"
+
+        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="238dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="900dp"
+        android:text=""
+        android:textColor="#B62626"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        tools:ignore="MissingConstraints" />
+
 
     <Spinner
         android:id="@+id/fonction"
@@ -203,29 +317,6 @@
         app:layout_constraintTop_toBottomOf="@+id/nomUtil"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/authentification"
-        android:layout_width="111dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
-        android:text="Se connecter"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/alreadyHaveAccount"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
-    <TextView
-        android:id="@+id/alreadyHaveAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Vous avez un compte?"
-        android:textColor="@color/strong_grey"
-        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-        app:layout_constraintHorizontal_bias="0.196"
-        app:layout_constraintStart_toStartOf="@+id/btnRegister"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -233,12 +324,11 @@
         android:src="@drawable/ic_baseline_account_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.169"
+        app:layout_constraintVertical_bias="0.138"
 
         tools:ignore="MissingConstraints" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout></ScrollView>
