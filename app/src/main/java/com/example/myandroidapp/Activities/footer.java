@@ -37,7 +37,7 @@ public class footer extends AppCompatActivity {
                     startActivity(i3);
                     break;
                 case R.id.profile:
-                    Intent i4 = new Intent(footer.this, CurrentProfile.class);
+                    Intent i4 = new Intent(footer.this, EditProfile.class);
                     startActivity(i4);
                     break;
                 case R.id.favoris:

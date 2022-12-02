@@ -40,7 +40,4 @@ public interface ApiInterface {
 
     @GET("employees/getFemmeMenage")
     Call<List<Employee>> getFemmeMenage();
-    @GET("users/2")
-    Call<Employee> getProfilePersonne();
-
 }

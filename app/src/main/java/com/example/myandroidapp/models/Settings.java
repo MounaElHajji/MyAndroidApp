@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myandroidapp.Activities.CurrentProfile;
 import com.example.myandroidapp.Activities.EditProfile;
 import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Activities.HomeActivity;
@@ -61,7 +60,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onProfilClick(View view) {
-        Intent intent = new Intent(this, CurrentProfile.class);
+        Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
 

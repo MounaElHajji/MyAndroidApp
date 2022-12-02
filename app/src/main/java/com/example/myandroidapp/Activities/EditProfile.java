@@ -44,7 +44,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public void onProfilClick(View view) {
-        Intent intent = new Intent(this, CurrentProfile.class);
+        Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
 
