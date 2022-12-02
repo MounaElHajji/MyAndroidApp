@@ -3,6 +3,7 @@ package com.example.myandroidapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class CurrentProfile extends AppCompatActivity {
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();
-
+        OnclickButtonListener();
     }
     private void getVardFromLayout() {
         villeTxt = findViewById(R.id.textView4);
@@ -56,13 +57,16 @@ public class CurrentProfile extends AppCompatActivity {
                 String empVille = reponseEmp.getCity();
                 String empTel = response.body().getTel();
                 String empNom = reponseEmp.getFirstName();
-                String empEmploie = reponseEmp.getFunction();
+                String empPrenom = reponseEmp.getLastName();
+                String empCin = reponseEmp.getCin();
+                String empEmploie = reponseEmp.getTypeProfil();
 
                 //set the data in the layout to the dat coming from the backend
                 villeTxt.setText(empVille);
                 telTxt.setText(empTel);
-                nomTxt.setText(empNom);
+                nomTxt.setText(empNom +""+empPrenom);
                 emploiTxt.setText(empEmploie);
+                descTxt.setText(empCin);
             }
 
             @Override
@@ -76,6 +80,18 @@ public class CurrentProfile extends AppCompatActivity {
     public void onBackClick(View view) {
         finish();
     }
+    //heart icon listener
+    public void OnclickButtonListener() {
+
+        ImageView imgview = findViewById(R.id.imageView6);
+        imgview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CurrentProfile.this,FavorisActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     // -------- Footer icons listeners :
 
@@ -85,7 +101,7 @@ public class CurrentProfile extends AppCompatActivity {
     }
 
     public void onFavorisClick(View view) {
-        Intent intent = new Intent(this, listeServices.class);
+        Intent intent = new Intent(this,FavorisActivity.class);
         startActivity(intent);
     }
 

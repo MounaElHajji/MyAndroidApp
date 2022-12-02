@@ -1,7 +1,23 @@
 package com.example.myandroidapp.Models;
 
 public class Employee {
-    private String city, lastName, tel, image, function, cin, firstName;
+    private String city;
+    private String lastName;
+    private String tel;
+    private String image;
+    private String function;
+    private String cin;
+    private String firstName;
+
+    public String getTypeProfil() {
+        return typeProfil;
+    }
+
+    public void setTypeProfil(String typeProfil) {
+        this.typeProfil = typeProfil;
+    }
+
+    private String typeProfil;
     private Long id;
 
     public String getLastName() {
