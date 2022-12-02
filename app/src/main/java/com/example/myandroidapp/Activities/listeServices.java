@@ -3,30 +3,22 @@ package com.example.myandroidapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Adapters.ServiceAdapter;
-import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.Service;
-import com.example.myandroidapp.Models.Settings;
 import com.example.myandroidapp.R;
-import com.example.myandroidapp.retrofit.ApiInterface;
 import com.example.myandroidapp.retrofit.IApiServices;
 import com.example.myandroidapp.retrofit.RetrofitBack;
-import com.example.myandroidapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import retrofit2.Call;
 import retrofit2.Callback;

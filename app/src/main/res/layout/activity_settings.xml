@@ -5,7 +5,7 @@
     android:id="@+id/backgroudLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Models.Settings"
+    tools:context=".Activities.Settings"
     android:background="#4485C0"
     >
 

@@ -1,4 +1,4 @@
-package com.example.myandroidapp.Models;
+package com.example.myandroidapp.Activities;
 
 
 import android.content.Intent;
@@ -8,9 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myandroidapp.Activities.CurrentProfile;
-import com.example.myandroidapp.Activities.EditProfile;
-import com.example.myandroidapp.Activities.HomeActivity;
 import com.example.myandroidapp.R;
 
 import butterknife.BindView;

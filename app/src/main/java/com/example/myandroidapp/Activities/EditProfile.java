@@ -6,7 +6,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myandroidapp.Models.Settings;
 import com.example.myandroidapp.R;
 
 public class EditProfile extends AppCompatActivity {
