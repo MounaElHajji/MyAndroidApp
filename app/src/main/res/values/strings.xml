@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyAndroidApp</string>
+    <string-array name="filtrage">
+        <item>Filtrer Par</item>
+        <item>Nom</item>
+        <item>Ville</item>
+    </string-array>
 </resources>
