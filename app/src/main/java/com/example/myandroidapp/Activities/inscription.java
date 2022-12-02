@@ -25,7 +25,9 @@ import com.example.myandroidapp.R;
 import com.example.myandroidapp.Retrofit.RetrofitS;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -187,9 +189,10 @@ public class inscription extends AppCompatActivity {
         account.setPassword(pwd.getText().toString());
         account.setUsername(username.getText().toString());
         service1.setService_title(service.getSelectedItem().toString());
-        service1.setService_id(service.getSelectedItemPosition()-1);
+        service1.setService_id(service.getSelectedItemPosition());
         person.setService(service1);
         account.setPerson(person);
+        System.out.println(account.getPerson().getService().getService_title());
         api.signup(account).enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
@@ -202,7 +205,6 @@ public class inscription extends AppCompatActivity {
                 Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
             }
         });
-        ;
 
     }
 }
