@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Models.Account;
+import com.example.myandroidapp.Models.Person;
+import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.Retrofit.RetrofitS;
 
@@ -38,6 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class inscription extends AppCompatActivity {
+
     @BindView(R.id.fonction)
     Spinner fonction;
 
@@ -62,8 +65,22 @@ public class inscription extends AppCompatActivity {
     @BindView(R.id.desc)
     EditText desc;
 
+    @BindView(R.id.prenom)
+    EditText prenom;
+    @BindView(R.id.nom)
+    EditText nom;
+    @BindView(R.id.username)
+    EditText username;
+    @BindView(R.id.mail)
+    EditText mail;
+    @BindView(R.id.adresse)
+    EditText adresse;
+    @BindView(R.id.cin)
+    EditText cin;
 
-
+    //Retrofit
+    RetrofitS retrofitS= new RetrofitS();
+    AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +116,7 @@ public class inscription extends AppCompatActivity {
         //Enfin on passe l'adapter au Spinner et c'est tout
         fonction.setAdapter(adapter);
         ville.setAdapter(adapter1);
-        RetrofitS retrofitS= new RetrofitS();
-        AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
+
         api.listServices().enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -156,5 +172,37 @@ public class inscription extends AppCompatActivity {
         if(fonction.getSelectedItemPosition()==0) {
             msg.setText("Veuillez chosir une fonction");
         }
+        Person person= new Person();
+        Account account= new Account();
+        Service service1= new Service();
+        person.setAdresse(adresse.getText().toString());
+        person.setDescription(desc.getText().toString());
+        person.setCin(cin.getText().toString());
+        person.setFirstName(prenom.getText().toString());
+        person.setCity(ville.getSelectedItem().toString());
+        person.setImage("");
+        person.setLastName(nom.getText().toString());
+        person.setTel(mail.getText().toString());
+        person.setTypeProfil(fonction.getSelectedItem().toString());
+        account.setPassword(pwd.getText().toString());
+        account.setUsername(username.getText().toString());
+        service1.setService_title(service.getSelectedItem().toString());
+        service1.setService_id(service.getSelectedItemPosition()-1);
+        person.setService(service1);
+        account.setPerson(person);
+        api.signup(account).enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                Toast.makeText(inscription.this, "login successful!", Toast.LENGTH_SHORT).show();
+               // startActivity(i);
+            }
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                Toast.makeText(inscription.this, "login failed!!!", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+        ;
+
     }
 }

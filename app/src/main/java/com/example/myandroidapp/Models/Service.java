@@ -13,6 +13,10 @@ public class Service{
         return personnes;
     }
 
+    public void setService_id(long service_id) {
+        this.service_id = service_id;
+    }
+
     public String getService_title() {
         return service_title;
     }
