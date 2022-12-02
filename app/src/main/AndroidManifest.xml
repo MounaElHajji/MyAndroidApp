@@ -16,28 +16,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".FemmeMenageActivity"
+            android:name=".Activities.FemmeMenageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".BricolageActivity"
+            android:name=".Activities.BricolageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ClimatisationActivity"
+            android:name=".Activities.ClimatisationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ElectriciteActivity"
+            android:name=".Activities.ElectriciteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -107,6 +107,13 @@
         </activity>
         <activity
             android:name=".Activities.PlombrieList"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activities.Settings"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

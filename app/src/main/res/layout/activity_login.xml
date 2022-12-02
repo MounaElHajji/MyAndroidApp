@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".Activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_gravity="center"
             android:ems="10"
             android:inputType="textPersonName"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView2"
@@ -85,7 +85,7 @@
             android:layout_gravity="center"
             android:ems="10"
             android:inputType="numberPassword"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:layout_width="wrap_content"
