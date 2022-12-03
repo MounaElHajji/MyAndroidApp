@@ -119,7 +119,6 @@ public class inscription extends AppCompatActivity {
                 for (String s:
                         lis ) {
                     Services.add(s);
-                    System.out.println(s);
                 }
             }
             @Override
@@ -157,11 +156,11 @@ public class inscription extends AppCompatActivity {
             desc.setVisibility(View.GONE);
             msg.setVisibility(View.VISIBLE);
             msg.setText("Veuillez chosir une fonction");
-        } else if (pos == 1) {
+        } else if(pos==1) {
             msg.setText("");
             desc.setVisibility(View.VISIBLE);
             service.setVisibility(View.VISIBLE);
-        } else {
+        }else{
             desc.setVisibility(View.GONE);
             service.setVisibility(View.GONE);
         }
@@ -169,34 +168,26 @@ public class inscription extends AppCompatActivity {
     @OnItemSelected(R.id.ville)
     public void clickVille(Spinner s,int pos) {
         if (pos == 0) {
-
             msg.setVisibility(View.VISIBLE);
             msg.setText("Veuillez chosir une ville");
-        } else if (pos == 1) {
-            msg.setText("");
-        } else {
+        }
+        else {
             msg.setText("");
         }
     }
     @OnItemSelected(R.id.service)
     public void clickService(Spinner s,int pos) {
         if (pos == 0) {
-            desc.setVisibility(View.GONE);
-            msg.setVisibility(View.VISIBLE);
             msg.setText("Veuillez chosir un service");
-        } else if (pos == 1) {
-            msg.setText("");
-           // desc.setVisibility(View.VISIBLE);
         } else {
             msg.setText("");
-            //desc.setVisibility(View.GONE);
         }
     }
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
         if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 || service.getSelectedItemPosition()==0 ||
-        mail.getText().equals("") || prenom.getText().equals("") || nom.getText().equals("")
-        || cin.getText().equals("") || pwd.getText().equals("")) {
+        mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
+        || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
         }else {
             Person person = new Person();
