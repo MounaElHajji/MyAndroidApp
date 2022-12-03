@@ -23,13 +23,13 @@ public interface ApiInterface {
     @GET("employees/getAll")
     Call<List<Employee>> getPost();
 
-    @GET("employees/getpLombier")
+    @GET("employees/getPlombier")
     Call<List<Employee>> getPlombiers();
 
-    @GET("employees/getPeiture")
+    @GET("employees/getPeinture")
     Call<List<Employee>> getPeniture();
 
-    @GET("employees/getElectricie")
+    @GET("employees/getElectricite")
     Call<List<Employee>> getElectricite();
 
     @GET("employees/getClimatisation")
