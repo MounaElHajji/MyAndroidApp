@@ -2,6 +2,7 @@
 package com.example.myandroidapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.myandroidapp.Activities.BricolageActivity;
+import com.example.myandroidapp.Activities.PlombrieList;
 import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
 
@@ -43,6 +46,16 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     public void onBindViewHolder(@NonNull ServiceAdapter.ViewHolder holder, int position) {
         Service service = services.get(position);
         holder.service_title.setText(service.getLabel());
+        if(service.getService_title().contains("Bricolage"))
+        {
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, BricolageActivity.class);
+                    context.startActivity(i);
+                }
+            });
+        }
 
        if(services.get(position).getImage() != null){
            Picasso.get().load(services.get(position).getImage()).into(holder.image);
