@@ -7,8 +7,10 @@ public class Person {
     private String lastName;
     private String city;
     private String tel;
-    private String image;
+    private String imageP;
     private String typeProfil;
+    private String description;
+    private Service service;
 
     public Long getId() {
         return id;
@@ -18,9 +20,7 @@ public class Person {
         this.id = id;
     }
 
-    private String description;
-    private Service service;
-    private String imageP;
+
 
 
     public void setDescription(String description) {
@@ -53,7 +53,7 @@ public class Person {
     }
 
     public String getImage() {
-        return image;
+        return imageP;
     }
 
     public String getTypeProfil() {
@@ -85,7 +85,7 @@ public class Person {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.imageP = image;
     }
 
     public void setTypeProfil(String typeProfil) {
