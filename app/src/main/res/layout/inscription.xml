@@ -222,6 +222,7 @@
             android:layout_marginTop="12dp"
             android:text="Se connecter"
             android:textColor="@color/black"
+            android:clickable="true"
             app:layout_constraintStart_toStartOf="@+id/alreadyHaveAccount"
             app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 

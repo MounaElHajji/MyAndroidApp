@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -114,7 +116,6 @@ public class inscription extends AppCompatActivity {
         api.listServices().enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                Toast.makeText(inscription.this, "services successfully!", Toast.LENGTH_SHORT).show();
                 List<String> lis=response.body();
                 for (String s:
                         lis ) {
@@ -124,8 +125,6 @@ public class inscription extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-                Toast.makeText(inscription.this, "services failed!", Toast.LENGTH_SHORT).show();
-
             }
         });
         ;
@@ -183,13 +182,37 @@ public class inscription extends AppCompatActivity {
             msg.setText("");
         }
     }
+    @OnClick(R.id.authentification)
+    public void clickLogin(){
+        Intent i= new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
+/**************************/
+private boolean isValidMail(String email) {
+
+    String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    return Pattern.compile(EMAIL_STRING).matcher(email).matches();
+
+}
+    private boolean isValidMobile(String phone) {
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() > 6 && phone.length() <= 13;
+        }
+        return false;
+    }
+/****************************/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
         if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 || service.getSelectedItemPosition()==0 ||
         mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
         || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
-        }else {
+        }else if(!isValidMail(mail.getText().toString()) && !isValidMobile(mail.getText().toString())){
+            msg.setText("Email ou Tél n'est pas valide");
+        }
+        else {
             Person person = new Person();
             Account account = new Account();
             Service service1 = new Service();
