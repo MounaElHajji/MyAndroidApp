@@ -84,8 +84,12 @@ public class LoginActivity extends AppCompatActivity {
         api.loginAccount(account) .enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
-                Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
-                startActivity(i);
+                if(response.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
+                    startActivity(i);
+                }else{
+                    Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onFailure(Call<Account> call, Throwable t) {
