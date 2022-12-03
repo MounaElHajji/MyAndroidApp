@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Numéro tele/Email"
+            android:text="Numéro tél/Email"
             tools:ignore="MissingConstraints" />
 
         <EditText

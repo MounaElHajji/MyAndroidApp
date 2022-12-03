@@ -82,6 +82,7 @@ public class inscription extends AppCompatActivity {
         setContentView(R.layout.inscription);
         ButterKnife.bind(this);
         desc.setVisibility(View.GONE);
+        service.setVisibility(View.GONE);
         msg.setVisibility(View.GONE);
         msg.setText("");
         List fcts= new ArrayList();
@@ -169,15 +170,12 @@ public class inscription extends AppCompatActivity {
     public void clickVille(Spinner s,int pos) {
         if (pos == 0) {
 
-            desc.setVisibility(View.GONE);
             msg.setVisibility(View.VISIBLE);
             msg.setText("Veuillez chosir une ville");
         } else if (pos == 1) {
             msg.setText("");
-            desc.setVisibility(View.VISIBLE);
         } else {
             msg.setText("");
-            desc.setVisibility(View.GONE);
         }
     }
     @OnItemSelected(R.id.service)
@@ -188,10 +186,10 @@ public class inscription extends AppCompatActivity {
             msg.setText("Veuillez chosir un service");
         } else if (pos == 1) {
             msg.setText("");
-            desc.setVisibility(View.VISIBLE);
+           // desc.setVisibility(View.VISIBLE);
         } else {
             msg.setText("");
-            desc.setVisibility(View.GONE);
+            //desc.setVisibility(View.GONE);
         }
     }
     @OnClick(R.id.btnRegister)
