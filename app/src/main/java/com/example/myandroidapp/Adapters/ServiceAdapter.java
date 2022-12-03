@@ -2,28 +2,22 @@
 package com.example.myandroidapp.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
-import com.example.myandroidapp.retrofit.IApiServices;
-import com.squareup.picasso.Picasso;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
+import com.squareup.picasso.Picasso;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
     List<Service> services;

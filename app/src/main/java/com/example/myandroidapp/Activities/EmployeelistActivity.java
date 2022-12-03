@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
-import com.example.myandroidapp.retrofit.ApiInterface;
+import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 
 import java.util.List;

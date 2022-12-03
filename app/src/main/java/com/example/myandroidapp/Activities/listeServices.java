@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.Adapters.ServiceAdapter;
 import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
-import com.example.myandroidapp.retrofit.IApiServices;
+import com.example.myandroidapp.Api.IApiServices;
 import com.example.myandroidapp.retrofit.RetrofitBack;
 
 import java.util.ArrayList;
@@ -36,7 +36,6 @@ public class listeServices extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_services);
-
         setList();
         listServices();
 

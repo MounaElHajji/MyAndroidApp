@@ -7,8 +7,8 @@
     tools:context=".Activities.LoginActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="481dp"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
@@ -67,8 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:inputType="textPersonName"
-            tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView2"
@@ -84,8 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:inputType="numberPassword"
-            tools:ignore="MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            android:inputType="textPassword"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,6 +99,19 @@
             android:layout_height="10dp"
             tools:ignore="MissingConstraints" />
 
+        <CheckBox
+            android:id="@+id/pwdsh"
+            android:layout_width="247dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="10dp"
+            android:text="Afficher le mot de passe" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            tools:ignore="MissingConstraints" />
+
         <Button
             android:id="@+id/button2"
             android:layout_width="200dp"
@@ -112,23 +124,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
             android:layout_gravity="left"
             android:text="Vous n'avez pas un compte ? "
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/signUp"
-            android:layout_width="wrap_content"
+            android:layout_width="87dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="-20dp"
             android:layout_marginRight="20dp"
             android:text="S'inscrire"
+            android:clickable="true"
             android:textColor="@color/black" />
 
     </LinearLayout>
