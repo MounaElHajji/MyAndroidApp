@@ -1,7 +1,7 @@
 package com.example.myandroidapp.Models;
 
 public class Service {
-    private int id;
+    private int service_id;
     private String service_title;
     private String image;
 
@@ -10,11 +10,11 @@ public class Service {
     }
 
     public int getService_id() {
-        return id;
+        return service_id;
     }
 
     public void setService_id(int service_id) {
-        this.id = service_id;
+        this.service_id = service_id;
     }
 
     public void setService_title(String service_title) {
@@ -28,10 +28,6 @@ public class Service {
     public Service(String service_title, String image) {
         this.service_title = service_title;
         this.image = image;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getLabel() {
