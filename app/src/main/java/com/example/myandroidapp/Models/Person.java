@@ -9,8 +9,18 @@ public class Person {
     private String tel;
     private String image;
     private String typeProfil;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     private String description;
     private Service service;
+    private String imageP;
 
     public void setDescription(String description) {
         this.description = description;
