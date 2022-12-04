@@ -1,6 +1,8 @@
 package com.example.myandroidapp.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +24,7 @@ import retrofit2.Response;
 public class CurrentProfile extends AppCompatActivity {
     Employee emp = new Employee();
     ApiInterface apiInterface;
-    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt;
+    TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +38,18 @@ public class CurrentProfile extends AppCompatActivity {
     private void getVardFromLayout() {
         villeTxt = findViewById(R.id.textView4);
         nomTxt = findViewById(R.id.textView);
-        adressTxt = findViewById(R.id.textView8);
+        cinTxt = findViewById(R.id.textView8);
         emploiTxt = findViewById(R.id.textView10);
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
     }
 
     private void getUserDetails() {
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Employee> call = apiInterface.getProfilePersonne();
+        int id= sh.getInt("id",0);
+        Call<Employee> call = apiInterface.getProfilePersonne(id);
         call.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
@@ -59,14 +64,16 @@ public class CurrentProfile extends AppCompatActivity {
                 String empNom = reponseEmp.getFirst_name();
                 String empPrenom = reponseEmp.getLast_name();
                 String empCin = reponseEmp.getCin();
-                String empEmploie = reponseEmp.getType_profile();
+                String empDesc = reponseEmp.getDescription();
+                String empEmploie = reponseEmp.getType_profil();
 
                 //set the data in the layout to the dat coming from the backend
                 villeTxt.setText(empVille);
                 telTxt.setText(empTel);
                 nomTxt.setText(empNom +" "+empPrenom);
                 emploiTxt.setText(empEmploie);
-                descTxt.setText(empCin);
+                cinTxt.setText(empCin);
+                descTxt.setText(empDesc);
             }
 
             @Override

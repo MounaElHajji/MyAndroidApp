@@ -12,6 +12,10 @@ public class Account {
         this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     private Person person;
 
     public String getUsername() {

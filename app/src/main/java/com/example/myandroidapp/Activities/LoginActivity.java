@@ -1,8 +1,12 @@
 package com.example.myandroidapp.Activities;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -46,12 +50,14 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.signUp)
     TextView signUp;
 
-
+    SharedPreferences sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         ButterKnife.bind(this);
+
     }
     @OnCheckedChanged(R.id.pwdsh)
     public void onCheckedChanged() {
@@ -86,6 +92,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
+                    Account account1= response.body();
+                    SharedPreferences.Editor myEdit = sharedPref.edit();
+                    myEdit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
+                    myEdit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
+                    myEdit.commit();
                     startActivity(i);
                 }else{
                     Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,11 @@
 package com.example.myandroidapp.Api;
+import static android.os.ParcelFileDescriptor.MODE_APPEND;
+
+import static java.security.AccessController.getContext;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.example.myandroidapp.Models.Employee;
 import  com.example.myandroidapp.Models.Employee;
 
@@ -20,6 +27,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 public interface ApiInterface {
+
     @GET("employees/getAll")
     Call<List<Employee>> getPost();
 
@@ -41,6 +49,11 @@ public interface ApiInterface {
     @GET("employees/getFemmeMenage")
     Call<List<Employee>> getFemmeMenage();
 
+<<<<<<< HEAD
     @GET("employees/8")
     Call<Employee> getProfilePersonne();
+=======
+    @GET("employees/{id}")
+    Call<Employee> getProfilePersonne(@Path("id") int id);
+>>>>>>> a4da64b1d4202673642a154988c8f11e2377065f
 }
