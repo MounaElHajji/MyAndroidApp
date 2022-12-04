@@ -3,6 +3,7 @@ package com.example.myandroidapp.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -46,12 +47,16 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.signUp)
     TextView signUp;
 
+    SharedPreferences mypreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        /*logout*/
+        mypreferences = getSharedPreferences("userrecord", 0);
+        Boolean islogin = mypreferences.getBoolean("userlogin", false);
     }
     @OnCheckedChanged(R.id.pwdsh)
     public void onCheckedChanged() {
@@ -73,6 +78,11 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.button2)
     public  void loginClick(){
+       /*logout*/
+        SharedPreferences.Editor edit =  mypreferences.edit();
+        edit.putBoolean("userlogin", true);
+        edit.commit();
+
         RetrofitS retrofitS= new RetrofitS();
         AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
         String passwd=String.valueOf(pwd.getText());
