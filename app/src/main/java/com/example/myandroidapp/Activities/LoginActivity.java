@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        Boolean islogin = sharedPref.getBoolean("userlogin", false);
         ButterKnife.bind(this);
 
     }
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.button2)
     public  void loginClick(){
+
         RetrofitS retrofitS= new RetrofitS();
         AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
         String passwd=String.valueOf(pwd.getText());
@@ -91,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()) {
+                    /*logout*/
+                    SharedPreferences.Editor edit =  sharedPref.edit();
+                    edit.putBoolean("userlogin", true);
+                    edit.commit();
+
                     Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
                     Account account1= response.body();
                     SharedPreferences.Editor myEdit = sharedPref.edit();
