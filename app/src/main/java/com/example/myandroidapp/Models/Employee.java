@@ -1,7 +1,7 @@
 package com.example.myandroidapp.Models;
 
 public class Employee {
-    private String city, last_name, tel, imageP, type_profil, cin, first_name;
+    private String city, lastName, tel, imageP, type_profil, cin, firstName;
     private Long service_id;
 
     public String getCity() {
@@ -13,11 +13,11 @@ public class Employee {
     }
 
     public String getLast_name() {
-        return last_name;
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLast_name(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getTel() {
@@ -53,11 +53,11 @@ public class Employee {
     }
 
     public String getFirst_name() {
-        return first_name;
+        return firstName;
     }
 
     public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+        this.firstName = first_name;
     }
 
     public Long getId() {

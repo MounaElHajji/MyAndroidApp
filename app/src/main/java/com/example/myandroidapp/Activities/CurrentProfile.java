@@ -64,7 +64,7 @@ public class CurrentProfile extends AppCompatActivity {
                 //set the data in the layout to the dat coming from the backend
                 villeTxt.setText(empVille);
                 telTxt.setText(empTel);
-                nomTxt.setText(empNom +""+empPrenom);
+                nomTxt.setText(empNom +" "+empPrenom);
                 emploiTxt.setText(empEmploie);
                 descTxt.setText(empCin);
             }

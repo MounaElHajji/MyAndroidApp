@@ -41,7 +41,7 @@
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/personn" />
+        app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -102,7 +102,7 @@
         android:textAlignment="center"
         android:textColor="#ffffff"
 
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
-                android:text="Numéro tel:"
+                android:text="Num tel/email:"
                 android:textColor="#0090ff"
                 android:textSize="20sp" />
 
@@ -349,10 +349,12 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/include2"
         layout="@layout/footer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

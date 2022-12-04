@@ -37,12 +37,12 @@ public class Settings extends AppCompatActivity {
     // -------- Footer icons listeners :
 
     public void onMessageClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
     }
 
     public void onFavorisClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, FavorisActivity.class);
         startActivity(intent);
     }
 

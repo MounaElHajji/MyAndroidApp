@@ -205,7 +205,7 @@ private boolean isValidMail(String email) {
 /****************************/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
-        if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 || service.getSelectedItemPosition()==0 ||
+        if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 ||
         mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
         || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
