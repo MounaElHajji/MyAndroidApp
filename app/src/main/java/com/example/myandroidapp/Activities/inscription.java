@@ -156,6 +156,7 @@ public class inscription extends AppCompatActivity {
         if (pos == 0) {
             desc.setVisibility(View.GONE);
             msg.setVisibility(View.VISIBLE);
+            service.setVisibility(View.GONE);
             msg.setText("Veuillez chosir une fonction");
         } else if(pos==1) {
             msg.setText("");
@@ -189,7 +190,7 @@ public class inscription extends AppCompatActivity {
         Intent i= new Intent(this, LoginActivity.class);
         startActivity(i);
     }
-/**************************/
+/********************************************* REGEX ************************************************/
 private boolean isValidMail(String email) {
 
     String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
