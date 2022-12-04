@@ -1,8 +1,16 @@
 package com.example.myandroidapp.Models;
 
 public class Employee {
-    private String city, lastName, tel, imageP, type_profil, cin, firstName;
+    private String city, lastName, tel, imageP, typeProfil, cin, firstName, description;
     private Long service_id;
+
+    public String getType_profil() {
+        return typeProfil;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     public String getCity() {
         return city;
@@ -36,12 +44,9 @@ public class Employee {
         this.imageP = image;
     }
 
-    public String getType_profile() {
-        return type_profil;
-    }
 
     public void setType_profile(String type_profile) {
-        this.type_profil = type_profile;
+        this.typeProfil = type_profile;
     }
 
     public String getCin() {
