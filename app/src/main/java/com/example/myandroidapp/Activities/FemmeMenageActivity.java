@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -71,4 +73,41 @@ public class FemmeMenageActivity extends AppCompatActivity {
             }
         });
     }
+    public void onBackClick(View view) {
+        finish();
+    }
+    // -------- Footer icons listeners :
+
+    public void onMessageClick(View view) {
+        Intent intent = new Intent(this, listeServices.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void onFavorisClick(View view) {
+        Intent intent = new Intent(this, FavorisActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onHomeClick(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onSettingsClick(View view) {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onProfilClick(View view) {
+        Intent intent = new Intent(this, CurrentProfile.class);
+        startActivity(intent);
+        finish();
+    }
+
+    // -------- Footer icons listeners /
 }
