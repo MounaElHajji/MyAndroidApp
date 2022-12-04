@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -120,6 +121,7 @@ public class inscription extends AppCompatActivity {
                 for (String s:
                         lis ) {
                     Services.add(s);
+                    System.out.println(s);
                 }
             }
             @Override
@@ -202,6 +204,14 @@ private boolean isValidMail(String email) {
         }
         return false;
     }
+
+    private  boolean isValidPwd(String pwd){
+         String PASSWORD_PATTERN =
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(pwd);
+        return matcher.matches();
+    }
 /****************************/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
@@ -210,7 +220,12 @@ private boolean isValidMail(String email) {
         || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
         }else if(!isValidMail(mail.getText().toString()) && !isValidMobile(mail.getText().toString())){
-            msg.setText("Email ou Tél n'est pas valide");
+            msg.setText("Email ou Tél n'est pas valide!");
+        }else if(fonction.getSelectedItemPosition()==1 && service.getSelectedItemPosition()==0){
+            msg.setText("Veuillez choisir un service!");
+        }else if(!isValidPwd(pwd.getText().toString())){
+            msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" +
+                    "des symboles et de longueur minimale 8!");
         }
         else {
             Person person = new Person();

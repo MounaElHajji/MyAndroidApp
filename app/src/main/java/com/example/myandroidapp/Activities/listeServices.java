@@ -87,12 +87,12 @@ public class listeServices extends AppCompatActivity {
     }
 
     public void onFavorisClick(View view) {
-        Intent intent = new Intent(this, listeServices.class);
+        Intent intent = new Intent(this, FavorisActivity.class);
         startActivity(intent);
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, listeServices.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 

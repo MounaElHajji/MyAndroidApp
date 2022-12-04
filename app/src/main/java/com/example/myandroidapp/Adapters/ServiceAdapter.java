@@ -1,4 +1,3 @@
-
 package com.example.myandroidapp.Adapters;
 
 import android.content.Context;
@@ -79,7 +78,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     }
     @Override
     public int getItemCount() {
-
         return services.size();
     }
 
