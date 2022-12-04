@@ -207,10 +207,10 @@ private boolean isValidMail(String email) {
     }
 
     private  boolean isValidPwd(String pwd){
-//         String PASSWORD_PATTERN =
-//                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-        String PASSWORD_PATTERN =
-                "[a-zA-Z]+";
+         String PASSWORD_PATTERN =
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+//        String PASSWORD_PATTERN =
+//                "[a-zA-Z]+";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
