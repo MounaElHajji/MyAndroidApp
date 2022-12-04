@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.myandroidapp.Activities.BricolageActivity;
+import com.example.myandroidapp.Activities.ClimatisationActivity;
+import com.example.myandroidapp.Activities.ElectriciteActivity;
+import com.example.myandroidapp.Activities.FemmeMenageActivity;
+import com.example.myandroidapp.Activities.PeintureList;
 import com.example.myandroidapp.Activities.PlombrieList;
 import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
@@ -56,10 +60,63 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
                 }
             });
         }
+        else if(service.getService_title().contains("Plomberie"))
+        {
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PlombrieList.class);
+                    context.startActivity(i);
+                }
+            });
+        }
 
-       if(services.get(position).getImage() != null){
-           Picasso.get().load(services.get(position).getImage()).into(holder.image);
-       }
+        else if(service.getService_title().contains("Electricité"))
+        {
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ElectriciteActivity.class);
+                    context.startActivity(i);
+                }
+            });
+        }
+
+        else if(service.getService_title().contains("Climatisation"))
+        {
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, ClimatisationActivity.class);
+                    context.startActivity(i);
+                }
+            });
+        }
+        else if(service.getService_title().contains("Peinture"))
+        {
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, PeintureList.class);
+                    context.startActivity(i);
+                }
+            });
+        }
+
+        else if(service.getService_title().contains("Femme de ménage"))
+        {
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, FemmeMenageActivity.class);
+                    context.startActivity(i);
+                }
+            });
+        }
+
+        if(services.get(position).getImage() != null){
+            Picasso.get().load(services.get(position).getImage()).into(holder.image);
+        }
 
     }
 
@@ -85,27 +142,3 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
