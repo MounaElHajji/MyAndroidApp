@@ -6,10 +6,13 @@ import com.example.myandroidapp.Models.Account;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface AccountApi {
     @POST("/account/login")
@@ -20,4 +23,8 @@ public interface AccountApi {
 
     @GET("/services/listString")
     Call<List<String>> listServices();
+
+    @Multipart
+    @POST("/uploadimage")
+    Call<Account> uploadImage (@Part MultipartBody.Part image);
 }

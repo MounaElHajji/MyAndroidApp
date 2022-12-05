@@ -7,7 +7,7 @@ public class RetrofitBack {
     private static Retrofit retrofit;
 
 
-    private static final String URL_Services = "http://192.168.1.102:8080/";
+    private static final String URL_Services = "http://192.168.149.86:8080/";
 
 
 
