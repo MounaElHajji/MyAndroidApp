@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Patterns;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.Service;
@@ -215,7 +216,34 @@ private boolean isValidMail(String email) {
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
     }
-/****************************/
+    /********************** LOGIN EXISTS ******/
+
+    RetrofitS retrofit= new RetrofitS();
+    ApiInterface api1 =retrofit.getRetrofit().create(ApiInterface.class);
+
+    private void loginExists(String login){
+
+        api1.checkLogin(login).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                // display response as string
+                if(response.body()) {
+                    msg.setText("Ce mail/tél est dèja utilisé");
+                }
+                else register();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(inscription.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+
+    }
+
+
+    /******************************************/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
         if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 ||
@@ -229,40 +257,41 @@ private boolean isValidMail(String email) {
         }else if(!isValidPwd(pwd.getText().toString())){
             msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" +
                     "des symboles et de longueur minimale 8!");
-        }
-        else {
-            Person person = new Person();
-            Account account = new Account();
-            Service service1 = new Service();
-            person.setDescription(desc.getText().toString());
-            person.setCin(cin.getText().toString());
-            person.setFirstName(prenom.getText().toString());
-            person.setCity(ville.getSelectedItem().toString());
-            person.setImage("");
-            person.setLastName(nom.getText().toString());
-            person.setTel(mail.getText().toString());
-            person.setTypeProfil(fonction.getSelectedItem().toString());
-            account.setPassword(pwd.getText().toString());
-            account.setUsername(mail.getText().toString());
-            service1.setService_title(service.getSelectedItem().toString());
-            service1.setService_id(service.getSelectedItemPosition());
-            person.setService(service1);
-            account.setPerson(person);
-            Intent i= new Intent(this, LoginActivity.class);
-            api.signup(account).enqueue(new Callback<Account>() {
-                @Override
-                public void onResponse(Call<Account> call, Response<Account> response) {
-                    Toast.makeText(inscription.this, "signed up successfully!", Toast.LENGTH_SHORT).show();
-                    startActivity(i);
-                }
+        }else { loginExists(mail.getText().toString()); }
 
-                @Override
-                public void onFailure(Call<Account> call, Throwable t) {
-                    Toast.makeText(inscription.this, "signed up failed!!!", Toast.LENGTH_SHORT).show();
-                    Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-                }
-            });
-        }
+    }
 
+    private void register() {
+        Person person = new Person();
+        Account account = new Account();
+        Service service1 = new Service();
+        person.setDescription(desc.getText().toString());
+        person.setCin(cin.getText().toString());
+        person.setFirstName(prenom.getText().toString());
+        person.setCity(ville.getSelectedItem().toString());
+        person.setImage("");
+        person.setLastName(nom.getText().toString());
+        person.setTel(mail.getText().toString());
+        person.setTypeProfil(fonction.getSelectedItem().toString());
+        account.setPassword(pwd.getText().toString());
+        account.setUsername(mail.getText().toString());
+        service1.setService_title(service.getSelectedItem().toString());
+        service1.setService_id(service.getSelectedItemPosition());
+        person.setService(service1);
+        account.setPerson(person);
+        Intent i= new Intent(this, LoginActivity.class);
+        api.signup(account).enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                Toast.makeText(inscription.this, "signed up successfully!", Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                Toast.makeText(inscription.this, "signed up failed!!!", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
     }
 }

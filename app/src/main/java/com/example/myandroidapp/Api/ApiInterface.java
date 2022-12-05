@@ -43,5 +43,8 @@ public interface ApiInterface {
     @DELETE("account/{id}")
     Call<Void> DeleteAccount(@Path("id") int id);
 
+    @GET("employees/checkLogin/{login}")
+    Call<Boolean> checkLogin(@Path("login") String login);
+
 
 }
