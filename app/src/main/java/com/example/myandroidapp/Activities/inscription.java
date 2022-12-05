@@ -189,6 +189,7 @@ public class inscription extends AppCompatActivity {
     public void clickLogin(){
         Intent i= new Intent(this, LoginActivity.class);
         startActivity(i);
+        finish();
     }
 /********************************************* REGEX ************************************************/
 private boolean isValidMail(String email) {
