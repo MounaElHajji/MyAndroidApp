@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                     myEdit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
                     myEdit.commit();
                     startActivity(i);
+                    finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();
                 }

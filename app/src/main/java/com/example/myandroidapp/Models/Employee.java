@@ -72,4 +72,48 @@ public class Employee {
     public void setId(Long id) {
         this.service_id = id;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getImageP() {
+        return imageP;
+    }
+
+    public void setImageP(String imageP) {
+        this.imageP = imageP;
+    }
+
+    public String getTypeProfil() {
+        return typeProfil;
+    }
+
+    public void setTypeProfil(String typeProfil) {
+        this.typeProfil = typeProfil;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(Long service_id) {
+        this.service_id = service_id;
+    }
 }
