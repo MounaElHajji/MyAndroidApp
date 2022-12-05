@@ -62,7 +62,7 @@ public class Settings extends AppCompatActivity {
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
        int id= sh.getInt("id",0);
-        Call<Void> call = apiInterface.DeleteAccount(1);
+        Call<Void> call = apiInterface.DeleteAccount(id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -75,8 +75,8 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(Settings.this, "failed to delete account ", Toast.LENGTH_LONG).show();
 
-                Toast.makeText(Settings.this, "Failed to delete account", Toast.LENGTH_LONG).show();
             }
         });
 
