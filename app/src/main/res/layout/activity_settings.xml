@@ -173,6 +173,7 @@
             android:padding="10dp"
             android:paddingLeft="20dp"
             android:text="Se déconnecter"
+            android:onClick="onLogOutClick"
             android:textColor="@color/black" />
 
         <include

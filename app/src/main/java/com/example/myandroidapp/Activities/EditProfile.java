@@ -25,26 +25,31 @@ public class EditProfile extends AppCompatActivity {
     public void onMessageClick(View view) {
         Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
+        finish();
     }
 
     public void onFavorisClick(View view) {
         Intent intent = new Intent(this, FavorisActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void onHomeClick(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void onSettingsClick(View view) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
+        finish();
     }
 
     public void onProfilClick(View view) {
         Intent intent = new Intent(this, CurrentProfile.class);
         startActivity(intent);
+        finish();
     }
 
     // -------- Footer icons listeners /
