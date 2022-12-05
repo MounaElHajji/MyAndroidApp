@@ -14,7 +14,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.button)
     protected void loginClick(){
-        Intent inten = new Intent(this, listeServices.class);
+        Intent inten = new Intent(this, LoginActivity.class);
         startActivity(inten);
     }
 

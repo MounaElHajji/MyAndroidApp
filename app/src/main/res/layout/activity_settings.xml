@@ -113,9 +113,11 @@
             android:backgroundTint="@color/white"
             android:gravity="center_vertical"
             android:padding="10dp"
+            android:onClick="DeleteuserAccount"
             android:paddingLeft="20dp"
             android:text="Supprimer votre compte"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+             />
 
         <ImageButton
             android:id="@+id/switchIcon"
