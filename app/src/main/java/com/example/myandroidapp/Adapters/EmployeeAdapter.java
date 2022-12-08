@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myandroidapp.Activities.CurrentProfile;
 import com.example.myandroidapp.Activities.EmployeelistActivity;
+import com.example.myandroidapp.Activities.EmployeesDetails;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 
@@ -49,13 +50,18 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, CurrentProfile.class);
+                Intent i = new Intent(context, EmployeesDetails.class);
+                i.putExtra("firstName", EmployeeList.get(position).getFirst_name());
+                i.putExtra("city", EmployeeList.get(position).getCity());
+                i.putExtra("description", EmployeeList.get(position).getDescription());
+                i.putExtra("tel", EmployeeList.get(position).getTel());
+                i.putExtra("image", EmployeeList.get(position).getImage());
                 context.startActivity(i);
             }
         });
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  id, nom, ville, descritpion;
+        TextView  id, nom, ville, descritpion, tel;
         ImageView image;
         Button btnVoir;
 
@@ -66,6 +72,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             ville = itemView.findViewById(R.id.text_ville);
             descritpion = itemView.findViewById(R.id.text_description);
             btnVoir = itemView.findViewById(R.id.btnVoir);
+
         }
     }
 
