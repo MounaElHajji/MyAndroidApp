@@ -16,6 +16,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -51,4 +52,10 @@ public interface ApiInterface {
 
     @GET("employees/{id}")
     Call<Employee> getProfilePersonne(@Path("id") int id);
+
+    @DELETE("account/{id}")
+    Call<Void> DeleteAccount(@Path("id") int id);
+
+    @GET("employees/checkLogin/{login}")
+    Call<Boolean> checkLogin(@Path("login") String login);
 }

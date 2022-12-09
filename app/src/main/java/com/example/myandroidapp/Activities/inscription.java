@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.Service;
@@ -39,6 +40,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class inscription extends AppCompatActivity {
+
+    ApiInterface api1;
 
     @BindView(R.id.fonction)
     Spinner fonction;
@@ -151,6 +154,63 @@ public class inscription extends AppCompatActivity {
             c.setText("Afficher le mot de passe");
         }
     }
+
+    private void loginExists(String login){
+
+        api1.checkLogin(login).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                // display response as string
+                if(response.body()) {
+                    msg.setText("Ce mail/tél est dèja utilisé");
+                }
+                else register();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(inscription.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+
+    }
+
+
+    private void register() {
+        Person person = new Person();
+        Account account = new Account();
+        Service service1 = new Service();
+        person.setDescription(desc.getText().toString());
+        person.setCin(cin.getText().toString());
+        person.setFirstName(prenom.getText().toString());
+        person.setCity(ville.getSelectedItem().toString());
+        person.setImage("");
+        person.setLastName(nom.getText().toString());
+        person.setTel(mail.getText().toString());
+        person.setTypeProfil(fonction.getSelectedItem().toString());
+        account.setPassword(pwd.getText().toString());
+        account.setUsername(mail.getText().toString());
+        service1.setService_title(service.getSelectedItem().toString());
+        service1.setService_id(service.getSelectedItemPosition());
+        person.setService(service1);
+        account.setPerson(person);
+        Intent i= new Intent(this, LoginActivity.class);
+        api.signup(account).enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                Toast.makeText(inscription.this, "signed up successfully!", Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                Toast.makeText(inscription.this, "signed up failed!!!", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+    }
+
     @OnItemSelected(R.id.fonction)
     public void click(Spinner s,int pos) {
         if (pos == 0) {
@@ -190,15 +250,15 @@ public class inscription extends AppCompatActivity {
         Intent i= new Intent(this, LoginActivity.class);
         startActivity(i);
     }
-/********************************************* REGEX ************************************************/
-private boolean isValidMail(String email) {
+    /*************** REGEX ****************/
+    private boolean isValidMail(String email) {
 
-    String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-    return Pattern.compile(EMAIL_STRING).matcher(email).matches();
+        return Pattern.compile(EMAIL_STRING).matcher(email).matches();
 
-}
+    }
     private boolean isValidMobile(String phone) {
         if(!Pattern.matches("[a-zA-Z]+", phone)) {
             return phone.length() > 6 && phone.length() <= 13;
@@ -207,20 +267,21 @@ private boolean isValidMail(String email) {
     }
 
     private  boolean isValidPwd(String pwd){
-         String PASSWORD_PATTERN =
-                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        String PASSWORD_PATTERN =
+                "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
 //        String PASSWORD_PATTERN =
 //                "[a-zA-Z]+";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
     }
-/****************************/
+    /**********/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
+
         if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 ||
-        mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
-        || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
+                mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
+                || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
         }else if(!isValidMail(mail.getText().toString()) && !isValidMobile(mail.getText().toString())){
             msg.setText("Email ou Tél n'est pas valide!");
