@@ -276,8 +276,13 @@ private boolean isValidMail(String email) {
         person.setTypeProfil(fonction.getSelectedItem().toString());
         account.setPassword(pwd.getText().toString());
         account.setUsername(mail.getText().toString());
-        service1.setService_title(service.getSelectedItem().toString());
-        service1.setService_id(service.getSelectedItemPosition());
+        if(fonction.getSelectedItemPosition()==2){
+            service1.setService_title("Client");
+            service1.setService_id(7);
+        }else {
+            service1.setService_title(service.getSelectedItem().toString());
+            service1.setService_id(service.getSelectedItemPosition());
+        }
         person.setService(service1);
         account.setPerson(person);
         Intent i= new Intent(this, LoginActivity.class);
