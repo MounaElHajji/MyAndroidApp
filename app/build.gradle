@@ -24,6 +24,7 @@ android {
     }
     buildFeatures{
         dataBinding = true
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -46,4 +47,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:25.1.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
 }

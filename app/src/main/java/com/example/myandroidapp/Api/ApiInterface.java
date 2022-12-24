@@ -2,6 +2,7 @@ package com.example.myandroidapp.Api;
 
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.Ville;
 
 import java.util.List;
 
@@ -34,8 +35,8 @@ public interface ApiInterface {
     Call<List<Employee>> getFemmeMenage();
 
 
-    @GET("employees/8")
-    Call<Employee> getProfilePersonne();
+    @GET("villes/getAllcities")
+    Call<List<Ville>> getCities();
 
     @GET("employees/{id}")
     Call<Employee> getProfilePersonne(@Path("id") int id);
