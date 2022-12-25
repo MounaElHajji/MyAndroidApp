@@ -5,45 +5,33 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.Activities.CurrentProfile;
-import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Activities.EmployeesDetails;
-import com.example.myandroidapp.Activities.FavorisActivity;
-import com.example.myandroidapp.Activities.Settings;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
-import com.example.myandroidapp.Models.ListFavoris;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> {
+public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.ViewHolder> {
 
     List<Employee> EmployeeList;
     Context context;
@@ -53,40 +41,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     HashMap<Employee, Integer> lisFav= new HashMap<>();
 
 
-    public EmployeeAdapter(Context context, List<Employee> posts) {
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        int id= sh.getInt("id", 0);
-        Call<List<ListFavoris>> call = apiInterface.getFav(id);
-        call.enqueue(new Callback<List<ListFavoris>>() {
-            @Override
-            public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
-                if(!response.isSuccessful()) {
-                    return;
-                }
-                List<ListFavoris> postList = response.body();
-                List<Employee> emp= new ArrayList<>();
-                for (Employee e:
-                    posts ) {
-                    for (ListFavoris f:
-                            postList ) {
-                        if(e.equals(f.getEmp())){
-                            lisFav.put(e, R.drawable.fav);
-                        }else{
-                            lisFav.put(e, R.drawable.ic_baseline_favorite_border_24);
-                        }
-                    }
-                }
 
-//                postAdapter.getFilter().filter("Employee");
-            }
-            @Override
-            public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
-            }
-        });
+    public FavEmployeeAdapter(Context context, List<Employee> posts) {
         this.context = context;
         EmployeeList = posts;
-
+        for (Employee emp:
+                getEmployeeList()) {
+            lisFav.put(emp, R.drawable.fav);
+        }
     }
 
 
@@ -96,18 +58,18 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
     @NonNull
     @Override
-    public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavEmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.items, null);
 
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
-
+        sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull FavEmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Employee post = EmployeeList.get(position);
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
@@ -125,12 +87,16 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             }
         });
         holder.btnHeart.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 int p2 = EmployeeList.get(position).getId();
                 int p1= sh.getInt("id", 0);
-                if(res==R.drawable.fav){
+                apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+               // System.out
+                if(lisFav.get(EmployeeList.get(position))==R.drawable.fav){
                     holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    lisFav.replace(EmployeeList.get(position),R.drawable.fav, R.drawable.ic_baseline_favorite_border_24);
                     Call<Void> call2=apiInterface.DeleteFav(p2,p1);
                     call2.enqueue(new Callback<Void>() {
                         @Override
@@ -142,7 +108,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                     });
                 }else{
                     holder.btnHeart.setImageResource(R.drawable.fav);
-                    res=R.drawable.fav;
+                    lisFav.replace(EmployeeList.get(position),R.drawable.ic_baseline_favorite_border_24, R.drawable.fav);
                     Call<Person> call1 = apiInterface.addFav(p1, p2);
                     call1.enqueue(new Callback<Person>() {
                         @Override
@@ -169,19 +135,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             descritpion = itemView.findViewById(R.id.text_description);
             btnVoir = itemView.findViewById(R.id.btnVoir);
             btnHeart=itemView.findViewById(R.id.btnHeart);
-           // btnHeart.setImageResource(R.drawable.fav);
-            /*Iterator iterator = lisFav.entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry mapentry = (Map.Entry) iterator.next();
-                System.out.println("clé: "+mapentry.getKey()
-                        + " | valeur: " + mapentry.getValue());
-            }
-            for (Employee e:
-                 getEmployeeList()) {
-                /*if(lisFav.get(e)==R.drawable.fav){
-                    btnHeart.setImageResource(R.drawable.fav);
-                }
-            }*/
+            btnHeart.setImageResource(R.drawable.fav);
+
         }
     }
 

@@ -2,12 +2,17 @@ package com.example.myandroidapp.Api;
 
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.ListFavoris;
+import com.example.myandroidapp.Models.Person;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -33,18 +38,25 @@ public interface ApiInterface {
     @GET("employees/getFemmeMenage")
     Call<List<Employee>> getFemmeMenage();
 
-
-    @GET("employees/8")
-    Call<Employee> getProfilePersonne();
-
     @GET("employees/{id}")
     Call<Employee> getProfilePersonne(@Path("id") int id);
+    @GET("employees/{id}")
+    Call<Person> getProfilePersonne1(@Path("id") int id);
 
     @DELETE("account/{id}")
     Call<Void> DeleteAccount(@Path("id") int id);
 
+    @Multipart
+    @POST("/favList/deleteFav")
+    Call<Void> DeleteFav(@Part("id1") int p1,@Part("id2") int p2);
+
     @GET("employees/checkLogin/{login}")
     Call<Boolean> checkLogin(@Path("login") String login);
 
+    @GET("/favList/getFav/{id}")
+    Call<List<ListFavoris>> getFav(@Path("id") int id);
 
+    @Multipart
+    @POST("/favList/addFav")
+    Call<Person> addFav(@Part("p1") int p1,@Part("p2") int p2);
 }

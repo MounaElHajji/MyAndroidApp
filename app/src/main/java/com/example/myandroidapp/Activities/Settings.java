@@ -123,7 +123,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();
     }

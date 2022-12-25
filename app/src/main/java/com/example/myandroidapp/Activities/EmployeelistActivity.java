@@ -17,6 +17,7 @@ import com.example.myandroidapp.R;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -66,7 +67,14 @@ public class EmployeelistActivity extends AppCompatActivity {
                     return;
                 }
                 List<Employee> postList = response.body();
-                employeeAdapter = new EmployeeAdapter(EmployeelistActivity.this, postList);
+                List<Employee> employeeList= new ArrayList<>();
+                for (Employee emp:
+                        postList) {
+                    if (emp.getTypeProfil().equals("Employé")){
+                        employeeList.add(emp);
+                    }
+                }
+                employeeAdapter = new EmployeeAdapter(EmployeelistActivity.this, employeeList);
 //                postAdapter.getFilter().filter("Employee");
                 recyclerViewVar.setAdapter(employeeAdapter);
             }
@@ -96,7 +104,7 @@ public class EmployeelistActivity extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();
     }

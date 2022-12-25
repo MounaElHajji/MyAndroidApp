@@ -78,15 +78,18 @@
                 android:text="voir tout"
                 android:textColor="@color/black"
                 android:textSize="6dp" />
+
         </LinearLayout>
 
-        <TextView
+
+
+        <ImageView
             android:id="@+id/btnHeart"
-            android:layout_width="40dp"
-            android:layout_height="27dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="10dp"
-            android:drawableRight="@drawable/ic_baseline_favorite_border_24"
-            android:textAllCaps="false"
-            android:textSize="7dp" />
+            app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

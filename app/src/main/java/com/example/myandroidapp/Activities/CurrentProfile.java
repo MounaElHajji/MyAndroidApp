@@ -53,9 +53,7 @@ public class CurrentProfile extends AppCompatActivity {
         call.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(CurrentProfile.this, "Success", Toast.LENGTH_LONG).show();
-                }
+
 
                 //get the data from the response
                 Employee reponseEmp = response.body();
@@ -117,7 +115,7 @@ public class CurrentProfile extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();
     }

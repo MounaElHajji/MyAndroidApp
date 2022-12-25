@@ -3,6 +3,7 @@ package com.example.myandroidapp.Api;
 
 
 import com.example.myandroidapp.Models.Account;
+import com.example.myandroidapp.Models.Person;
 
 import java.util.List;
 
@@ -23,8 +24,4 @@ public interface AccountApi {
 
     @GET("/services/listString")
     Call<List<String>> listServices();
-
-    @Multipart
-    @POST("/uploadimage")
-    Call<Account> uploadImage (@Part MultipartBody.Part image);
 }

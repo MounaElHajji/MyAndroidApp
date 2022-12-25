@@ -292,7 +292,6 @@ private boolean isValidMail(String email) {
                 Toast.makeText(inscription.this, "signed up successfully!", Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
-
             @Override
             public void onFailure(Call<Account> call, Throwable t) {
                 Toast.makeText(inscription.this, "signed up failed!!!", Toast.LENGTH_SHORT).show();

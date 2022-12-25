@@ -1,6 +1,7 @@
 package com.example.myandroidapp.Models;
 
 public class Employee {
+    int id;
     private String city, lastName, tel, imageP, typeProfil, cin, firstName, description;
     private Long service_id;
 
@@ -65,8 +66,8 @@ public class Employee {
         this.firstName = first_name;
     }
 
-    public Long getId() {
-        return service_id;
+    public int getId() {
+        return id;
     }
 
     public void setId(Long id) {

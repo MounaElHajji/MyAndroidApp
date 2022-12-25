@@ -1,9 +1,12 @@
 package com.example.myandroidapp.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -12,13 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
+import com.example.myandroidapp.Adapters.FavEmployeeAdapter;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.ListFavoris;
+import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,16 +39,18 @@ public class FavorisActivity  extends AppCompatActivity {
 
     List<Employee> EmployeeList;
     ApiInterface apiInterface;
-    EmployeeAdapter employeeAdapter;
+    FavEmployeeAdapter employeeAdapter;
+   // ImageView btnHeart =findViewById(R.id.btnHeart);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoris);
-
         spinners();
         setList();
         getData();
+       // btnHeart.setImageResource(R.drawable.fav);
+        ButterKnife.bind(this);
     }
 
     private void spinners() {
@@ -55,21 +68,28 @@ public class FavorisActivity  extends AppCompatActivity {
 
     private void getData() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Employee>> call = apiInterface.getPost();
-        call.enqueue(new Callback<List<Employee>>() {
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int id= sh.getInt("id", 0);
+        Call<List<ListFavoris>> call = apiInterface.getFav(id);
+        call.enqueue(new Callback<List<ListFavoris>>() {
             @Override
-            public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
+            public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
                 if(!response.isSuccessful()) {
                     Toast.makeText(FavorisActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<Employee> postList = response.body();
-                employeeAdapter = new EmployeeAdapter(FavorisActivity.this, postList);
+                List<ListFavoris> postList = response.body();
+                List<Employee> emp= new ArrayList<>();
+                for (ListFavoris f:
+                    postList ) {
+                    emp.add(f.getEmp());
+                }
+                employeeAdapter = new FavEmployeeAdapter(FavorisActivity.this, emp);
 //                postAdapter.getFilter().filter("Employee");
                 recyclerViewVar.setAdapter(employeeAdapter);
             }
             @Override
-            public void onFailure(Call<List<Employee>> call, Throwable t) {
+            public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
                 Toast.makeText(FavorisActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -93,7 +113,7 @@ public class FavorisActivity  extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();
     }
