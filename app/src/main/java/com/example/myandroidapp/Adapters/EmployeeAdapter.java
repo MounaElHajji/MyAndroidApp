@@ -5,24 +5,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.Activities.CurrentProfile;
-import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Activities.EmployeesDetails;
-import com.example.myandroidapp.Activities.FavorisActivity;
-import com.example.myandroidapp.Activities.Settings;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.ListFavoris;
@@ -32,25 +27,25 @@ import com.example.myandroidapp.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> {
 
-    List<Employee> EmployeeList;
+public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> implements Filterable{
+
+   List<Employee> EmployeeList;
     Context context;
     ApiInterface apiInterface;
     SharedPreferences sh;
     int res;
     HashMap<Employee, Integer> lisFav= new HashMap<>();
+   List<Employee> filteredList;
+   private List<Employee> PostListFull;
+    private List<Employee> PostSearchName;
+    //private List<Employee> PostEmployees;
 
 
     public EmployeeAdapter(Context context, List<Employee> posts) {
@@ -86,17 +81,20 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         });
         this.context = context;
         EmployeeList = posts;
-
+        this.PostListFull=posts;//create a copy of postList
+        PostSearchName = new ArrayList<>(EmployeeList);
     }
 
 
     public List<Employee> getEmployeeList() {
         return EmployeeList;
+       // PostEmployees = new ArrayList<>(EmployeeList);
+
     }
 
     @NonNull
     @Override
-    public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType ) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.items, null);
 
@@ -105,6 +103,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
         return viewHolder;
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -116,10 +115,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, EmployeesDetails.class);
-                i.putExtra("firstName", EmployeeList.get(position).getFirst_name());
-                i.putExtra("city", EmployeeList.get(position).getCity());
-                i.putExtra("description", EmployeeList.get(position).getDescription());
-                i.putExtra("tel", EmployeeList.get(position).getTel());
+                i.putExtra("firstName",  EmployeeList.get(position).getFirst_name());
+                i.putExtra("city",  EmployeeList.get(position).getCity());
+                i.putExtra("description",  EmployeeList.get(position).getDescription());
+                i.putExtra("tel",  EmployeeList.get(position).getTel());
                 i.putExtra("image", EmployeeList.get(position).getImage());
                 context.startActivity(i);
             }
@@ -156,8 +155,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             }
         });}
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  id, nom, ville, descritpion, tel;
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView id, nom, ville, descritpion, tel;
         ImageView image, btnHeart;
         Button btnVoir;
 
@@ -168,8 +168,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             ville = itemView.findViewById(R.id.text_ville);
             descritpion = itemView.findViewById(R.id.text_description);
             btnVoir = itemView.findViewById(R.id.btnVoir);
-            btnHeart=itemView.findViewById(R.id.btnHeart);
-           // btnHeart.setImageResource(R.drawable.fav);
+            btnHeart = itemView.findViewById(R.id.btnHeart);
+            // btnHeart.setImageResource(R.drawable.fav);
             /*Iterator iterator = lisFav.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry mapentry = (Map.Entry) iterator.next();
@@ -185,8 +185,54 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         }
     }
 
-    @Override
-    public int getItemCount() {
+        public int getItemCount() {
         return EmployeeList.size();
     }
+
+
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString().toLowerCase().trim();
+                if (charString.isEmpty()) {
+                    //filteredList = EmployeeList;
+                    filteredList.addAll(PostListFull);
+                    filteredList.addAll(PostSearchName);
+                    //filteredList.addAll(PostEmployees);
+                } else {
+                    ArrayList<Employee> filterList = new ArrayList<>();
+
+                    for (Employee androidVersion : PostSearchName) {
+
+                        if (androidVersion.getCity().toLowerCase().contains(charString)||androidVersion.getFirstName().toLowerCase().contains(charString) || androidVersion.getLast_name().toLowerCase().contains(charString) ) {
+                            filterList.add(androidVersion);
+
+                        }
+
+                    }
+                    filteredList = filterList;
+
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                //noinspection unchecked
+           //filteredList = (ArrayList<Employee>) results.values;
+
+                EmployeeList.clear();
+                EmployeeList.addAll((List) results.values);
+                notifyDataSetChanged();
+                //Log.e(PlombrieList.TAG, "results=" + results);
+            }
+        };
+    }
+
 }
+
+

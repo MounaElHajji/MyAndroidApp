@@ -5,4 +5,8 @@
         <item>Nom</item>
         <item>Ville</item>
     </string-array>
+
+    <string-array name="ville">
+
+    </string-array>
 </resources>

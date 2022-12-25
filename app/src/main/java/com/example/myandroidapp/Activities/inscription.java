@@ -19,8 +19,10 @@ import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.Service;
+import com.example.myandroidapp.Models.Ville;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.Api.AccountApi;
+import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
 import java.util.ArrayList;
@@ -78,6 +80,7 @@ public class inscription extends AppCompatActivity {
 
     //Retrofit
     RetrofitS retrofitS= new RetrofitS();
+    ApiInterface apiInterface;
     AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
 
     @Override
@@ -92,9 +95,11 @@ public class inscription extends AppCompatActivity {
         List fcts= new ArrayList();
         List LisVille= new ArrayList();
         List Services= new ArrayList();
-        LisVille.add("Ville");
-        LisVille.add("Kénitra");
-        LisVille.add("Rabat");
+        //LisVille.add("Ville");
+        /*LisVille.add("Kénitra");
+        LisVille.add("Rabat");*/
+        getVilles();
+
         fcts.add("Fonction");
         fcts.add("Employé");
         fcts.add("Client");
@@ -104,16 +109,16 @@ public class inscription extends AppCompatActivity {
                 android.R.layout.simple_spinner_item,
                 fcts
         );
-        ArrayAdapter adapter1 = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                LisVille
-        );
+       /* ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, LisVille
+        );*/
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fonction.setAdapter(adapter);
-        ville.setAdapter(adapter1);
+        //ville.setAdapter(adapter1);
+
+
+
 
         api.listServices().enqueue(new Callback<List<String>>() {
             @Override
@@ -296,6 +301,34 @@ private boolean isValidMail(String email) {
             public void onFailure(Call<Account> call, Throwable t) {
                 Toast.makeText(inscription.this, "signed up failed!!!", Toast.LENGTH_SHORT).show();
                 Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+    }
+    private void getVilles() {
+        List <String> Ville =new ArrayList<>();
+        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(inscription.this, android.R.layout.simple_list_item_1,Ville);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<Ville>> call = apiInterface.getCities();
+        call.enqueue(new Callback<List<Ville>>() {
+            @Override
+            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
+                if(response.isSuccessful()) {
+                    for (Ville villeList :response.body()){
+                        String nom_ville= villeList.getNom_ville();
+                        System.out.println(nom_ville);
+                        // Ville object = new Ville(nom_ville);
+                        Ville.add(nom_ville);
+
+                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        ville.setAdapter(villeAdapter);
+                    }
+                }
+
+
+            }
+            @Override
+            public void onFailure(Call<List<Ville>> call, Throwable t) {
+                Toast.makeText(inscription.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
