@@ -198,9 +198,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 String charString = constraint.toString().toLowerCase().trim();
                 if (charString.isEmpty()) {
                     //filteredList = EmployeeList;
-                    filteredList.addAll(PostListFull);
-                    filteredList.addAll(PostSearchName);
-                    //filteredList.addAll(PostEmployees);
+                   //filteredList.addAll(PostListFull);//3
+                   filteredList.addAll(PostSearchName);
+                    //filteredList.addAll(EmployeeList);
                 } else {
                     ArrayList<Employee> filterList = new ArrayList<>();
 
