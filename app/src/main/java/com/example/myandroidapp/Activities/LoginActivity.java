@@ -53,11 +53,15 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        ButterKnife.bind(this);
+        if(islogin){
+            Intent i= new Intent(this, EmployeelistActivity.class);
+            startActivity(i);
+        }else{
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);}
 
     }
     @OnCheckedChanged(R.id.pwdsh)

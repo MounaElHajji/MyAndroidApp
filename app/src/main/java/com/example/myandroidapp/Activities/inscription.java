@@ -2,6 +2,7 @@ package com.example.myandroidapp.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -82,9 +83,16 @@ public class inscription extends AppCompatActivity {
     RetrofitS retrofitS= new RetrofitS();
     ApiInterface apiInterface;
     AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        Boolean islogin = sharedPref.getBoolean("userlogin", false);
+        if(islogin){
+            Intent i= new Intent(this, EmployeelistActivity.class);
+            startActivity(i);
+        }else{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inscription);
         ButterKnife.bind(this);
@@ -143,6 +151,7 @@ public class inscription extends AppCompatActivity {
         );
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         service.setAdapter(adapter2);
+    }
 
     }
     @OnCheckedChanged(R.id.checkBox)
@@ -222,7 +231,7 @@ private boolean isValidMail(String email) {
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
     }
-    /********************** LOGIN EXISTS ******/
+    /********************** LOGIN EXISTS *********************/
 
     RetrofitS retrofit= new RetrofitS();
     ApiInterface api1 =retrofit.getRetrofit().create(ApiInterface.class);
@@ -315,7 +324,6 @@ private boolean isValidMail(String email) {
                 if(response.isSuccessful()) {
                     for (Ville villeList :response.body()){
                         String nom_ville= villeList.getNom_ville();
-                        System.out.println(nom_ville);
                         // Ville object = new Ville(nom_ville);
                         Ville.add(nom_ville);
 

@@ -1,6 +1,8 @@
 package com.example.myandroidapp.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -37,7 +39,6 @@ public class EmployeelistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_list_activity);
-
         spinners();
         setList();
         getData();
