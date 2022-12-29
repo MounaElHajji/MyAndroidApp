@@ -59,7 +59,4 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
         startActivity(i);
     }
 
-    public void onBackClick(View view) {
-        finish();
-    }
 }

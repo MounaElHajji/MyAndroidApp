@@ -1,6 +1,7 @@
 package com.example.myandroidapp;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,6 +66,10 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new MessageAdapter(listMessages,ChatActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    public void onBackClick(View view) {
+        finish();
     }
 
 }
