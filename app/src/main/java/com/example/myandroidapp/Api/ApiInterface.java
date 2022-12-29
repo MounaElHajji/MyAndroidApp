@@ -44,8 +44,6 @@ public interface ApiInterface {
 
     @GET("employees/{id}")
     Call<Employee> getProfilePersonne(@Path("id") int id);
-    @GET("employees/{id}")
-    Call<Person> getProfilePersonne1(@Path("id") int id);
 
     @DELETE("account/{id}")
     Call<Void> DeleteAccount(@Path("id") int id);

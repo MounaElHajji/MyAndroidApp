@@ -53,13 +53,10 @@ public class BricolageActivity extends AppCompatActivity {
         setContentView(R.layout.employee_list_activity);
         myspinnerVille = findViewById(R.id.spinnerVille);
         searchView = findViewById(R.id.search_bar);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
         SearchByVille();
         SearchByName();
         DepndantList();
-       spinners();
+        spinners();
         setList();
         getData();
     }
@@ -89,9 +86,7 @@ public class BricolageActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 employeeAdapter.getFilter().filter(myspinnerVille.getSelectedItem().toString());
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -106,7 +101,6 @@ public class BricolageActivity extends AppCompatActivity {
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
-
         myspinnerVille = findViewById(R.id.spinnerVille);
         myspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -118,9 +112,6 @@ public class BricolageActivity extends AppCompatActivity {
                 }
                 if(position==2){
                     myspinnerVille.setVisibility(View.VISIBLE);
-                  /*  ArrayAdapter<String> myAdapterVille = new ArrayAdapter<>(ElectriciteActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.ville));
-                    myAdapterVille.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    myspinnerVille.setAdapter(myAdapterVille);*/
                     getVilles();
                     SearchLayout.setVisibility(View.GONE);
                 }
@@ -184,34 +175,6 @@ public class BricolageActivity extends AppCompatActivity {
             }
         });
     }
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem search = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) search.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.e(TAG, "newText=" + newText);
-
-                employeeAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.e(TAG, "hasFocus=" + hasFocus);
-            }
-        });
-        return true;
-    }*/
     public void onBackClick(View view) {
         finish();
     }
