@@ -90,14 +90,14 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                int p2 = EmployeeList.get(position).getId();
+                String p2 = EmployeeList.get(position).getId();
                 int p1= sh.getInt("id", 0);
                 apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
                // System.out
                 if(lisFav.get(EmployeeList.get(position))==R.drawable.fav){
                     holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     lisFav.replace(EmployeeList.get(position),R.drawable.fav, R.drawable.ic_baseline_favorite_border_24);
-                    Call<Void> call2=apiInterface.DeleteFav(p2,p1);
+                    Call<Void> call2=apiInterface.DeleteFav(p1,p2);
                     call2.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
