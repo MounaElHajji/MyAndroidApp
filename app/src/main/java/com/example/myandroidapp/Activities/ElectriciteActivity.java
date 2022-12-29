@@ -17,10 +17,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.Ville;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -100,9 +102,10 @@ public class ElectriciteActivity extends AppCompatActivity {
                 }
                 if(position==2){
                     myspinnerVille.setVisibility(View.VISIBLE);
-                    ArrayAdapter<String> myAdapterVille = new ArrayAdapter<>(ElectriciteActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.ville));
-                    myAdapterVille.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    myspinnerVille.setAdapter(myAdapterVille);
+                    getVilles();
+//                    ArrayAdapter<String> myAdapterVille = new ArrayAdapter<>(ElectriciteActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.ville));
+//                    myAdapterVille.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    myspinnerVille.setAdapter(myAdapterVille);
                     SearchLayout.setVisibility(View.GONE);
                 }
             }
@@ -129,7 +132,7 @@ public class ElectriciteActivity extends AppCompatActivity {
 
     private void getData() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Employee>> call = apiInterface.getPost();
+        Call<List<Employee>> call = apiInterface.getElectricite();
         call.enqueue(new Callback<List<Employee>>() {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
@@ -148,6 +151,34 @@ public class ElectriciteActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getVilles() {
+        List <String> Ville =new ArrayList<>();
+        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(ElectriciteActivity.this, android.R.layout.simple_list_item_1,Ville);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<com.example.myandroidapp.Models.Ville>> call = apiInterface.getCities();
+        call.enqueue(new Callback<List<Ville>>() {
+            @Override
+            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
+                if(response.isSuccessful()) {
+                    for (Ville villeList :response.body()){
+                        String nom_ville= villeList.getNom_ville();
+                        // Ville object = new Ville(nom_ville);
+                        Ville.add(nom_ville);
+
+                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        myspinnerVille.setAdapter(villeAdapter);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Ville>> call, Throwable t) {
+                Toast.makeText(ElectriciteActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     public void onBackClick(View view) {
         finish();
     }
@@ -184,6 +215,8 @@ public class ElectriciteActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 
     // -------- Footer icons listeners /
 }

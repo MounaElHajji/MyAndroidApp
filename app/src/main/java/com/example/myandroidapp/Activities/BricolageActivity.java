@@ -118,9 +118,6 @@ public class BricolageActivity extends AppCompatActivity {
                 }
                 if(position==2){
                     myspinnerVille.setVisibility(View.VISIBLE);
-                  /*  ArrayAdapter<String> myAdapterVille = new ArrayAdapter<>(ElectriciteActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.ville));
-                    myAdapterVille.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    myspinnerVille.setAdapter(myAdapterVille);*/
                     getVilles();
                     SearchLayout.setVisibility(View.GONE);
                 }
@@ -130,34 +127,8 @@ public class BricolageActivity extends AppCompatActivity {
             }
         });
     }
-    private void getVilles() {
-        List <String> ville =new ArrayList<>();
-        ArrayAdapter<String> villeAdapter= new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1,ville);
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Ville>> call = apiInterface.getCities();
-        call.enqueue(new Callback<List<Ville>>() {
-            @Override
-            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
-                if(response.isSuccessful()) {
-                    for (Ville villeList :response.body()){
-                        String nom_ville= villeList.getNom_ville();
-                        System.out.println(nom_ville);
-                        // Ville object = new Ville(nom_ville);
-                        ville.add(nom_ville);
-
-                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        myspinnerVille.setAdapter(villeAdapter);
-                    }
-                }
 
 
-            }
-            @Override
-            public void onFailure(Call<List<Ville>> call, Throwable t) {
-                Toast.makeText(BricolageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     private void setList() {
         recyclerViewVar = findViewById(R.id.recycleView);
         recyclerViewVar.setHasFixedSize(true);
@@ -184,34 +155,32 @@ public class BricolageActivity extends AppCompatActivity {
             }
         });
     }
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem search = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) search.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    private void getVilles() {
+        List <String> Ville =new ArrayList<>();
+        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1,Ville);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<com.example.myandroidapp.Models.Ville>> call = apiInterface.getCities();
+        call.enqueue(new Callback<List<Ville>>() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
+                if(response.isSuccessful()) {
+                    for (Ville villeList :response.body()){
+                        String nom_ville= villeList.getNom_ville();
+                        // Ville object = new Ville(nom_ville);
+                        Ville.add(nom_ville);
+
+                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        myspinnerVille.setAdapter(villeAdapter);
+                    }
+                }
             }
-
             @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.e(TAG, "newText=" + newText);
-
-                employeeAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.e(TAG, "hasFocus=" + hasFocus);
+            public void onFailure(Call<List<Ville>> call, Throwable t) {
+                Toast.makeText(BricolageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        return true;
-    }*/
+    }
+
     public void onBackClick(View view) {
         finish();
     }

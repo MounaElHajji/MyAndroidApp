@@ -7,6 +7,12 @@
     </string-array>
 
     <string-array name="ville">
-
+        <item>Choisir Ville</item>
+        <item>Rabat</item>
+        <item>Kenitra</item>
+        <item>Kenitra</item>
+        <item>Kenitra</item>
+        <item>Kenitra</item>
+        <item>Kenitra</item>
     </string-array>
 </resources>
