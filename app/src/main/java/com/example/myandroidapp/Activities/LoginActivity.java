@@ -55,15 +55,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        if(islogin){
+       /* if(islogin){
             Intent i= new Intent(this, EmployeelistActivity.class);
             startActivity(i);
-        }else{
+        }else{*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);}
 
-    }
+
     @OnCheckedChanged(R.id.pwdsh)
     public void onCheckedChanged() {
         if (pwdsh.isChecked()) {

@@ -1,5 +1,6 @@
 package com.example.myandroidapp.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,8 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myandroidapp.Activities.CurrentProfile;
-import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Activities.EmployeesDetails;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
@@ -50,11 +49,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Employee post = EmployeeList.get(position);
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
+
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +77,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView  id, nom, ville, descritpion, tel;
         ImageView image;
+        ImageView imageP;
         Button btnVoir;
 
         public ViewHolder(@NonNull View itemLayoutView) {
@@ -86,7 +87,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             ville = itemView.findViewById(R.id.text_ville);
             descritpion = itemView.findViewById(R.id.text_description);
             btnVoir = itemView.findViewById(R.id.btnVoir);
-
+           imageP= itemView.findViewById(R.id.imageView);
         }
     }
 

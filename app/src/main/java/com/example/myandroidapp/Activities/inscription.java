@@ -1,28 +1,31 @@
 package com.example.myandroidapp.Activities;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.Models.Ville;
 import com.example.myandroidapp.R;
-import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
@@ -77,22 +80,25 @@ public class inscription extends AppCompatActivity {
 
     @BindView(R.id.cin)
     EditText cin;
-
-
+    String path;
+    private Button btn;
+    private ImageView iv;
+    private TextView tv;
+    private final int GALLERY = 1000;
     //Retrofit
-    RetrofitS retrofitS= new RetrofitS();
+    RetrofitS retrofitS = new RetrofitS();
     ApiInterface apiInterface;
-    AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
+    AccountApi api = retrofitS.getRetrofit().create(AccountApi.class);
     SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        if(islogin){
+       /* if(islogin){
             Intent i= new Intent(this, EmployeelistActivity.class);
             startActivity(i);
-        }else{
+        }else{*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inscription);
         ButterKnife.bind(this);
@@ -100,13 +106,20 @@ public class inscription extends AppCompatActivity {
         service.setVisibility(View.GONE);
         msg.setVisibility(View.GONE);
         msg.setText("");
-        List fcts= new ArrayList();
-        List LisVille= new ArrayList();
-        List Services= new ArrayList();
-        //LisVille.add("Ville");
-        /*LisVille.add("Kénitra");
-        LisVille.add("Rabat");*/
+        List fcts = new ArrayList();
+        List Services = new ArrayList();
         getVilles();
+        btn = findViewById(R.id.btnUpload);
+        iv = findViewById(R.id.imageView);
+        tv = findViewById(R.id.message);
+       btn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent iGallery = new Intent(Intent.ACTION_PICK);
+               iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+               startActivityForResult(iGallery,GALLERY);
+           }
+       });
 
         fcts.add("Fonction");
         fcts.add("Employé");
@@ -126,18 +139,17 @@ public class inscription extends AppCompatActivity {
         //ville.setAdapter(adapter1);
 
 
-
-
         api.listServices().enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                List<String> lis=response.body();
-                for (String s:
-                        lis ) {
+                List<String> lis = response.body();
+                for (String s :
+                        lis) {
                     Services.add(s);
                     System.out.println(s);
                 }
             }
+
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
@@ -151,9 +163,9 @@ public class inscription extends AppCompatActivity {
         );
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         service.setAdapter(adapter2);
-    }
 
     }
+
     @OnCheckedChanged(R.id.checkBox)
     public void onCheckedChanged() {
         if (c.isChecked()) {
@@ -284,7 +296,7 @@ private boolean isValidMail(String email) {
         person.setCin(cin.getText().toString());
         person.setFirstName(prenom.getText().toString());
         person.setCity(ville.getSelectedItem().toString());
-        person.setImage("");
+        person.setImage(path);
         person.setLastName(nom.getText().toString());
         person.setTel(mail.getText().toString());
         person.setTypeProfil(fonction.getSelectedItem().toString());
@@ -339,5 +351,19 @@ private boolean isValidMail(String email) {
                 Toast.makeText(inscription.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+    @Override
+    protected void  onActivityResult(int requestCode ,int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode== RESULT_OK){
+            if(requestCode==GALLERY){
+                //for gallery
+                iv.setImageURI(data.getData());
+              path= String.valueOf(data.getData());
+
+
+            }
+        }
     }
 }
