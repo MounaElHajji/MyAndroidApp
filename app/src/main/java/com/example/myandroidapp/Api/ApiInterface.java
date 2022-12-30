@@ -53,7 +53,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/favList/deleteFav")
-    Call<Void> DeleteFav(@Part("id1") int p1,@Part("id2") String p2);
+    Call<Void> DeleteFav(@Part("id1") int p1,@Part("id2") int p2);
 
     @GET("employees/checkLogin/{login}")
     Call<Boolean> checkLogin(@Path("login") String login);
@@ -66,7 +66,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/favList/addFav")
-    Call<Person> addFav(@Part("p1") int p1,@Part("p2") String p2);
+    Call<Person> addFav(@Part("p1") int p1,@Part("p2") int p2);
 
     @POST("/employees/{id}/ratings")
     Call<Employee> AddRating(@Body Rating rating, @Path("id") String id);

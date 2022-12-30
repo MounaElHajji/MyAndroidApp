@@ -13,12 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.myandroidapp.Activities.BricolageActivity;
-import com.example.myandroidapp.Activities.ClimatisationActivity;
-import com.example.myandroidapp.Activities.ElectriciteActivity;
-import com.example.myandroidapp.Activities.FemmeMenageActivity;
-import com.example.myandroidapp.Activities.PeintureList;
-import com.example.myandroidapp.Activities.PlombrieList;
+import com.example.myandroidapp.Activities.ServiceEmpActivity;
 import com.example.myandroidapp.Models.Service;
 import com.example.myandroidapp.R;
 
@@ -53,7 +48,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, BricolageActivity.class);
+                Intent i = new Intent(context, ServiceEmpActivity.class);
                 System.out.println(service.getLabel());
                 i.putExtra("categ", service.getLabel());
                 context.startActivity(i);

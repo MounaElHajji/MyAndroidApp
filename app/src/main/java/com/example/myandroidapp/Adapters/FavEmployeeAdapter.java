@@ -97,7 +97,7 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
                 if(lisFav.get(EmployeeList.get(position))==R.drawable.fav){
                     holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     lisFav.replace(EmployeeList.get(position),R.drawable.fav, R.drawable.ic_baseline_favorite_border_24);
-                    Call<Void> call2=apiInterface.DeleteFav(p1,p2);
+                    Call<Void> call2=apiInterface.DeleteFav(p1,Integer.parseInt(p2));
                     call2.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -109,7 +109,7 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
                 }else{
                     holder.btnHeart.setImageResource(R.drawable.fav);
                     lisFav.replace(EmployeeList.get(position),R.drawable.ic_baseline_favorite_border_24, R.drawable.fav);
-                    Call<Person> call1 = apiInterface.addFav(p1, p2);
+                    Call<Person> call1 = apiInterface.addFav(p1, Integer.parseInt(p2));
                     call1.enqueue(new Callback<Person>() {
                         @Override
                         public void onFailure(Call<Person> call, Throwable t) {

@@ -1,10 +1,6 @@
 package com.example.myandroidapp.Activities;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,9 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BricolageActivity extends AppCompatActivity {
+public class ServiceEmpActivity extends AppCompatActivity {
     private RecyclerView recyclerViewVar;
     List<Employee> EmployeeList;
     ApiInterface apiInterface;
@@ -67,7 +60,7 @@ public class BricolageActivity extends AppCompatActivity {
 
     private void spinners() {
         Spinner myspinner = findViewById(R.id.spinner1);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(ServiceEmpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
     }
@@ -102,7 +95,7 @@ public class BricolageActivity extends AppCompatActivity {
     private void DepndantList() {
         //Spinners
         myspinner = findViewById(R.id.spinner1);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(ServiceEmpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
         myspinnerVille = findViewById(R.id.spinnerVille);
@@ -140,23 +133,23 @@ public class BricolageActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(BricolageActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ServiceEmpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<Employee> postList = response.body();
-                employeeAdapter = new EmployeeAdapter(BricolageActivity.this, postList);
+                employeeAdapter = new EmployeeAdapter(ServiceEmpActivity.this, postList);
                 recyclerViewVar.setAdapter(employeeAdapter);
             }
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
-                Toast.makeText(BricolageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ServiceEmpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getVilles() {
         List <String> Ville =new ArrayList<>();
-        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1,Ville);
+        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(ServiceEmpActivity.this, android.R.layout.simple_list_item_1,Ville);
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<com.example.myandroidapp.Models.Ville>> call = apiInterface.getCities();
         call.enqueue(new Callback<List<Ville>>() {
@@ -175,7 +168,7 @@ public class BricolageActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<Ville>> call, Throwable t) {
-                Toast.makeText(BricolageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ServiceEmpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
