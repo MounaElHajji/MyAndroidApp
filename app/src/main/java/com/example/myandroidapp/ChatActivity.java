@@ -44,7 +44,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         listMessages = getListMessages();
-        List<Message> listMessagesToDisplay = new ArrayList<>();
 
         /*
         Bundle bundle = getIntent().getExtras();
@@ -57,28 +56,9 @@ public class ChatActivity extends AppCompatActivity {
         }
          */
 
-        //// to remove, for testing
-        for (Message msg : listMessages) {
-            String dateMsg = msg.getDate();
-
-            if (dateMsg.compareTo("30/12/2022 18:45") <= 0)
-            {
-                listMessagesToDisplay.add( 0,msg);
-
-                adapter = new MessageAdapter(listMessagesToDisplay,ChatActivity.this);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-
-        }
-        ////
-
-        /*
         adapter = new MessageAdapter(listMessages,ChatActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        /
-         */
     }
 
     ///////// Every 2 miliseconds this method will be run (update the recyclerView) :
@@ -92,41 +72,23 @@ public class ChatActivity extends AppCompatActivity {
             public void run() {
                 handler.postDelayed(runnable, delay);
 
-                for (Message msg : listMessages)
-                {
-                    String dateMsg = msg.getDate();
+                int itemsOldCount = recyclerView.getAdapter().getItemCount();
 
-                    /*
+                LinearLayoutManager layoutManager = ((LinearLayoutManager)recyclerView.getLayoutManager());
+                int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
 
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(dateMsg, formatter);
+                // get new data :
+                // listMessages = getListMessages();
+                int itemsNewCount = recyclerView.getAdapter().getItemCount();
+                int itemsDecalage = itemsNewCount - itemsOldCount;
 
-                    if (dateTime.isBefore(LocalDateTime.now()) || dateTime.isEqual(LocalDateTime.now()))
-                    {
-                        listMessages.add( 0,new Message(
-                                Message.LAYOUT_TWO, msg.getMessage(), msg.getDate()
-                        ));
+                adapter = new MessageAdapter(listMessages,ChatActivity.this);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
-                        adapter = new MessageAdapter(listMessages,ChatActivity.this);
-                        recyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                     */
+                recyclerView.getLayoutManager().scrollToPosition(firstVisiblePosition + itemsDecalage);
 
 
-                    if (dateMsg.compareTo("30/12/2022 18:45") <= 0)
-                    {
-                        listMessages.add( 0,new Message(
-                                Message.LAYOUT_TWO, msg.getMessage(), msg.getDate()
-                        ));
-
-                        adapter = new MessageAdapter(listMessages,ChatActivity.this);
-                        recyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                }
 
                 // recyclerView.scrollToPosition(6);
 
@@ -200,22 +162,19 @@ public class ChatActivity extends AppCompatActivity {
         //////// msgs must be selected from newest to oldest
 
         listMessages.add( new Message(
-                Message.LAYOUT_TWO, "hihihi", "30/12/2022 18:46"
+                Message.LAYOUT_TWO, "what's up !!!!!!!!!!!!!", "18/12/2022"
         ));
         listMessages.add( new Message(
-                Message.LAYOUT_TWO, "what's up !!!!!!!!!!!!!", "18/12/2022 12:53"
+                Message.LAYOUT_TWO, "test test", "17/12/2022"
         ));
         listMessages.add( new Message(
-                Message.LAYOUT_TWO, "test test", "17/12/2022 10:56"
+                Message.LAYOUT_TWO, "holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "16/12/2022"
         ));
         listMessages.add( new Message(
-                Message.LAYOUT_TWO, "holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "16/12/2022 : 00:00"
+                Message.LAYOUT_ONE, "???", "15/12/2022"
         ));
         listMessages.add( new Message(
-                Message.LAYOUT_ONE, "???", "15/12/2022 10:02"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "it's me", "12/12/2022 23:02"
+                Message.LAYOUT_TWO, "it's me", "12/12/2022 "
         ));
         listMessages.add( new Message(
                 Message.LAYOUT_ONE, "hi, who is this ?", "12/12/2022 22:00"
