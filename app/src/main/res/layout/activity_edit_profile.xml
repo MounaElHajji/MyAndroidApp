@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroudLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.EditProfile"
+    android:background="#4485C0"
+    >
+
+    <TextView
+        android:id="@+id/EditTitle"
+        style="@style/Widget.AppCompat.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:shadowColor="#33CDCD"
+        android:shadowDx="20"
+        android:text="Editer Profile"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="4mm"
+        android:paddingBottom="4mm"/>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="80dp"
+        android:layout_below="@+id/EditTitle"
+        android:layout_marginTop="-20dp"
+        android:elevation="10dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="153dp"
+            android:background="@color/white"
+            android:elevation="1dp"
+            android:src="@drawable/profil" />
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/arrow_back"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:layout_gravity="left"
+        android:background="@drawable/fleche"
+        android:clickable="true"
+        android:onClick="onBackClick"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_marginLeft="0px"
+        android:layout_marginTop="105dp"
+        android:layout_marginRight="0px"
+        android:layout_marginBottom="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="4mm"
+        android:paddingTop="14mm"
+        android:paddingRight="4mm">
+
+
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="1dp"
+            android:text="Email / Tel"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/email"
+            android:drawablePadding="20dp"
+            android:hint="xxxxxx@gmail.com"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+
+
+        <TextView
+            android:id="@+id/txt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:text="Ville:"
+            android:textColor="@color/black"
+            android:textSize="21dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/ville"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt3"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/place"
+            android:drawablePadding="20dp"
+            android:hint="ville"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        <TextView
+            android:id="@+id/txt5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:text="Password:"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ville"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edit_text"
+            android:drawableStart="@drawable/pass"
+            android:drawablePadding="20dp"
+            android:hint="**********"
+            android:inputType="textPassword"
+            android:padding="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="1dp"
+            android:backgroundTint="@color/design_default_color_secondary"
+            android:text="Editer"
+            android:textColor="@color/white"
+            android:textSize="50px" />
+
+        <include
+            layout="@layout/footer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
