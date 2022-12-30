@@ -73,6 +73,9 @@ public interface ApiInterface {
     @GET("/employees/{id}/ratings")
     Call<Float> SumRating(@Path("id") String id);
 
+    @GET("/employees/{id}/sumRatingByEmp")
+    Call<Integer> sumRatingsByImp(@Path("id") String id);
+
     @PUT("/{id}/ratings/{id_rating}")
     Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body Rating ratingRequest);
 }

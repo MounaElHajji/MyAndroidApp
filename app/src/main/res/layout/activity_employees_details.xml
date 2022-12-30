@@ -5,23 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
-    tools:context=".Activities.CurrentProfile">
+    tools:context=".Activities.CurrentProfile"
+    android:backgroundTint="@color/white">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="410dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="-500dp"
-        android:layout_marginEnd="24dp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"
-        app:srcCompat="@drawable/top_bcakground" />
 
     <ImageButton
         android:id="@+id/arrow_back"
@@ -33,12 +21,14 @@
         android:onClick="onBackClick"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
+
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="186dp"
-        android:layout_height="126dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_account_circle_24" />
@@ -47,55 +37,122 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="128dp"
         android:text="Ibrahim nahi"
         android:textAlignment="center"
-        android:textColor="#ffffff"
 
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        app:layout_constraintVertical_bias="0.786" />
+
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="215dp">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Plombier"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/employeeVille"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Casa"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.318"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView13" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="400dp"
-        android:layout_height="73dp"
+        android:layout_width="458dp"
+        android:layout_height="43dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="252dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_white"
         android:elevation="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <RatingBar
             android:id="@+id/ratingBar2"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="3dp"
+            android:isIndicator="true"
             android:progressTint="#ffd700"
-            android:scaleX="0.5"
-            android:scaleY="0.5"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
             android:stepSize="0.5"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="177dp"
-            android:isIndicator="true"/>
+            tools:layout_editor_absoluteY="177dp" />
 
         <TextView
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="2dp"
             android:text="2.3"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="3dp"
+            android:text="."
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/ratingSumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:text="2.3"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/textgs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Ratings"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
@@ -103,69 +160,40 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/background_white"
         android:elevation="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/background_grey"
-                android:elevation="5dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|center_horizontal"
-                    android:layout_margin="10dp"
-                    android:translationY="10dp"
-                    app:srcCompat="@drawable/fav" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-
-            >
+            android:id="@+id/layout3"
+            android:layout_width="409dp"
+            android:layout_height="78dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-9dp"
+            tools:layout_editor_absoluteY="268dp">
 
 
             <TextView
                 android:id="@+id/yourrating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10sp"
-                android:layout_weight="1"
-                android:text="your rating:"
-                android:textColor="#0090ff"
+                android:layout_marginLeft="160sp"
+                android:layout_weight="3"
+                android:text="Evaluer:"
+                android:textColor="@color/grey"
                 android:textSize="20sp" />
 
             <RatingBar
@@ -173,12 +201,87 @@
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="7dp"
+                android:layout_marginBottom="2dp"
                 android:progressTint="#ffd700"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
                 android:stepSize="1.0"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="86dp"
                 tools:layout_editor_absoluteY="177dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+
+                android:alpha="0.5"
+                android:background="#585858" />
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="-10dp"
+            android:elevation="5dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_margin="10dp"
+                android:translationY="10dp"
+                app:srcCompat="@drawable/fav" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10sp"
+                android:layout_weight="1"
+                android:text="Description:"
+                android:textColor="#0090ff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text=" 8ans d'expériences"
+
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/idTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=" id"
+
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -201,7 +304,7 @@
                 android:layout_weight="1"
                 android:text="Ville:"
                 android:textColor="#0090ff"
-                android:textSize="20sp" />
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -242,7 +345,7 @@
                 android:layout_weight="1"
                 android:text="Num tel/email:"
                 android:textColor="#0090ff"
-                android:textSize="20sp" />
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -283,7 +386,7 @@
                 android:layout_weight="1"
                 android:text="CIN:"
                 android:textColor="#0090ff"
-                android:textSize="20sp" />
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -324,18 +427,9 @@
                 android:layout_weight="1"
                 android:text="L'emploi:"
                 android:textColor="#0090ff"
-                android:textSize="20sp" />
+                android:textSize="23sp" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Plombier"
-                android:layout_marginRight="50dp"
-                android:textAlignment="viewStart"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -346,73 +440,33 @@
             android:alpha="0.5"
             android:background="#585858" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
 
-            >
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10sp"
-                android:layout_weight="1"
-                android:text="Description:"
-                android:textColor="#0090ff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=" 8ans d'expériences"
-
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/idTest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=" id"
-
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/idTVResponse"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <Button
-            android:id="@+id/buttonRat"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="rate"
-            />
+        <!--        <Button-->
+        <!--            android:id="@+id/buttonRat"-->
+        <!--            android:layout_width="100dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:text="rate"-->
+        <!--            />-->
 
     </LinearLayout>
 
 
-    <include
-        android:id="@+id/include2"
-        layout="@layout/footer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <!--    <include-->
+    <!--        android:id="@+id/include2"-->
+    <!--        layout="@layout/footer_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        tools:layout_editor_absoluteX="78dp"-->
+    <!--        tools:layout_editor_absoluteY="730dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

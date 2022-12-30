@@ -1,6 +1,5 @@
 package com.example.myandroidapp.Activities;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -32,7 +31,7 @@ public class EmployeesDetails extends AppCompatActivity {
 
     List<Rating> ratingList;
     RatingBar ratingBar, ratingBarTotal;
-    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating;
+    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille;
     String nom;
     String ville;
     String description;
@@ -64,11 +63,14 @@ public class EmployeesDetails extends AppCompatActivity {
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
         ratingBar = findViewById(R.id.ratingBar);
-        buttonRat = findViewById(R.id.buttonRat);
+//        buttonRat = findViewById(R.id.buttonRat);
         responseTV = findViewById(R.id.idTVResponse);
         employeeDeatls = findViewById(R.id.idTest);
         averageRating = findViewById(R.id.rating);
         ratingBarTotal = findViewById(R.id.ratingBar2);
+        ratingSumText =findViewById(R.id.ratingSumText);
+        employeeVille = findViewById(R.id.employeeVille);
+
 
         Intent intent = getIntent();
         nom = intent.getStringExtra("firstName");
@@ -83,7 +85,7 @@ public class EmployeesDetails extends AppCompatActivity {
 
 
         SumRating();
-
+        sumColumnsRating();
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -130,10 +132,7 @@ public class EmployeesDetails extends AppCompatActivity {
                     float width = ratingBar.getWidth();
                     float starsf = (touchPositionX / width) * 5.0f;
                     int stars = (int)starsf + 1;
-                    if(!ratingList.contains(id))
-                    {
-                        RateEmplployee(String.valueOf(stars));
-                    }
+                    RateEmplployee(String.valueOf(stars));
                     Toast.makeText(EmployeesDetails.this, String.valueOf("test"), Toast.LENGTH_SHORT).show();
                     v.setPressed(false);
 //                    UpdateRating(String.valueOf(stars));
@@ -157,7 +156,45 @@ public class EmployeesDetails extends AppCompatActivity {
         descTxt.setText(description);
         emploiTxt.setText(emploie);
         telTxt.setText(telephone);
+        employeeVille.setText(ville);
         employeeDeatls.setText(id);
+    }
+
+    private void sumColumnsRating() {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        // calling a method to create an update and passing our modal class.
+        Call<Integer> call = apiInterface.sumRatingsByImp(id);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                // this method is called when we get response from our api.
+                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                // on below line we are setting empty
+                // text to our both edit text.
+
+                // we are getting a response from our body and
+                // passing it to our modal class.
+                Integer responseFromAPI = response.body();
+
+                // on below line we are getting our data from modal class
+                // and adding it to our string.
+
+                // below line we are setting our string to our text view.
+
+                String ratText = Integer.toString(responseFromAPI);
+
+                ratingSumText.setText(ratText);
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+                // setting text to our text view when
+                // we get error response from API.
+                averageRating.setText("Error found is : " + t.getMessage());
+            }
+        });
     }
 
     private void UpdateRating(String label) {
@@ -219,11 +256,11 @@ public class EmployeesDetails extends AppCompatActivity {
                 // and adding it to our string.
 
                 // below line we are setting our string to our text view.
-                String ratText = Float.toString(responseFromAPI);
+                String ratTextAverage = Float.toString(responseFromAPI);
 
                 ratingBarTotal.setRating(responseFromAPI);
 
-                averageRating.setText(ratText);
+                averageRating.setText(ratTextAverage);
             }
 
             @Override
