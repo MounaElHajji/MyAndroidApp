@@ -24,24 +24,6 @@ public interface ApiInterface {
     @GET("employees/getAll")
     Call<List<Employee>> getPost();
 
-    @GET("employees/getPlombier")
-    Call<List<Employee>> getPlombiers();
-
-    @GET("employees/getPeinture")
-    Call<List<Employee>> getPeniture();
-
-    @GET("employees/getElectricite")
-    Call<List<Employee>> getElectricite();
-
-    @GET("employees/getClimatisation")
-    Call<List<Employee>> getClimatisation();
-
-    @GET("employees/getBricolage")
-    Call<List<Employee>> getBricolage();
-
-    @GET("employees/getFemmeMenage")
-    Call<List<Employee>> getFemmeMenage();
-
     @GET("villes/getAllcities")
     Call<List<Ville>> getCities();
 
