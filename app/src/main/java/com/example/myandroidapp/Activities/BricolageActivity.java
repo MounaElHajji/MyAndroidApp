@@ -47,18 +47,22 @@ public class BricolageActivity extends AppCompatActivity {
     LinearLayout SearchLayout;
     Spinner myspinner, myspinnerVille;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_list_activity);
         myspinnerVille = findViewById(R.id.spinnerVille);
         searchView = findViewById(R.id.search_bar);
+        Intent intent = getIntent();
+        String categ1 = intent.getStringExtra("categ");
+        System.out.println(categ1+"hiiiiii climaaaaa");
         SearchByVille();
         SearchByName();
         DepndantList();
         spinners();
         setList();
-        getData();
+        getData(categ1);
     }
 
     private void spinners() {
@@ -129,9 +133,9 @@ public class BricolageActivity extends AppCompatActivity {
         recyclerViewVar.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void getData() {
+    private void getData(String categ) {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Employee>> call = apiInterface.getBricolage();
+        Call<List<Employee>> call = apiInterface.getByCateg(categ);
         call.enqueue(new Callback<List<Employee>>() {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {

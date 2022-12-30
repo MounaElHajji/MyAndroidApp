@@ -61,6 +61,9 @@ public interface ApiInterface {
     @GET("/favList/getFav/{id}")
     Call<List<ListFavoris>> getFav(@Path("id") int id);
 
+    @GET("/employees/getByCateg/{cat}")
+    Call<List<Employee>> getByCateg(@Path("cat") String category);
+
     @Multipart
     @POST("/favList/addFav")
     Call<Person> addFav(@Part("p1") int p1,@Part("p2") String p2);
