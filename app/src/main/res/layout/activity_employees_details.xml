@@ -28,42 +28,70 @@
         android:layout_height="180dp"
         android:layout_marginTop="-10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ibrahim nahi"
-        android:textAlignment="center"
-
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView13"
-        app:layout_constraintVertical_bias="0.786" />
+        tools:layout_editor_absoluteY="184dp">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ibrahim"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView13"
+            app:layout_constraintVertical_bias="0.786" />
+
+        <TextView
+            android:id="@+id/textViewNom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="nahi"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView13"
+            app:layout_constraintVertical_bias="0.786" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="180dp"
         android:layout_height="30dp"
         android:gravity="center"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="215dp">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Plombier"
-            android:textColor="@color/black"
+            android:text="#Plombier"
+            android:textColor="#00BFFF"
             android:textSize="16sp" />
 
         <TextView
@@ -71,9 +99,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Casa"
+            android:text="#Casa"
+
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="#00BFFF"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.318"
@@ -88,12 +117,13 @@
         android:layout_width="458dp"
         android:layout_height="43dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="256dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_white"
         android:elevation="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -118,7 +148,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="2.3"
-            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
             app:layout_constraintTop_toTopOf="@+id/ratingBar" />
@@ -130,7 +161,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
             android:text="."
-            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
             app:layout_constraintTop_toTopOf="@+id/ratingBar" />
@@ -142,7 +174,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="6dp"
             android:text="2.3"
-            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
             app:layout_constraintTop_toTopOf="@+id/ratingBar" />
@@ -153,7 +186,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Ratings"
-            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"
             app:layout_constraintTop_toTopOf="@+id/ratingBar" />
@@ -272,16 +306,16 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/idTest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text=" id"
+            <!--            <TextView-->
+            <!--                android:id="@+id/idTest"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:text=" id"-->
 
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+            <!--                android:textAlignment="textStart"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="20sp" />-->
         </LinearLayout>
 
         <LinearLayout
