@@ -49,7 +49,6 @@ public class ServiceEmpActivity extends AppCompatActivity {
         searchView = findViewById(R.id.search_bar);
         Intent intent = getIntent();
         String categ1 = intent.getStringExtra("categ");
-        System.out.println(categ1+"hiiiiii climaaaaa");
         SearchByVille();
         SearchByName();
         DepndantList();

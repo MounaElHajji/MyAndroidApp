@@ -43,7 +43,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     private List<Employee> PostListFull;
     private List<Employee> PostSearchName;
     private List<Employee> PostEmployees;
-    private List<Employee> favEmployees;
     Context context;
     ApiInterface apiInterface;
     SharedPreferences sh;
