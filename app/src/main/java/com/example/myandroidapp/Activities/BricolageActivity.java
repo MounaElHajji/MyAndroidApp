@@ -121,34 +121,8 @@ public class BricolageActivity extends AppCompatActivity {
             }
         });
     }
-    private void getVilles() {
-        List <String> ville =new ArrayList<>();
-        ArrayAdapter<String> villeAdapter= new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1,ville);
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Ville>> call = apiInterface.getCities();
-        call.enqueue(new Callback<List<Ville>>() {
-            @Override
-            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
-                if(response.isSuccessful()) {
-                    for (Ville villeList :response.body()){
-                        String nom_ville= villeList.getNom_ville();
-                        System.out.println(nom_ville);
-                        // Ville object = new Ville(nom_ville);
-                        ville.add(nom_ville);
-
-                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        myspinnerVille.setAdapter(villeAdapter);
-                    }
-                }
 
 
-            }
-            @Override
-            public void onFailure(Call<List<Ville>> call, Throwable t) {
-                Toast.makeText(BricolageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     private void setList() {
         recyclerViewVar = findViewById(R.id.recycleView);
         recyclerViewVar.setHasFixedSize(true);
@@ -175,6 +149,33 @@ public class BricolageActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getVilles() {
+        List <String> Ville =new ArrayList<>();
+        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(BricolageActivity.this, android.R.layout.simple_list_item_1,Ville);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<com.example.myandroidapp.Models.Ville>> call = apiInterface.getCities();
+        call.enqueue(new Callback<List<Ville>>() {
+            @Override
+            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
+                if(response.isSuccessful()) {
+                    for (Ville villeList :response.body()){
+                        String nom_ville= villeList.getNom_ville();
+                        // Ville object = new Ville(nom_ville);
+                        Ville.add(nom_ville);
+
+                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        myspinnerVille.setAdapter(villeAdapter);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Ville>> call, Throwable t) {
+                Toast.makeText(BricolageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void onBackClick(View view) {
         finish();
     }

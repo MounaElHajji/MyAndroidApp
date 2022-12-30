@@ -1,9 +1,32 @@
 package com.example.myandroidapp.Models;
 
+import android.media.Rating;
+
 public class Employee {
-    int id;
     private String city, lastName, tel, imageP, typeProfil, cin, firstName, description;
+    private String id;
+    private Rating rating;
     private Long service_id;
+
+
+    public Employee(Rating rating) {
+        this.rating = rating;
+    }
+
+    public Employee() {
+    }
+
+    public Employee(com.example.myandroidapp.Models.Rating rating) {
+    }
+
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
 
     public String getType_profil() {
         return typeProfil;
@@ -31,6 +54,10 @@ public class Employee {
 
     public String getTel() {
         return tel;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setTel(String tel) {
@@ -64,14 +91,6 @@ public class Employee {
 
     public void setFirst_name(String first_name) {
         this.firstName = first_name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.service_id = id;
     }
 
     public String getLastName() {
@@ -116,5 +135,11 @@ public class Employee {
 
     public void setService_id(Long service_id) {
         this.service_id = service_id;
+    }
+
+
+
+    public String getId() {
+        return id;
     }
 }

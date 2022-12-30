@@ -1,6 +1,7 @@
 package com.example.myandroidapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity {
+
+    SharedPreferences sharedPref;
 
     @OnClick(R.id.button)
     protected void loginClick(){
@@ -28,7 +31,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
+        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        Boolean islogin = sharedPref.getBoolean("userlogin", false);
+        if(islogin){
+            Intent i= new Intent(this, EmployeelistActivity.class);
+            startActivity(i);
+        }else {
+            setContentView(R.layout.activity_home);
+            ButterKnife.bind(this);
+        }
     }
 }
