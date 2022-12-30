@@ -22,9 +22,21 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+<!--        <activity-->
+<!--            android:name=".MainActivity"-->
+<!--            android:exported="false" >-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
         <activity
-            android:name=".MainActivity"
-            android:exported="false" >
+            android:name=".Activities.HomeActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -57,14 +69,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".Activities.HomeActivity"
-            android:exported="true" >
+<!--        <activity-->
+<!--            android:name=".Activities.HomeActivity"-->
+<!--            android:exported="true" >-->
 
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
         <activity
             android:name=".Activities.CurrentProfile"
             android:exported="false" >
@@ -88,12 +100,12 @@
         </activity>
         <activity
             android:name=".Activities.inscription"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
