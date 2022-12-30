@@ -119,7 +119,8 @@
             android:layout_marginStart="@dimen/_4sdp"
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_send"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:onClick="onSendClick" />
 
     </FrameLayout>
 

@@ -1,18 +1,23 @@
 package com.example.myandroidapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myandroidapp.Adapters.MessageAdapter;
-import com.example.myandroidapp.Adapters.MessageAdapter;
 import com.example.myandroidapp.Models.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -20,6 +25,10 @@ public class ChatActivity extends AppCompatActivity {
     MessageAdapter adapter;
     List<Message> listMessages;
     LinearLayoutManager layoutManager;
+
+    Handler handler = new Handler();
+    Runnable runnable;
+    int delay = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +41,104 @@ public class ChatActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(true);    // to show the recyclerView list from the bottom
         recyclerView.setLayoutManager(layoutManager);
 
+        listMessages = getListMessages();
+
+        /*
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null)
+        {
+            listMessages.add( new Message(
+                    Message.LAYOUT_ONE, bundle.getString("newMsg"), "20/12/2022"
+            ));
+        }
+         */
+
+        adapter = new MessageAdapter(listMessages,ChatActivity.this);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    ///////// Every 2 miliseconds this method will be run (update the recyclerView) :
+
+    @Override
+    protected void onResume() {
+
+        listMessages = getListMessages(); // this line shld go inside the run() method
+
+        handler.postDelayed(runnable = new Runnable() {
+            public void run() {
+                handler.postDelayed(runnable, delay);
+                adapter = new MessageAdapter(listMessages,ChatActivity.this);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+                // recyclerView.scrollToPosition(6);
+
+                // System.out.println("agaiiiiiiin");
+
+            }
+        }, delay);
+        super.onResume();
+    }
+
+    /////////
+
+    public void onBackClick(View view) {
+        finish();
+    }
+
+
+    public void onSendClick(View view) {
+
+        EditText newMessageText = (EditText) findViewById(R.id.inputMessage);
+        String newMessage = newMessageText.getText().toString();
+
+        listMessages = getListMessages();
+
+        /// --- this is optional, just for the frontend now, shld be replaced by the msg saving method of backend
+        listMessages.add( 0,new Message(
+                Message.LAYOUT_ONE, newMessage, "20/12/2022"
+        ));
+
+        adapter = new MessageAdapter(listMessages,ChatActivity.this);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        /// ---
+
+        newMessageText.setText("");
+
+        /*
+        Intent i = new Intent(ChatActivity.this, ChatActivity.class);
+        i.putExtra("newMsg", newMessage );
+        startActivity(i);
+
+         */
+
+        /*
+        int insertIndex = 1;
+        listMessages.add( insertIndex, new Message(
+                Message.LAYOUT_ONE, newMessage, "20/12/2022"
+        ));
+
+        adapter.notifyDataSetChanged();
+//        adapter.notifyItemInserted(insertIndex);
+
+         */
+
+        /*
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+
+         */
+    }
+
+    // here, we should select the date from database
+
+    public ArrayList<Message> getListMessages() {
 
         listMessages = new ArrayList<>();
 
@@ -62,14 +169,7 @@ public class ChatActivity extends AppCompatActivity {
                 Message.LAYOUT_TWO, "hello Kawtar", "12/12/2022"
         ));
 
-
-        adapter = new MessageAdapter(listMessages,ChatActivity.this);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-
-    public void onBackClick(View view) {
-        finish();
+        return (ArrayList<Message>) listMessages;
     }
 
 }
