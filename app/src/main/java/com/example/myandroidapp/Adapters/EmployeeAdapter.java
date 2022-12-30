@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,8 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.Activities.CurrentProfile;
 import com.example.myandroidapp.Activities.EmployeelistActivity;
 import com.example.myandroidapp.Activities.EmployeesDetails;
+import com.example.myandroidapp.Activities.FavorisActivity;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.ListFavoris;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
@@ -40,10 +43,13 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     private List<Employee> PostListFull;
     private List<Employee> PostSearchName;
     private List<Employee> PostEmployees;
+    private List<Employee> favEmployees;
     Context context;
     ApiInterface apiInterface;
     SharedPreferences sh;
+
     HashMap<Employee, Integer> lisFav= new HashMap<>();
+
 
 
     public EmployeeAdapter(Context context, List<Employee> EmployeeList) {
@@ -52,12 +58,39 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         PostListFull = new ArrayList<>(EmployeeList); //create a copy of postList
         PostSearchName = new ArrayList<>(EmployeeList);
         PostEmployees = new ArrayList<>(EmployeeList);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+
+
         for (Employee emp:
                 EmployeeList) {
             lisFav.put(emp, R.drawable.ic_baseline_favorite_border_24);
         }
+
     }
 
+    public List<Employee> getListFav(){
+        int id= sh.getInt("id", 0);
+        Call<List<ListFavoris>> call = apiInterface.getFav(id);
+        call.enqueue(new Callback<List<ListFavoris>>() {
+            @Override
+            public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
+                if(!response.isSuccessful()) {
+                    return;
+                }
+                List<ListFavoris> postList = response.body();
+                for (ListFavoris f:
+                        postList ) {
+                    favEmployees.add(f.getEmp());
+                }
+
+            }
+            @Override
+            public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
+            }
+        });
+        return  favEmployees;
+    }
     @NonNull
     @Override
     public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,16 +98,38 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 .inflate(R.layout.items, null);
 
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
-        sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
         Employee post = EmployeeList.get(position);
+        List<Employee> favEmployees1= new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
+        int id= sh.getInt("id", 0);
+        Call<List<ListFavoris>> call = apiInterface.getFav(id);
+        call.enqueue(new Callback<List<ListFavoris>>() {
+            @Override
+            public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
+                List<ListFavoris> postList = response.body();
+                for (ListFavoris f:
+                        postList ) {
+                    favEmployees1.add(f.getEmp());
+                 if(post.getTel().equals(f.getEmp().getTel())){
+                        System.out.println("girdim");
+                        holder.btnHeart.setImageResource(R.drawable.fav);
+                    }
+                }
+
+
+            }
+            @Override
+            public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
+            }
+        });
+
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +153,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 public void onClick(View view) {
                     String p2 = EmployeeList.get(position).getId();
                     int p1= sh.getInt("id", 0);
-                    apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
                     // System.out
                     if(lisFav.get(EmployeeList.get(position))==R.drawable.fav){
                         holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);

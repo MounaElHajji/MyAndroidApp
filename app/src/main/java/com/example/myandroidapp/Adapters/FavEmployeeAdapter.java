@@ -102,7 +102,7 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                         }
-                        
+
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                         }

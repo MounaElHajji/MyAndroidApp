@@ -24,28 +24,7 @@
         </activity>
 
         <activity
-            android:name=".Activities.FemmeMenageActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Activities.ServiceEmpActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activities.ClimatisationActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activities.ElectriciteActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -100,21 +79,6 @@
         </activity>
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activities.PeintureList"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Activities.PlombrieList"
-
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
