@@ -79,7 +79,7 @@ public class EmployeesDetails extends AppCompatActivity {
         description = intent.getStringExtra("description");
         image = intent.getStringExtra("imageP");
         telephone = intent.getStringExtra("tel");
-        emploie = intent.getStringExtra("typeProfil");
+        emploie = intent.getStringExtra("service_title");
         id = intent.getStringExtra("id");
         typeProfile = intent.getStringExtra("typeProfil");
         lastNameEmp = intent.getStringExtra("lastName");
@@ -140,7 +140,7 @@ public class EmployeesDetails extends AppCompatActivity {
         emploiTxt.setText(emploie);
         telTxt.setText(telephone);
         employeeVille.setText(ville);
-        employeeDeatls.setText(id);
+//        employeeDeatls.setText(id);
         lastNamemployye.setText(lastNameEmp);
     }
 

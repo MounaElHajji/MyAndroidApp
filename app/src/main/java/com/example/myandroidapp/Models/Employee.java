@@ -6,8 +6,16 @@ public class Employee {
     private String city, lastName, tel, imageP, typeProfil, cin, firstName, description;
     private String id;
     private Rating rating;
+    private Service service;
     private Long service_id;
 
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
 
     public Employee(Rating rating) {
         this.rating = rating;

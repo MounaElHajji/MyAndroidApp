@@ -63,6 +63,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("id", EmployeeList.get(position).getId());
                 i.putExtra("firstName", EmployeeList.get(position).getFirst_name());
                 i.putExtra("typeProfil", EmployeeList.get(position).getTypeProfil());
+                i.putExtra("service_title", EmployeeList.get(position).getService().getService_title());
                 i.putExtra("city", EmployeeList.get(position).getCity());
                 i.putExtra("description", EmployeeList.get(position).getDescription());
                 i.putExtra("tel", EmployeeList.get(position).getTel());
