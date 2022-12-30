@@ -31,12 +31,12 @@ public class EmployeesDetails extends AppCompatActivity {
 
     List<Rating> ratingList;
     RatingBar ratingBar, ratingBarTotal;
-    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille;
+    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
     String nom;
     String ville;
     String description;
     String image;
-    String telephone;
+    String telephone, lastNameEmp;
     String emploie;
     String rating;
     String id;
@@ -65,11 +65,12 @@ public class EmployeesDetails extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
 //        buttonRat = findViewById(R.id.buttonRat);
         responseTV = findViewById(R.id.idTVResponse);
-        employeeDeatls = findViewById(R.id.idTest);
+//        employeeDeatls = findViewById(R.id.idTest);
         averageRating = findViewById(R.id.rating);
         ratingBarTotal = findViewById(R.id.ratingBar2);
         ratingSumText =findViewById(R.id.ratingSumText);
         employeeVille = findViewById(R.id.employeeVille);
+        lastNamemployye = findViewById(R.id.textViewNom);
 
 
         Intent intent = getIntent();
@@ -81,6 +82,7 @@ public class EmployeesDetails extends AppCompatActivity {
         emploie = intent.getStringExtra("typeProfil");
         id = intent.getStringExtra("id");
         typeProfile = intent.getStringExtra("typeProfil");
+        lastNameEmp = intent.getStringExtra("lastName");
 
 
 
@@ -158,6 +160,7 @@ public class EmployeesDetails extends AppCompatActivity {
         telTxt.setText(telephone);
         employeeVille.setText(ville);
         employeeDeatls.setText(id);
+        lastNamemployye.setText(lastNameEmp);
     }
 
     private void sumColumnsRating() {
