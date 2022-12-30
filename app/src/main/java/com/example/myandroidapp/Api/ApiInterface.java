@@ -1,10 +1,9 @@
 package com.example.myandroidapp.Api;
 
-import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.ListFavoris;
 import com.example.myandroidapp.Models.Person;
-import com.example.myandroidapp.Models.Rating;
+import com.example.myandroidapp.Models.RatingEmp;
 import com.example.myandroidapp.Models.Ville;
 
 import java.util.List;
@@ -68,7 +67,7 @@ public interface ApiInterface {
     Call<Person> addFav(@Part("p1") int p1,@Part("p2") String p2);
 
     @POST("/employees/{id}/ratings")
-    Call<Employee> AddRating(@Body Rating rating, @Path("id") String id);
+    Call<Employee> AddRating(@Body RatingEmp rating, @Path("id") String id);
 
     @GET("/employees/{id}/ratings")
     Call<Float> SumRating(@Path("id") String id);
@@ -77,5 +76,5 @@ public interface ApiInterface {
     Call<Integer> sumRatingsByImp(@Path("id") String id);
 
     @PUT("/{id}/ratings/{id_rating}")
-    Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body Rating ratingRequest);
+    Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body RatingEmp ratingRequest);
 }

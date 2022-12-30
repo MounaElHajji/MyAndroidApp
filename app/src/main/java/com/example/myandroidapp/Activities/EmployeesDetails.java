@@ -20,7 +20,7 @@ import retrofit2.Response;
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
-import com.example.myandroidapp.Models.Rating;
+import com.example.myandroidapp.Models.RatingEmp;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.example.myandroidapp.retrofit.RetrofitS;
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class EmployeesDetails extends AppCompatActivity {
 
-    List<Rating> ratingList;
+    List<RatingEmp> ratingList;
     RatingBar ratingBar, ratingBarTotal;
     TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
     String nom;
@@ -97,27 +97,8 @@ public class EmployeesDetails extends AppCompatActivity {
 
                 myRating = ratingBar.getRating();
                 ratingBar.setRating(myRating);
-                switch (rating) {
-                    case 1:
-                        message = "Sorry to hear that! :(";
-                        break;
+                RateEmplployee(myRating);
 
-                    case 2:
-                        message = "You always accept suggestions";
-                        break;
-
-                    case 3:
-                        message = "Good enough";
-                        break;
-
-                    case 4:
-                        message = "Great! Thank you";
-                        break;
-
-                    case 5:
-                        message = "Awesome";
-                        break;
-                }
 
                 Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
             }
@@ -125,31 +106,31 @@ public class EmployeesDetails extends AppCompatActivity {
         int id_current= sh.getInt("id",0);
 
 
+//        ratingBar.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    float touchPositionX = event.getX();
+//                    float width = ratingBar.getWidth();
+//                    float starsf = (touchPositionX / width) * 5.0f;
+//                    int stars = (int)starsf + 1;
+//                    RateEmplployee(String.valueOf(stars));
+//                    Toast.makeText(EmployeesDetails.this, String.valueOf("test"), Toast.LENGTH_SHORT).show();
+//                    v.setPressed(false);
+////                    UpdateRating(String.valueOf(stars));
+//                }
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    v.setPressed(true);
+//                }
+//
+//                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+//                    v.setPressed(false);
+//                }
+//
+//                return false;
+//            }
+//        });
 
-        ratingBar.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    float touchPositionX = event.getX();
-                    float width = ratingBar.getWidth();
-                    float starsf = (touchPositionX / width) * 5.0f;
-                    int stars = (int)starsf + 1;
-                    RateEmplployee(String.valueOf(stars));
-                    Toast.makeText(EmployeesDetails.this, String.valueOf("test"), Toast.LENGTH_SHORT).show();
-                    v.setPressed(false);
-//                    UpdateRating(String.valueOf(stars));
-                }
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    v.setPressed(true);
-                }
-
-                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
-                    v.setPressed(false);
-                }
-
-                return false;
-            }
-        });
 
 
 
@@ -200,8 +181,8 @@ public class EmployeesDetails extends AppCompatActivity {
         });
     }
 
-    private void UpdateRating(String label) {
-        Rating rating = new Rating(label);
+    private void UpdateRating(Float label) {
+        RatingEmp rating = new RatingEmp(label);
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
@@ -276,8 +257,8 @@ public class EmployeesDetails extends AppCompatActivity {
         });
     }
 
-    private void RateEmplployee(String label) {
-        Rating rating = new Rating(label);
+    private void RateEmplployee(Float label) {
+        RatingEmp rating = new RatingEmp(label);
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.

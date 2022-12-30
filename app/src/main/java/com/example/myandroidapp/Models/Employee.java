@@ -16,7 +16,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(com.example.myandroidapp.Models.Rating rating) {
+    public Employee(RatingEmp rating) {
     }
 
 
