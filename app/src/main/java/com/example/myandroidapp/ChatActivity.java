@@ -30,7 +30,7 @@ public class ChatActivity extends AppCompatActivity {
 
     Handler handler = new Handler();
     Runnable runnable;
-    int delay = 200;
+    int delay = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class ChatActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    ///////// Every 2 miliseconds this method will be run (update the recyclerView) :
+    ///////// Every 5 seconds this method will be run (update the recyclerView) :
 
     @Override
     protected void onResume() {
@@ -73,6 +73,8 @@ public class ChatActivity extends AppCompatActivity {
                 handler.postDelayed(runnable, delay);
 
                 int itemsOldCount = recyclerView.getAdapter().getItemCount();
+
+                // get new data :
 
                 LinearLayoutManager layoutManager = ((LinearLayoutManager)recyclerView.getLayoutManager());
                 int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
@@ -87,12 +89,6 @@ public class ChatActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
 
                 recyclerView.getLayoutManager().scrollToPosition(firstVisiblePosition + itemsDecalage);
-
-
-
-                // recyclerView.scrollToPosition(6);
-
-                // System.out.println("agaiiiiiiin");
 
             }
         }, delay);
@@ -113,7 +109,7 @@ public class ChatActivity extends AppCompatActivity {
 
         listMessages = getListMessages();
 
-        /// --- this is optional, just for the frontend now, shld be replaced by the msg saving method of backend
+        /// --- this is optional, just for the frontend now, shld be replaced by the msg-saving method of backend
         listMessages.add( 0,new Message(
                 Message.LAYOUT_ONE, newMessage, "20/12/2022 18:02"
         ));
