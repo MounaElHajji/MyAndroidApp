@@ -69,28 +69,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
     }
 
-    public List<Employee> getListFav(){
-        int id= sh.getInt("id", 0);
-        Call<List<ListFavoris>> call = apiInterface.getFav(id);
-        call.enqueue(new Callback<List<ListFavoris>>() {
-            @Override
-            public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
-                if(!response.isSuccessful()) {
-                    return;
-                }
-                List<ListFavoris> postList = response.body();
-                for (ListFavoris f:
-                        postList ) {
-                    favEmployees.add(f.getEmp());
-                }
 
-            }
-            @Override
-            public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
-            }
-        });
-        return  favEmployees;
-    }
     @NonNull
     @Override
     public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -116,11 +95,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 List<ListFavoris> postList = response.body();
                 for (ListFavoris f:
                         postList ) {
-                    favEmployees1.add(f.getEmp());
                  if(post.getTel().equals(f.getEmp().getTel())){
-                        System.out.println("girdim");
                         holder.btnHeart.setImageResource(R.drawable.fav);
-                    }
+                     lisFav.replace(EmployeeList.get(position),R.drawable.ic_baseline_favorite_border_24, R.drawable.fav);
+                 }
                 }
 
 

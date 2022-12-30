@@ -90,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
         String passwd=String.valueOf(pwd.getText());
         String usrname=String.valueOf(username.getText());
         Account account= new Account();
-        account.setPassword(passwd);
-        account.setUsername(usrname);
+        account.setPassword(passwd.trim());
+        account.setUsername(usrname.trim());
         Intent i= new Intent(this, listeServices.class);
         api.loginAccount(account) .enqueue(new Callback<Account>() {
             @Override

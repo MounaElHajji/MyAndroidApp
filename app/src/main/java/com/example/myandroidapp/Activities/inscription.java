@@ -280,16 +280,16 @@ private boolean isValidMail(String email) {
         Person person = new Person();
         Account account = new Account();
         Service service1 = new Service();
-        person.setDescription(desc.getText().toString());
-        person.setCin(cin.getText().toString());
-        person.setFirstName(prenom.getText().toString());
+        person.setDescription(desc.getText().toString().trim());
+        person.setCin(cin.getText().toString().trim());
+        person.setFirstName(prenom.getText().toString().trim());
         person.setCity(ville.getSelectedItem().toString());
         person.setImage("");
         person.setLastName(nom.getText().toString());
-        person.setTel(mail.getText().toString());
+        person.setTel(mail.getText().toString().trim());
         person.setTypeProfil(fonction.getSelectedItem().toString());
-        account.setPassword(pwd.getText().toString());
-        account.setUsername(mail.getText().toString());
+        account.setPassword(pwd.getText().toString().trim());
+        account.setUsername(mail.getText().toString().trim());
         if(fonction.getSelectedItemPosition()==2){
             service1.setService_title("Client");
             service1.setService_id(7);

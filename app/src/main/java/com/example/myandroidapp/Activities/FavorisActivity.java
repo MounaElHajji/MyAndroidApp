@@ -39,7 +39,7 @@ public class FavorisActivity  extends AppCompatActivity {
 
     List<Employee> EmployeeList;
     ApiInterface apiInterface;
-    FavEmployeeAdapter employeeAdapter;
+    EmployeeAdapter employeeAdapter;
    // ImageView btnHeart =findViewById(R.id.btnHeart);
 
     @Override
@@ -84,7 +84,7 @@ public class FavorisActivity  extends AppCompatActivity {
                     postList ) {
                     emp.add(f.getEmp());
                 }
-                employeeAdapter = new FavEmployeeAdapter(FavorisActivity.this, emp);
+                employeeAdapter = new EmployeeAdapter(FavorisActivity.this, emp);
 //                postAdapter.getFilter().filter("Employee");
                 recyclerViewVar.setAdapter(employeeAdapter);
             }

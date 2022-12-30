@@ -37,10 +37,6 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         OnclickButtonListener();
-
-
-
-
     }
 
     //Delete  Button  listener
@@ -69,17 +65,15 @@ public class Settings extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(Settings.this, "Success account deleted", Toast.LENGTH_LONG).show();
                 }
-
-
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(Settings.this, "failed to delete account ", Toast.LENGTH_LONG).show();
-
             }
         });
-
+        SharedPreferences.Editor editor = sh.edit();
+        editor.putBoolean("userlogin", false);
+        editor.commit();
     }
 
 
