@@ -37,7 +37,7 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
     Context context;
     ApiInterface apiInterface;
     SharedPreferences sh;
-    int res;
+
     HashMap<Employee, Integer> lisFav= new HashMap<>();
 
 

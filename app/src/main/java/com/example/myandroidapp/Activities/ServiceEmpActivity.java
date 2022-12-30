@@ -32,7 +32,6 @@ import retrofit2.Response;
 
 public class ServiceEmpActivity extends AppCompatActivity {
     private RecyclerView recyclerViewVar;
-    List<Employee> EmployeeList;
     ApiInterface apiInterface;
     EmployeeAdapter employeeAdapter;
     public static final String TAG ="MAIN" ;
