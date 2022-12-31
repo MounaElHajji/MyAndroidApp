@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -86,7 +85,7 @@ public class CurrentProfile extends AppCompatActivity {
     //heart icon listener
     public void OnclickButtonListener() {
 
-        ImageView imgview = findViewById(R.id.imageView6);
+        ImageView imgview = findViewById(R.id.heartf);
         imgview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -43,6 +43,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     private List<Employee> PostListFull;
     private List<Employee> PostSearchName;
     private List<Employee> PostEmployees;
+    private List<Employee> fav = new ArrayList<>();
     Context context;
     ApiInterface apiInterface;
     SharedPreferences sh;
@@ -86,6 +87,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 List<ListFavoris> postList = response.body();
                 for (ListFavoris f:
                         postList ) {
+                    fav.add(f.getEmp());
                  if(post.getTel().equals(f.getEmp().getTel())){
                         holder.btnHeart.setImageResource(R.drawable.fav);
                  }
@@ -111,6 +113,15 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("tel", EmployeeList.get(position).getTel());
                 i.putExtra("image", EmployeeList.get(position).getImage());
                 i.putExtra("rating", EmployeeList.get(position).getRating());
+                String tmp= "false";
+                for (Employee emp:
+                     fav) {
+                    if(emp.getTel().equals(EmployeeList.get(position).getTel())){
+                        tmp= "true";
+                    }
+                }
+                i.putExtra("fav", tmp);
+
 
                 context.startActivity(i);
             }

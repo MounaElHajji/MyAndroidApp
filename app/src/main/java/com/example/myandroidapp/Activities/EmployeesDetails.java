@@ -2,6 +2,7 @@ package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,10 +10,13 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,6 +24,7 @@ import retrofit2.Response;
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.Rating;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
@@ -31,6 +36,7 @@ public class EmployeesDetails extends AppCompatActivity {
 
     List<Rating> ratingList;
     RatingBar ratingBar, ratingBarTotal;
+    ImageView heart;
     TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille;
     String nom;
     String ville;
@@ -41,6 +47,7 @@ public class EmployeesDetails extends AppCompatActivity {
     String rating;
     String id;
     String typeProfile;
+    Context context;
     Button buttonRat;
     AccountApi api1;
     float myRating = 0;
@@ -49,6 +56,7 @@ public class EmployeesDetails extends AppCompatActivity {
     RetrofitS retrofitS= new RetrofitS();
     AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Employee emp = new Employee();
@@ -70,6 +78,8 @@ public class EmployeesDetails extends AppCompatActivity {
         ratingBarTotal = findViewById(R.id.ratingBar2);
         ratingSumText =findViewById(R.id.ratingSumText);
         employeeVille = findViewById(R.id.employeeVille);
+        heart = findViewById(R.id.heartf);
+
 
 
         Intent intent = getIntent();
@@ -81,6 +91,7 @@ public class EmployeesDetails extends AppCompatActivity {
         emploie = intent.getStringExtra("typeProfil");
         id = intent.getStringExtra("id");
         typeProfile = intent.getStringExtra("typeProfil");
+
 
 
 
@@ -158,7 +169,42 @@ public class EmployeesDetails extends AppCompatActivity {
         telTxt.setText(telephone);
         employeeVille.setText(ville);
         employeeDeatls.setText(id);
+        if(intent.getStringExtra("fav").equals("true")){
+            heart.setImageResource(R.drawable.fav);
+        }else{
+            heart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
+        ButterKnife.bind(this);
+
     }
+    @OnClick(R.id.heartf)
+    public void clickHeart(){
+        int id1=sh.getInt("id", 0);
+        if(heart.getDrawable().getConstantState() == EmployeesDetails.this.getResources().getDrawable(R.drawable.fav).getConstantState()){
+            heart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            Call<Void> call2=apiInterface.DeleteFav(id1, Integer.parseInt(id));
+            call2.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                }
+            });
+        }else{
+            heart.setImageResource(R.drawable.fav);
+            Call<Person> call1 = apiInterface.addFav(id1, Integer.parseInt(id));
+            call1.enqueue(new Callback<Person>() {
+                @Override
+                public void onFailure(Call<Person> call, Throwable t) {
+                }
+                @Override
+                public void onResponse(Call<Person> call, Response<Person> response) {
+                }
+            });
+        }
+    }
+
 
     private void sumColumnsRating() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
@@ -168,30 +214,13 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                // this method is called when we get response from our api.
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
                 Integer responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
-
-                // below line we are setting our string to our text view.
-
                 String ratText = Integer.toString(responseFromAPI);
-
                 ratingSumText.setText(ratText);
             }
-
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
@@ -199,28 +228,15 @@ public class EmployeesDetails extends AppCompatActivity {
 
     private void UpdateRating(String label) {
         Rating rating = new Rating(label);
-
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        // calling a method to create an update and passing our modal class.
         Call<Employee> call = apiInterface.updateRating(id, 60, rating);
 
         call.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
-                // this method is called when we get response from our api.
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
                 Employee responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
                 String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getRating();
-
-                // below line we are setting our string to our text view.
                 responseTV.setText(responseString);
             }
 
