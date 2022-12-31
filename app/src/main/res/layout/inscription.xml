@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="304dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_corner"
             android:drawablePadding="10dp"
@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bievenue"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"></EditText>
 
         <EditText
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="296dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_corner"
             android:drawablePadding="10dp"
@@ -78,18 +78,16 @@
             android:paddingBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bievenue"
             tools:ignore="MissingConstraints"></EditText>
-
-
 
         <TextView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bienvenue"
+            android:text="Bienvenue 👋"
             android:textColor="@color/black"
             android:textSize="36sp"
             android:textStyle="bold"
@@ -98,7 +96,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.027"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/bievenue"
@@ -106,20 +105,21 @@
             android:layout_height="wrap_content"
             android:text="Inscrivez vous"
             android:textColor="@color/black"
-            android:textSize="33sp"
-            android:textStyle="italic"
+            android:textSize="30sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.076"
+            app:layout_constraintVertical_bias="0.084"
             tools:ignore="HardcodedText" />
 
         <Spinner
             android:id="@+id/fonction"
-            android:layout_width="339dp"
+            android:layout_width="349dp"
             android:layout_height="43dp"
-            android:layout_marginTop="356dp"
+            android:layout_marginTop="472dp"
             android:backgroundTint="#0E0C0C"
             android:ems="10"
             android:paddingLeft="20dp"
@@ -128,9 +128,9 @@
             android:paddingBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bievenue"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -138,7 +138,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="416dp"
+            android:layout_marginTop="408dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_corner"
             android:drawablePadding="10dp"
@@ -151,7 +151,7 @@
             android:paddingBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bievenue"
             tools:ignore="MissingConstraints"></EditText>
@@ -160,7 +160,7 @@
             android:id="@+id/ville"
             android:layout_width="339dp"
             android:layout_height="43dp"
-            android:layout_marginTop="477dp"
+            android:layout_marginTop="460dp"
             android:backgroundTint="#0E0C0C"
             android:ems="10"
             android:paddingLeft="20dp"
@@ -169,6 +169,7 @@
             android:paddingBottom="10dp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bievenue"
             tools:ignore="MissingConstraints" />
@@ -214,14 +215,16 @@
             app:layout_constraintEnd_toEndOf="@+id/pwd"
             app:layout_constraintHorizontal_bias="0.161"
             app:layout_constraintStart_toStartOf="@+id/pwd"
-            app:layout_constraintTop_toBottomOf="@+id/bievenue" />
+            app:layout_constraintTop_toBottomOf="@+id/bievenue"
+            android:layout_marginBottom="60dp"/>
 
         <TextView
             android:id="@+id/authentification"
             android:layout_width="111dp"
             android:layout_height="17dp"
             android:layout_marginStart="196dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="100dp"
             android:clickable="true"
             android:text="Se connecter"
             android:textColor="@color/black"
@@ -230,16 +233,16 @@
 
         <Button
             android:id="@+id/btnRegister"
-            android:layout_width="337dp"
+            android:layout_width="130dp"
 
             android:layout_height="44dp"
 
-            android:layout_marginTop="764dp"
+            android:layout_marginTop="836dp"
             android:background="@drawable/round_corner"
             android:backgroundTint="@color/blue"
             android:text="S'inscrire"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintHorizontal_bias="0.459"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView"
             tools:ignore="MissingConstraints" />
@@ -272,19 +275,19 @@
             android:id="@+id/alreadyHaveAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="20dp"
             android:text="Vous avez un compte?"
             android:textColor="@color/strong_grey"
             app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-            app:layout_constraintHorizontal_bias="0.162"
-
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginRight="100dp"
             app:layout_constraintStart_toStartOf="@+id/btnRegister"
             app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="174dp"
+            android:layout_height="137dp"
             android:src="@drawable/ic_baseline_account_circle_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -307,16 +310,19 @@
 
         <Button
             android:id="@+id/btnUpload"
-            android:layout_width="match_parent"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-
-            android:text="Select Image and upload"
+            android:layout_marginTop="130dp"
+            android:backgroundTint="#00CCFF"
+            android:text="Selectionner Une image"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.846"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="939dp" />
+            tools:layout_editor_absoluteX="81dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout></ScrollView>
