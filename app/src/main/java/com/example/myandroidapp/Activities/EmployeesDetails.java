@@ -1,21 +1,19 @@
 package com.example.myandroidapp.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Api.ApiInterface;
@@ -24,14 +22,20 @@ import com.example.myandroidapp.Models.Rating;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.example.myandroidapp.retrofit.RetrofitS;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EmployeesDetails extends AppCompatActivity {
 
     List<Rating> ratingList;
     RatingBar ratingBar, ratingBarTotal;
     TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille;
+    ImageView imageP;
     String nom;
     String ville;
     String description;
@@ -41,6 +45,7 @@ public class EmployeesDetails extends AppCompatActivity {
     String rating;
     String id;
     String typeProfile;
+String imagep;
     Button buttonRat;
     AccountApi api1;
     float myRating = 0;
@@ -70,13 +75,14 @@ public class EmployeesDetails extends AppCompatActivity {
         ratingBarTotal = findViewById(R.id.ratingBar2);
         ratingSumText =findViewById(R.id.ratingSumText);
         employeeVille = findViewById(R.id.employeeVille);
+        imageP= findViewById(R.id.imageView13);
 
 
         Intent intent = getIntent();
         nom = intent.getStringExtra("firstName");
         ville = intent.getStringExtra("city");
         description = intent.getStringExtra("description");
-        image = intent.getStringExtra("imageP");
+       imagep= intent.getStringExtra("imagep");
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("typeProfil");
         id = intent.getStringExtra("id");
@@ -158,6 +164,12 @@ public class EmployeesDetails extends AppCompatActivity {
         telTxt.setText(telephone);
         employeeVille.setText(ville);
         employeeDeatls.setText(id);
+
+        Picasso.get()
+                .load(Uri.parse(imagep))
+                .centerCrop()
+                .resize(150,150)
+                .into(imageP);
     }
 
     private void sumColumnsRating() {

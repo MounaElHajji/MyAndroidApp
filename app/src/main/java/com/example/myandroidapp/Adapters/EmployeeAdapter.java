@@ -3,6 +3,7 @@ package com.example.myandroidapp.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.Activities.EmployeesDetails;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     private List<Employee> PostSearchName;
     private List<Employee> PostEmployees;
     Context context;
+
 
     public EmployeeAdapter(Context context, List<Employee> EmployeeList) {
         this.context = context;
@@ -55,6 +58,15 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
 
+            //Picasso.get().load(EmployeeList.get(position).getImage()).into(holder.image);
+            Picasso.get()
+                    .load(Uri.parse(EmployeeList.get(position).getImageP()))
+                    .centerCrop()
+                    .resize(150,150)
+                    .into(holder.imageP);
+
+
+
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +78,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("city", EmployeeList.get(position).getCity());
                 i.putExtra("description", EmployeeList.get(position).getDescription());
                 i.putExtra("tel", EmployeeList.get(position).getTel());
-                i.putExtra("image", EmployeeList.get(position).getImage());
+                i.putExtra("imagep", EmployeeList.get(position).getImageP());
                 i.putExtra("rating", EmployeeList.get(position).getRating());
 
                 context.startActivity(i);
@@ -87,7 +99,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             ville = itemView.findViewById(R.id.text_ville);
             descritpion = itemView.findViewById(R.id.text_description);
             btnVoir = itemView.findViewById(R.id.btnVoir);
-           imageP= itemView.findViewById(R.id.imageView);
+
+           imageP= itemView.findViewById(R.id.img_headline);
         }
     }
 
