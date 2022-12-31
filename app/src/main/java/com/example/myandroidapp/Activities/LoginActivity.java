@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor edit =  sharedPref.edit();
                     edit.putBoolean("userlogin", true);
                     edit.commit();
-
                     Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
                     Account account1= response.body();
                     SharedPreferences.Editor myEdit = sharedPref.edit();
