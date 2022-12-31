@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Models.Account;
+import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
@@ -32,6 +34,7 @@ import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,20 +53,30 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.signUp)
     TextView signUp;
 
-    SharedPreferences sharedPref;
+
+
+    String type_profil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        if(islogin){
+        type_profil = sharedPref.getString("type_profil", "");
+        if(type_profil.equals("employe") &&  islogin){
             Intent i= new Intent(this, EmployeelistActivity.class);
             startActivity(i);
-        }else{
+        }
+        else if(type_profil.equals("client") &&  islogin){
+            Intent i= new Intent(this, listeServices.class);
+            startActivity(i);
+        }
+        else{
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);}
+        ButterKnife.bind(this);
+        }
 
     }
+
     @OnCheckedChanged(R.id.pwdsh)
     public void onCheckedChanged() {
         if (pwdsh.isChecked()) {
@@ -76,15 +89,30 @@ public class LoginActivity extends AppCompatActivity {
             pwdsh.setText("Afficher le mot de passe");
         }
     }
+
     @OnClick(R.id.signUp)
     public void  signUp(){
         Intent i= new Intent(this, inscription.class);
         startActivity(i);
     }
 
-    @OnClick(R.id.button2)
-    public  void loginClick(){
+     public void loginEmployee(){
 
+         Intent i= new Intent(this, EmployeelistActivity.class);
+         startActivity(i);
+         finish();
+     }
+    public void loginClient(){
+
+        Intent i= new Intent(this, listeServices.class);
+        startActivity(i);
+        finish();
+
+    }
+    @OnClick(R.id.button2)
+    public void loginClick(){
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         RetrofitS retrofitS= new RetrofitS();
         AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
         String passwd=String.valueOf(pwd.getText());
@@ -92,24 +120,27 @@ public class LoginActivity extends AppCompatActivity {
         Account account= new Account();
         account.setPassword(passwd);
         account.setUsername(usrname);
-        Intent i= new Intent(this, listeServices.class);
-        api.loginAccount(account) .enqueue(new Callback<Account>() {
+
+
+        api.loginAccount(account).enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
+
                 if(response.isSuccessful()) {
                     /*logout*/
+                    SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
                     SharedPreferences.Editor edit =  sharedPref.edit();
-                    edit.putBoolean("userlogin", true);
-                    edit.commit();
 
                     Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
                     Account account1= response.body();
-                    SharedPreferences.Editor myEdit = sharedPref.edit();
-                    myEdit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
-                    myEdit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
-                    myEdit.commit();
-                    startActivity(i);
-                    finish();
+//                    SharedPreferences.Editor myEdit = sharedPref.edit();
+                    edit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
+                    edit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
+                    edit.putBoolean("userlogin", true);
+                    edit.commit();
+                    typeprofil(account1.getUsername());
+
+
                 }else{
                     Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();
                 }
@@ -120,6 +151,61 @@ public class LoginActivity extends AppCompatActivity {
                 Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
             }
         });
-        ;
+
+
+    }
+
+    public void typeprofil(String login) {
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        Retrofit adapter = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.15:8080")
+                .addConverterFactory(new ToStringConverterFactory())
+                .build();
+
+        AccountApi  api = adapter.create(AccountApi.class);
+         System.out.println(login);
+        Call<String> call = api.getTypeProfil(login);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                String type_profile = response.body();
+
+
+
+                if (response.isSuccessful()) {
+
+                    if (type_profile.equals("Employé")) {
+
+                        editor.putString("type_profil", "employe");
+                        editor.commit();
+                        type_profil = sharedPref.getString("type_profil", "");
+
+                        loginEmployee();
+
+                    } else {
+
+                        editor.putString("type_profil", "client");
+                        editor.commit();
+                        type_profil = sharedPref.getString("type_profil", "");
+
+                        loginClient();
+                    }
+           }
+                else {
+                    System.out.println("heloo asmaaaaaaaaaaaaaaaaa from call " + type_profile);
+                    System.out.println("from shared" + type_profil);
+                    Toast.makeText(LoginActivity.this, "Oops, réessayez!, login inexistant", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+                Toast.makeText(LoginActivity.this, "oops, réessayez! une erreur est rencontré", Toast.LENGTH_SHORT).show();
+                Log.d("Error", " Throwable is " +t.toString());
+            }
+        });
     }
 }

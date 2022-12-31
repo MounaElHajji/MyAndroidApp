@@ -25,11 +25,19 @@ public class CurrentProfile extends AppCompatActivity {
     Employee emp = new Employee();
     ApiInterface apiInterface;
     TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
-
+    String type_profil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_profile);
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        type_profil = sharedPref.getString("type_profil", "");
+        if(type_profil.equals("employe")) {
+            setContentView(R.layout.activity_current_profile_empl);
+        }
+        else{
+            setContentView(R.layout.activity_current_profile);
+        }
+
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();
@@ -107,6 +115,11 @@ public class CurrentProfile extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void onMessageEmplClick(View view){
+        Intent intent = new Intent(CurrentProfile.this, EmployeelistActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     public void onFavorisClick(View view) {
         Intent intent = new Intent(this, FavorisActivity.class);
@@ -115,11 +128,16 @@ public class CurrentProfile extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, EmployeelistActivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
         finish();
     }
 
+    public void onHomeEmployeClick(View view){
+        Intent intent = new Intent(this, EmployeelistActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void onSettingsClick(View view) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);

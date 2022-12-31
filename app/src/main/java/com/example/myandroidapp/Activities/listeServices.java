@@ -74,7 +74,7 @@ public class listeServices extends AppCompatActivity {
 
     @OnItemClick(R.id.recycleView)
     public void onListTransactionClicked(int position){
-        Intent i = new Intent(this, EmployeelistActivity.class);
+        Intent i = new Intent(this, ServiceEmpActivity.class);
         startActivity(i);
     }
 
@@ -94,7 +94,7 @@ public class listeServices extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, EmployeelistActivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
         finish();
     }

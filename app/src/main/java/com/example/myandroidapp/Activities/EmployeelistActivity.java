@@ -38,7 +38,7 @@ public class EmployeelistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.employee_list_activity);
+        setContentView(R.layout.employee_list_activity_emp);
         spinners();
         setList();
         getData();
@@ -85,9 +85,13 @@ public class EmployeelistActivity extends AppCompatActivity {
             }
         });
     }
+
+
     public void onBackClick(View view) {
         finish();
     }
+
+
 
     // -------- Footer icons listeners :
 
@@ -97,7 +101,11 @@ public class EmployeelistActivity extends AppCompatActivity {
         finish();
     }
 
-
+    public void onMessageEmplClick(View view){
+        Intent intent = new Intent(this, EmployeelistActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void onFavorisClick(View view) {
         Intent intent = new Intent(this, FavorisActivity.class);
         startActivity(intent);
@@ -105,6 +113,11 @@ public class EmployeelistActivity extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
+        Intent intent = new Intent(this,listeServices.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onHomeEmployeClick(View view){
         Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();

@@ -83,17 +83,24 @@ public class inscription extends AppCompatActivity {
     RetrofitS retrofitS= new RetrofitS();
     ApiInterface apiInterface;
     AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
-    SharedPreferences sharedPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        if(islogin){
+        String type_profil = sharedPref.getString("type_profil", "");
+        if(islogin && type_profil.equals("client")){
+            Intent i= new Intent(this, listeServices.class);
+            startActivity(i);
+        }
+        else if(islogin && type_profil.equals("employe")){
             Intent i= new Intent(this, EmployeelistActivity.class);
             startActivity(i);
-        }else{
+        }
+        else{
         setContentView(R.layout.inscription);
         ButterKnife.bind(this);
         desc.setVisibility(View.GONE);
@@ -168,6 +175,8 @@ public class inscription extends AppCompatActivity {
     }
     @OnItemSelected(R.id.fonction)
     public void click(Spinner s,int pos) {
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         if (pos == 0) {
             desc.setVisibility(View.GONE);
             msg.setVisibility(View.VISIBLE);
@@ -177,9 +186,14 @@ public class inscription extends AppCompatActivity {
             msg.setText("");
             desc.setVisibility(View.VISIBLE);
             service.setVisibility(View.VISIBLE);
+            editor.putString("type_profil", "employe");
+            editor.commit();
         }else{
             desc.setVisibility(View.GONE);
             service.setVisibility(View.GONE);
+            editor.putString("type_profil", "client");
+            editor.commit();
+
         }
     }
     @OnItemSelected(R.id.ville)
@@ -223,10 +237,10 @@ private boolean isValidMail(String email) {
     }
 
     private  boolean isValidPwd(String pwd){
-         String PASSWORD_PATTERN =
-                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-   /*String PASSWORD_PATTERN =
-            "[a-zA-Z]+";*/
+//         String PASSWORD_PATTERN =
+//                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+   String PASSWORD_PATTERN =
+            "[a-zA-Z]+";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();

@@ -13,7 +13,7 @@ import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPref;
+
 
     @OnClick(R.id.button)
     protected void loginClick(){
@@ -31,12 +31,18 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        if(islogin){
+        String type_profil = sharedPref.getString("type_profil", "");
+        if(islogin && type_profil.equals("employe")){
             Intent i= new Intent(this, EmployeelistActivity.class);
             startActivity(i);
-        }else {
+        }
+        else if(islogin && type_profil.equals("client")){
+            Intent i= new Intent(this, listeServices.class);
+            startActivity(i);
+        }
+        else {
             setContentView(R.layout.activity_home);
             ButterKnife.bind(this);
         }

@@ -27,19 +27,22 @@ import retrofit2.Response;
 public class Settings extends AppCompatActivity {
     Employee emp = new Employee();
     ApiInterface apiInterface;
-
+    String type_profil;
     @BindView(R.id.editButton)
     TextView edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        OnclickButtonListener();
-
-
-
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        type_profil = sharedPref.getString("type_profil", "");
+        if(type_profil.equals("employe")){
+            setContentView(R.layout.activity_settings_empl);
+            OnclickButtonListener();
+        }else{
+            setContentView(R.layout.activity_settings);
+            OnclickButtonListener();
+        }
 
     }
 
@@ -70,7 +73,6 @@ public class Settings extends AppCompatActivity {
                     Toast.makeText(Settings.this, "Success account deleted", Toast.LENGTH_LONG).show();
                 }
 
-
             }
 
             @Override
@@ -92,6 +94,7 @@ public class Settings extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("userlogin", false);
+        editor.clear();
         editor.commit();
 
 
@@ -100,6 +103,17 @@ public class Settings extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Toast.makeText(Settings.this, "you 're logout successfully!", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    public void SwitchProfil(View view){
+        System.out.println("im here");
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("type_profil", "client");
+        editor.commit();
+        Intent i = new Intent(this, listeServices.class);
+        startActivity(i);
         finish();
     }
 
@@ -114,7 +128,12 @@ public class Settings extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void onMessageEmplClick(View view){
+        Intent intent = new Intent(this, EmployeelistActivity.class);
 
+        startActivity(intent);
+        finish();
+    }
 
     public void onFavorisClick(View view) {
         Intent intent = new Intent(this, FavorisActivity.class);
@@ -123,11 +142,15 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
+        Intent intent = new Intent(this,listeServices.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onHomeEmployeClick(View view){
         Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();
     }
-
     public void onSettingsClick(View view) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);

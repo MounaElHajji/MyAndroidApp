@@ -120,23 +120,55 @@
              />
 
         <ImageButton
-            android:id="@+id/logoutIcon"
+            android:id="@+id/switchIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_below="@+id/deleteIcon"
             android:layout_gravity="left"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/logout_icon"
+            android:background="@drawable/switch_icon"
+
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <Button
-            android:id="@+id/logoutButton"
+            android:id="@+id/switchButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@+id/deleteButton"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/switchIcon"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:paddingLeft="20dp"
+            android:onClick="SwitchProfil"
+            android:text="Switcher profil"
+            android:textColor="@color/black" />
+
+        <ImageButton
+            android:id="@+id/logoutIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/switchIcon"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/logout_icon"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/switchButton"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_toRightOf="@+id/logoutIcon"
             android:backgroundTint="@color/white"
             android:gravity="center_vertical"
@@ -146,10 +178,8 @@
             android:onClick="onLogOutClick"
             android:textColor="@color/black" />
 
-
-
         <include
-            layout="@layout/footer_layout"
+            layout="@layout/employee_footer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

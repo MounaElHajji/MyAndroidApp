@@ -61,6 +61,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="0px"
         android:layout_marginTop="105dp"
         android:layout_marginRight="0px"
@@ -171,10 +172,9 @@
             android:textSize="50px" />
 
         <include
-            layout="@layout/footer_layout"
-            android:layout_width="384dp"
-            android:layout_height="match_parent" />
-
+            layout="@layout/employee_footer_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="205dp" />
 
     </LinearLayout>
 
