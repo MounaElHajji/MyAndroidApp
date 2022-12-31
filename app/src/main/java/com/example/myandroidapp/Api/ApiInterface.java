@@ -54,7 +54,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/favList/deleteFav")
-    Call<Void> DeleteFav(@Part("id1") int p1,@Part("id2") String p2);
+    Call<Void> DeleteFav(@Part("id1") int p1,@Part("id2") int p2);
 
     @GET("employees/checkLogin/{login}")
     Call<Boolean> checkLogin(@Path("login") String login);
@@ -64,20 +64,20 @@ public interface ApiInterface {
 
     @Multipart
     @POST("/favList/addFav")
-    Call<Person> addFav(@Part("p1") int p1,@Part("p2") String p2);
+    Call<Person> addFav(@Part("p1") int p1,@Part("p2") int p2);
 
 
     //Ratings
     @POST("/employees/{id}/ratings/{id_client}")
     Call<Employee> AddRating(@Body RatingEmp rating, @Path("id") int id,  @Path("id_client") int id_client);
 
-    @GET("/employees/{id}/ratings")
-    Call<Integer> SumRating(@Path("id") int id);
+    @GET("/employees/{id}/ratings/{id_client}")
+    Call<Integer> SumRating(@Path("id") int id,  @Path("id_client") int id_client);
 
     @GET("/employees/{id}/sumRatingByEmp/{id_client}")
     Call<Integer> sumRatingsByImp(@Path("id") int id, @Path("id_client") int id_client);
 
-    @GET("/{id_client}/RatingEmpByClient/{id}")
+    @GET("/employees/{id_client}/RatingEmpByClient/{id}")
     Call<Integer> getRatOfClientForEmp(@Path(value = "id_client") int id_client, @Path(value = "id") int id);
 
     @PUT("/{id}/ratings/{id_rating}")

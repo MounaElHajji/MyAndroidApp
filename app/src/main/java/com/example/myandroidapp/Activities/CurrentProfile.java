@@ -3,6 +3,7 @@ package com.example.myandroidapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
+import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -25,10 +27,13 @@ public class CurrentProfile extends AppCompatActivity {
     Employee emp = new Employee();
     ApiInterface apiInterface;
     TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
-
+    ImageView imageP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        imageP= findViewById(R.id.imageView);
+
         setContentView(R.layout.activity_current_profile);
         ButterKnife.bind(this);
         getVardFromLayout();
@@ -64,6 +69,9 @@ public class CurrentProfile extends AppCompatActivity {
                 String empCin = reponseEmp.getCin();
                 String empDesc = reponseEmp.getDescription();
                 String empEmploie = reponseEmp.getType_profil();
+                String imagep= reponseEmp.getImageP();
+
+
 
                 //set the data in the layout to the dat coming from the backend
                 villeTxt.setText(empVille);
@@ -72,6 +80,12 @@ public class CurrentProfile extends AppCompatActivity {
                 emploiTxt.setText(empEmploie);
                 cinTxt.setText(empCin);
                 descTxt.setText(empDesc);
+
+                Picasso.get()
+                        .load(Uri.parse(imagep))
+                        .centerCrop()
+                        .resize(150,150)
+                        .into(imageP);
             }
 
             @Override

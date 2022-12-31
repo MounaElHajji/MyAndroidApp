@@ -1,9 +1,11 @@
 package com.example.myandroidapp.Activities;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,76 +87,111 @@ public class inscription extends AppCompatActivity {
     ApiInterface apiInterface;
     AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
     SharedPreferences sharedPref;
+    String path;
 
+    private ImageView iv;
+    private TextView tv;
+    private final int GALLERY = 1000;
+    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
-        if(islogin){
-            Intent i= new Intent(this, EmployeelistActivity.class);
+
+
+
+        if (islogin) {
+            Intent i = new Intent(this, EmployeelistActivity.class);
             startActivity(i);
-        }else{
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.inscription);
-        ButterKnife.bind(this);
-        desc.setVisibility(View.GONE);
-        service.setVisibility(View.GONE);
-        msg.setVisibility(View.GONE);
-        msg.setText("");
-        List fcts= new ArrayList();
-        List LisVille= new ArrayList();
-        List Services= new ArrayList();
-        //LisVille.add("Ville");
+        } else {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.inscription);
+            ButterKnife.bind(this);
+            desc.setVisibility(View.GONE);
+            service.setVisibility(View.GONE);
+            msg.setVisibility(View.GONE);
+            msg.setText("");
+            List fcts = new ArrayList();
+            List LisVille = new ArrayList();
+            List Services = new ArrayList();
+            //LisVille.add("Ville");
         /*LisVille.add("Kénitra");
         LisVille.add("Rabat");*/
-        getVilles();
+            iv = findViewById(R.id.imageView);
+//            tv = findViewById(R.id.message);
+            getVilles();
 
-        fcts.add("Fonction");
-        fcts.add("Employé");
-        fcts.add("Client");
-        Services.add("Service");
-        ArrayAdapter adapter = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                fcts
-        );
+
+
+            fcts.add("Fonction");
+            fcts.add("Employé");
+            fcts.add("Client");
+            Services.add("Service");
+            ArrayAdapter adapter = new ArrayAdapter(
+                    this,
+                    android.R.layout.simple_spinner_item,
+                    fcts
+            );
        /* ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, LisVille
         );*/
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fonction.setAdapter(adapter);
-        //ville.setAdapter(adapter1);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            fonction.setAdapter(adapter);
+            //ville.setAdapter(adapter1);
 
 
 
 
-        api.listServices().enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                List<String> lis=response.body();
-                for (String s:
-                        lis ) {
-                    Services.add(s);
-                    System.out.println(s);
+            api.listServices().enqueue(new Callback<List<String>>() {
+                @Override
+                public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                    List<String> lis=response.body();
+                    for (String s:
+                            lis ) {
+                        Services.add(s);
+                        System.out.println(s);
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-            }
-        });
-        ;
-        ArrayAdapter adapter2 = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                Services
-        );
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        service.setAdapter(adapter2);
+                @Override
+                public void onFailure(Call<List<String>> call, Throwable t) {
+                    Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                }
+            });
+            ;
+            ArrayAdapter adapter2 = new ArrayAdapter(
+                    this,
+                    android.R.layout.simple_spinner_item,
+                    Services
+            );
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            service.setAdapter(adapter2);
+            btn = findViewById(R.id.btnUpload);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent iGallery = new Intent(Intent.ACTION_PICK);
+                    iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(iGallery, GALLERY);
+                }
+            });
+        }
     }
 
+
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == GALLERY) {
+                //for gallery
+                iv.setImageURI(data.getData());
+                path = String.valueOf(data.getData());
+            }
+        }
     }
+
     @OnCheckedChanged(R.id.checkBox)
     public void onCheckedChanged() {
         if (c.isChecked()) {
@@ -206,15 +244,15 @@ public class inscription extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-/********************************************* REGEX ************************************************/
-private boolean isValidMail(String email) {
+    /*************** REGEX ****************/
+    private boolean isValidMail(String email) {
 
-    String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-    return Pattern.compile(EMAIL_STRING).matcher(email).matches();
+        return Pattern.compile(EMAIL_STRING).matcher(email).matches();
 
-}
+    }
     private boolean isValidMobile(String phone) {
         if(!Pattern.matches("[a-zA-Z]+", phone)) {
             return phone.length() > 6 && phone.length() <= 13;
@@ -223,15 +261,15 @@ private boolean isValidMail(String email) {
     }
 
     private  boolean isValidPwd(String pwd){
-         String PASSWORD_PATTERN =
-                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        String PASSWORD_PATTERN =
+                "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
    /*String PASSWORD_PATTERN =
             "[a-zA-Z]+";*/
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
     }
-    /********************** LOGIN EXISTS *********************/
+    /******** LOGIN EXISTS *******/
 
     RetrofitS retrofit= new RetrofitS();
     ApiInterface api1 =retrofit.getRetrofit().create(ApiInterface.class);
@@ -258,20 +296,20 @@ private boolean isValidMail(String email) {
     }
 
 
-    /******************************************/
+    /**************/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
         if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 ||
-        mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
-        || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
+                mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
+                || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
         }else if(!isValidMail(mail.getText().toString()) && !isValidMobile(mail.getText().toString())){
             msg.setText("Email ou Tél n'est pas valide!");
         }else if(fonction.getSelectedItemPosition()==1 && service.getSelectedItemPosition()==0){
             msg.setText("Veuillez choisir un service!");
-        }else if(!isValidPwd(pwd.getText().toString())){
-            msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" +
-                    "des symboles et de longueur minimale 8!");
+//        }else if(!isValidPwd(pwd.getText().toString())){
+//            msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" +
+//                    "des symboles et de longueur minimale 8!");
         }else { loginExists(mail.getText().toString()); }
 
     }
@@ -286,6 +324,7 @@ private boolean isValidMail(String email) {
         person.setCity(ville.getSelectedItem().toString());
         person.setImage("");
         person.setLastName(nom.getText().toString());
+        person.setImage(path);
         person.setTel(mail.getText().toString());
         person.setTypeProfil(fonction.getSelectedItem().toString());
         account.setPassword(pwd.getText().toString());

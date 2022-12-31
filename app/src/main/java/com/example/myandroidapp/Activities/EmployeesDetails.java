@@ -63,9 +63,7 @@ public class EmployeesDetails extends AppCompatActivity {
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
         ratingBar = findViewById(R.id.ratingBar);
-//        buttonRat = findViewById(R.id.buttonRat);
         responseTV = findViewById(R.id.idTVResponse);
-//        employeeDeatls = findViewById(R.id.idTest);
         averageRating = findViewById(R.id.rating);
         ratingBarTotal = findViewById(R.id.ratingBar2);
         ratingSumText =findViewById(R.id.ratingSumText);
@@ -91,8 +89,16 @@ public class EmployeesDetails extends AppCompatActivity {
 
         SumRating();
         sumColumnsRating();
+//
+        if(id_current != id_emp)
+        {
+            ratingOfClientForEmp();
+        }
 
-
+//        if(ratingBar.getRating() != 0)
+//        {
+//            ratingBar.setIsIndicator(true);
+//        }
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -103,38 +109,9 @@ public class EmployeesDetails extends AppCompatActivity {
                 myRating = ratingBar.getRating();
                 ratingBar.setRating(myRating);
                 RateEmplployee(myRating);
-                ratingOfClientForEmp();
                 Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
             }
         });
-
-
-//        ratingBar.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    float touchPositionX = event.getX();
-//                    float width = ratingBar.getWidth();
-//                    float starsf = (touchPositionX / width) * 5.0f;
-//                    int stars = (int)starsf + 1;
-//                    RateEmplployee(String.valueOf(stars));
-//                    Toast.makeText(EmployeesDetails.this, String.valueOf("test"), Toast.LENGTH_SHORT).show();
-//                    v.setPressed(false);
-////                    UpdateRating(String.valueOf(stars));
-//                }
-//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    v.setPressed(true);
-//                }
-//
-//                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
-//                    v.setPressed(false);
-//                }
-//
-//                return false;
-//            }
-//        });
-
-
 
 
         nomTxt.setText(nom);
@@ -158,108 +135,12 @@ public class EmployeesDetails extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Integer responseFromAPI = response.body();
+                myRating = ratingBar.getRating();
 
                 ratingBar.setRating(responseFromAPI);
 
+
             }
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-                averageRating.setText("Error found is : " + t.getMessage());
-            }
-        });
-    }
-
-    private void sumColumnsRating() {
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.sumRatingsByImp(id_emp, id_current);
-
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                // this method is called when we get response from our api.
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
-                Integer responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
-
-                // below line we are setting our string to our text view.
-
-                String ratText = Integer.toString(responseFromAPI);
-
-                ratingSumText.setText(ratText);
-            }
-
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
-                averageRating.setText("Error found is : " + t.getMessage());
-            }
-        });
-    }
-
-    private void UpdateRating(Float label) {
-        RatingEmp rating = new RatingEmp(label);
-
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        // calling a method to create an update and passing our modal class.
-        Call<Employee> call = apiInterface.updateRating(id, 60, rating);
-
-        call.enqueue(new Callback<Employee>() {
-            @Override
-            public void onResponse(Call<Employee> call, Response<Employee> response) {
-                // this method is called when we get response from our api.
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
-                Employee responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
-                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getRating();
-
-                // below line we are setting our string to our text view.
-                responseTV.setText(responseString);
-            }
-
-            @Override
-            public void onFailure(Call<Employee> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
-                responseTV.setText("Error found is : " + t.getMessage());
-            }
-        });
-    }
-
-    private void SumRating()
-    {
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.SumRating(id_emp);
-
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                // this method is called when we get response from our api.
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Integer responseFromAPI = response.body();
-                String ratTextAverage = Integer.toString(responseFromAPI);
-                ratingBarTotal.setRating(responseFromAPI);
-                averageRating.setText(ratTextAverage);
-            }
-
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
@@ -303,4 +184,68 @@ public class EmployeesDetails extends AppCompatActivity {
             }
         });
     }
+
+    private void SumRating()
+    {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        // calling a method to create an update and passing our modal class.
+        Call<Integer> call = apiInterface.SumRating(id_emp, id_current);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                // this method is called when we get response from our api.
+                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                Integer responseFromAPI = response.body();
+                String ratTextAverage = Integer.toString(responseFromAPI);
+                ratingBarTotal.setRating(responseFromAPI);
+                averageRating.setText(ratTextAverage);
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                averageRating.setText("Error found is : " + t.getMessage());
+            }
+        });
+    }
+
+
+    private void sumColumnsRating() {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        // calling a method to create an update and passing our modal class.
+        Call<Integer> call = apiInterface.sumRatingsByImp(id_emp, id_current);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                // this method is called when we get response from our api.
+                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                // on below line we are setting empty
+                // text to our both edit text.
+
+                // we are getting a response from our body and
+                // passing it to our modal class.
+                Integer responseFromAPI = response.body();
+
+                // on below line we are getting our data from modal class
+                // and adding it to our string.
+
+                // below line we are setting our string to our text view.
+
+                String ratText = Integer.toString(responseFromAPI);
+
+                ratingSumText.setText(ratText);
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+                // setting text to our text view when
+                // we get error response from API.
+                averageRating.setText("Error found is : " + t.getMessage());
+            }
+        });
+    }
+
+
 }
