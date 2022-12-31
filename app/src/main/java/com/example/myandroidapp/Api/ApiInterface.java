@@ -66,14 +66,19 @@ public interface ApiInterface {
     @POST("/favList/addFav")
     Call<Person> addFav(@Part("p1") int p1,@Part("p2") String p2);
 
-    @POST("/employees/{id}/ratings")
-    Call<Employee> AddRating(@Body RatingEmp rating, @Path("id") String id);
+
+    //Ratings
+    @POST("/employees/{id}/ratings/{id_client}")
+    Call<Employee> AddRating(@Body RatingEmp rating, @Path("id") int id,  @Path("id_client") int id_client);
 
     @GET("/employees/{id}/ratings")
-    Call<Float> SumRating(@Path("id") String id);
+    Call<Integer> SumRating(@Path("id") int id);
 
-    @GET("/employees/{id}/sumRatingByEmp")
-    Call<Integer> sumRatingsByImp(@Path("id") String id);
+    @GET("/employees/{id}/sumRatingByEmp/{id_client}")
+    Call<Integer> sumRatingsByImp(@Path("id") int id, @Path("id_client") int id_client);
+
+    @GET("/{id_client}/RatingEmpByClient/{id}")
+    Call<Integer> getRatOfClientForEmp(@Path(value = "id_client") int id_client, @Path(value = "id") int id);
 
     @PUT("/{id}/ratings/{id_rating}")
     Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body RatingEmp ratingRequest);

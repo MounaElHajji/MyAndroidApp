@@ -38,17 +38,15 @@ public class EmployeesDetails extends AppCompatActivity {
     String image;
     String telephone, lastNameEmp;
     String emploie;
-    String rating;
+    String ratingValue;
     String id;
     String typeProfile;
-    Button buttonRat;
-    AccountApi api1;
     float myRating = 0;
     ApiInterface apiInterface;
     SharedPreferences sh;
     RetrofitS retrofitS= new RetrofitS();
     AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
-
+    int id_current, id_emp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Employee emp = new Employee();
@@ -56,6 +54,8 @@ public class EmployeesDetails extends AppCompatActivity {
         setContentView(R.layout.activity_employees_details);
 
         sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        id_current= sh.getInt("id",0);
+
         villeTxt = findViewById(R.id.textView4);
         nomTxt = findViewById(R.id.textView);
         adressTxt = findViewById(R.id.textView8);
@@ -80,7 +80,10 @@ public class EmployeesDetails extends AppCompatActivity {
         image = intent.getStringExtra("imageP");
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("service_title");
+//        ratingValue = intent.getStringExtra("label");
+
         id = intent.getStringExtra("id");
+        id_emp = Integer.valueOf(id);
         typeProfile = intent.getStringExtra("typeProfil");
         lastNameEmp = intent.getStringExtra("lastName");
 
@@ -88,6 +91,8 @@ public class EmployeesDetails extends AppCompatActivity {
 
         SumRating();
         sumColumnsRating();
+
+
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -98,12 +103,10 @@ public class EmployeesDetails extends AppCompatActivity {
                 myRating = ratingBar.getRating();
                 ratingBar.setRating(myRating);
                 RateEmplployee(myRating);
-
-
+                ratingOfClientForEmp();
                 Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
             }
         });
-        int id_current= sh.getInt("id",0);
 
 
 //        ratingBar.setOnTouchListener(new View.OnTouchListener() {
@@ -142,12 +145,34 @@ public class EmployeesDetails extends AppCompatActivity {
         employeeVille.setText(ville);
 //        employeeDeatls.setText(id);
         lastNamemployye.setText(lastNameEmp);
+
+    }
+
+    private void ratingOfClientForEmp()
+    {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<Integer> call = apiInterface.getRatOfClientForEmp(id_current, id_emp);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                Integer responseFromAPI = response.body();
+
+                ratingBar.setRating(responseFromAPI);
+
+            }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                averageRating.setText("Error found is : " + t.getMessage());
+            }
+        });
     }
 
     private void sumColumnsRating() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.sumRatingsByImp(id);
+        Call<Integer> call = apiInterface.sumRatingsByImp(id_emp, id_current);
 
         call.enqueue(new Callback<Integer>() {
             @Override
@@ -222,36 +247,21 @@ public class EmployeesDetails extends AppCompatActivity {
     {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Float> call = apiInterface.SumRating(id);
+        Call<Integer> call = apiInterface.SumRating(id_emp);
 
-        call.enqueue(new Callback<Float>() {
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<Float> call, Response<Float> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
                 // this method is called when we get response from our api.
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
-                Float responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
-
-                // below line we are setting our string to our text view.
-                String ratTextAverage = Float.toString(responseFromAPI);
-
+                Integer responseFromAPI = response.body();
+                String ratTextAverage = Integer.toString(responseFromAPI);
                 ratingBarTotal.setRating(responseFromAPI);
-
                 averageRating.setText(ratTextAverage);
             }
 
             @Override
-            public void onFailure(Call<Float> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
+            public void onFailure(Call<Integer> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
@@ -262,7 +272,7 @@ public class EmployeesDetails extends AppCompatActivity {
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Employee> call = apiInterface.AddRating(rating, id);
+        Call<Employee> call = apiInterface.AddRating(rating, id_emp, id_current);
 
         call.enqueue(new Callback<Employee>() {
             @Override
