@@ -29,24 +29,14 @@ import java.util.List;
 
 public class EmployeesDetails extends AppCompatActivity {
 
-    List<RatingEmp> ratingList;
     RatingBar ratingBar, ratingBarTotal;
-    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, employeeDeatls, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
-    String nom;
-    String ville;
-    String description;
-    String image;
-    String telephone, lastNameEmp;
-    String emploie;
-    String ratingValue;
-    String id;
-    String typeProfile;
+    TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
+    String nom, ville, description, image,telephone, lastNameEmp,emploie, ratingValue,id,typeProfile;
     float myRating = 0;
     ApiInterface apiInterface;
     SharedPreferences sh;
-    RetrofitS retrofitS= new RetrofitS();
-    AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
     int id_current, id_emp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Employee emp = new Employee();
@@ -85,11 +75,9 @@ public class EmployeesDetails extends AppCompatActivity {
         typeProfile = intent.getStringExtra("typeProfil");
         lastNameEmp = intent.getStringExtra("lastName");
 
-
-
         SumRating();
         sumColumnsRating();
-//
+
         if(id_current != id_emp)
         {
             ratingOfClientForEmp();
@@ -120,7 +108,6 @@ public class EmployeesDetails extends AppCompatActivity {
         emploiTxt.setText(emploie);
         telTxt.setText(telephone);
         employeeVille.setText(ville);
-//        employeeDeatls.setText(id);
         lastNamemployye.setText(lastNameEmp);
 
     }
@@ -136,10 +123,7 @@ public class EmployeesDetails extends AppCompatActivity {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Integer responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
-
                 ratingBar.setRating(responseFromAPI);
-
-
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
@@ -158,28 +142,14 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
-                // this method is called when we get response from our api.
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
                 Employee responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
                 String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getRating();
-
-                // below line we are setting our string to our text view.
                 responseTV.setText(responseString);
             }
 
             @Override
             public void onFailure(Call<Employee> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
                 responseTV.setText("Error found is : " + t.getMessage());
             }
         });
@@ -194,7 +164,6 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                // this method is called when we get response from our api.
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Integer responseFromAPI = response.body();
                 String ratTextAverage = Integer.toString(responseFromAPI);
@@ -218,22 +187,9 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                // this method is called when we get response from our api.
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                // on below line we are setting empty
-                // text to our both edit text.
-
-                // we are getting a response from our body and
-                // passing it to our modal class.
                 Integer responseFromAPI = response.body();
-
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
-
-                // below line we are setting our string to our text view.
-
                 String ratText = Integer.toString(responseFromAPI);
-
                 ratingSumText.setText(ratText);
             }
 
@@ -246,6 +202,4 @@ public class EmployeesDetails extends AppCompatActivity {
             }
         });
     }
-
-
 }
