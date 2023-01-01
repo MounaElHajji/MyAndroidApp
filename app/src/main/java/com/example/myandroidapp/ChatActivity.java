@@ -13,12 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myandroidapp.Adapters.MessageAdapter;
+import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Message;
+import com.example.myandroidapp.retrofit.RetrofitS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ChatActivity extends AppCompatActivity {
@@ -27,6 +33,12 @@ public class ChatActivity extends AppCompatActivity {
     MessageAdapter adapter;
     List<Message> listMessages;
     LinearLayoutManager layoutManager;
+
+    List<Message> listMessagesToDisplay;
+
+    // retrofit
+    RetrofitS retrofit= new RetrofitS();
+    ApiInterface api =retrofit.getRetrofit().create(ApiInterface.class);
 
     Handler handler = new Handler();
     Runnable runnable;
@@ -43,6 +55,7 @@ public class ChatActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(true);    // to show the recyclerView list from the bottom
         recyclerView.setLayoutManager(layoutManager);
 
+        int i = 0;
         listMessages = getListMessages();
 
         /*
@@ -56,7 +69,23 @@ public class ChatActivity extends AppCompatActivity {
         }
          */
 
-        adapter = new MessageAdapter(listMessages,ChatActivity.this);
+        for ( Message msg : listMessages ) {
+            if (msg.getPersonFrom().equals(4)) {
+                listMessagesToDisplay.add( i,new Message(
+                        Message.LAYOUT_ONE, msg.getMessage(), msg.getDate()
+                ));
+                i++;
+            }
+            else if (msg.getPersonTo().equals(4)) {
+
+                listMessagesToDisplay.add( i,new Message(
+                        Message.LAYOUT_TWO, msg.getMessage(), msg.getDate()
+                ));
+                i++;
+            }
+        }
+
+        adapter = new MessageAdapter(listMessagesToDisplay,ChatActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -109,10 +138,13 @@ public class ChatActivity extends AppCompatActivity {
 
         listMessages = getListMessages();
 
+        /*
         /// --- this is optional, just for the frontend now, shld be replaced by the msg-saving method of backend
         listMessages.add( 0,new Message(
                 Message.LAYOUT_ONE, newMessage, "20/12/2022 18:02"
         ));
+
+         */
 
         adapter = new MessageAdapter(listMessages,ChatActivity.this);
         recyclerView.setAdapter(adapter);
@@ -151,11 +183,13 @@ public class ChatActivity extends AppCompatActivity {
 
     // here, we should select the date from database
 
-    public ArrayList<Message> getListMessages() {
+    public List<Message> getListMessages() {
 
         listMessages = new ArrayList<>();
 
         //////// msgs must be selected from newest to oldest
+
+        /*
 
         listMessages.add( new Message(
                 Message.LAYOUT_TWO, "what's up !!!!!!!!!!!!!", "18/12/2022"
@@ -182,7 +216,24 @@ public class ChatActivity extends AppCompatActivity {
                 Message.LAYOUT_TWO, "hello Kawtar", "12/12/2022 18:02"
         ));
 
-        return (ArrayList<Message>) listMessages;
+         */
+
+        api.getChatMsgs(4,1).enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                // display response as string
+                listMessages = response.body();
+                System.out.println("got it");
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+                Toast.makeText(ChatActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                // Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+
+        return listMessages;
     }
 
 }
