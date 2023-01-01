@@ -28,13 +28,22 @@ public class CurrentProfile extends AppCompatActivity {
     ApiInterface apiInterface;
     TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
     ImageView imageP;
+    String type_profil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        type_profil = sharedPref.getString("type_profil", "");
+        if(type_profil.equals("employe")) {
+            setContentView(R.layout.activity_current_profile_empl);
+        }
+        else{
+            setContentView(R.layout.activity_current_profile);
+        }
 
         imageP= findViewById(R.id.imageView);
-
         setContentView(R.layout.activity_current_profile);
+
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();

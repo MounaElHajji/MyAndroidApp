@@ -1,6 +1,7 @@
 package com.example.myandroidapp.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,11 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myandroidapp.R;
 
 public class EditProfile extends AppCompatActivity {
-
+    String  type_profil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        type_profil = sharedPref.getString("type_profil", "");
+        if(type_profil.equals("employe")) {
+            setContentView(R.layout.activity_edit_profile_empl);
+        }
+        else{
+            setContentView(R.layout.activity_edit_profile);
+        }
     }
 
     public void onBackClick(View view) {

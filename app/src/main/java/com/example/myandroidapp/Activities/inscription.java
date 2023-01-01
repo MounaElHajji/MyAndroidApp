@@ -95,16 +95,19 @@ public class inscription extends AppCompatActivity {
     Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
 
 
-
-        if (islogin) {
+        String type_profil = sharedPref.getString("type_profil", "");
+        if (islogin && type_profil.equals("client")) {
+            Intent i = new Intent(this, listeServices.class);
+            startActivity(i);
+        } else if (islogin && type_profil.equals("employe")) {
             Intent i = new Intent(this, EmployeelistActivity.class);
             startActivity(i);
         } else {
-            super.onCreate(savedInstanceState);
             setContentView(R.layout.inscription);
             ButterKnife.bind(this);
             desc.setVisibility(View.GONE);
@@ -120,9 +123,6 @@ public class inscription extends AppCompatActivity {
             iv = findViewById(R.id.imageView);
 //            tv = findViewById(R.id.message);
             getVilles();
-
-
-
             fcts.add("Fonction");
             fcts.add("Employé");
             fcts.add("Client");
@@ -141,18 +141,17 @@ public class inscription extends AppCompatActivity {
             //ville.setAdapter(adapter1);
 
 
-
-
             api.listServices().enqueue(new Callback<List<String>>() {
                 @Override
                 public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                    List<String> lis=response.body();
-                    for (String s:
-                            lis ) {
+                    List<String> lis = response.body();
+                    for (String s :
+                            lis) {
                         Services.add(s);
                         System.out.println(s);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<List<String>> call, Throwable t) {
                     Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
@@ -206,6 +205,8 @@ public class inscription extends AppCompatActivity {
     }
     @OnItemSelected(R.id.fonction)
     public void click(Spinner s,int pos) {
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         if (pos == 0) {
             desc.setVisibility(View.GONE);
             msg.setVisibility(View.VISIBLE);
@@ -215,11 +216,18 @@ public class inscription extends AppCompatActivity {
             msg.setText("");
             desc.setVisibility(View.VISIBLE);
             service.setVisibility(View.VISIBLE);
+            editor.putString("type_profil", "employe");
+            editor.commit();
         }else{
             desc.setVisibility(View.GONE);
             service.setVisibility(View.GONE);
+            editor.putString("type_profil", "client");
+            editor.commit();
+
         }
     }
+
+
     @OnItemSelected(R.id.ville)
     public void clickVille(Spinner s,int pos) {
         if (pos == 0) {
@@ -244,7 +252,7 @@ public class inscription extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-    /*************** REGEX ****************/
+    /***** REGEX ******/
     private boolean isValidMail(String email) {
 
         String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -269,7 +277,7 @@ public class inscription extends AppCompatActivity {
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
     }
-    /******** LOGIN EXISTS *******/
+    /*** LOGIN EXISTS ****/
 
     RetrofitS retrofit= new RetrofitS();
     ApiInterface api1 =retrofit.getRetrofit().create(ApiInterface.class);
@@ -296,7 +304,7 @@ public class inscription extends AppCompatActivity {
     }
 
 
-    /**************/
+    /******/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
         if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 ||

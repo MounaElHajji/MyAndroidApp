@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,9 +34,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.ViewHolder> {
+public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.ViewHolder> implements Filterable {
 
     List<Employee> EmployeeList;
+    private List<Employee> PostListFull;
+    private List<Employee> PostSearchName;
+    private List<Employee> PostEmployees;
     Context context;
     ApiInterface apiInterface;
     SharedPreferences sh;
@@ -45,6 +51,9 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
     public FavEmployeeAdapter(Context context, List<Employee> posts) {
         this.context = context;
         EmployeeList = posts;
+        PostListFull = new ArrayList<>(EmployeeList); //create a copy of postList
+        PostSearchName = new ArrayList<>(EmployeeList);
+        PostEmployees = new ArrayList<>(EmployeeList);
         for (Employee emp:
                 getEmployeeList()) {
             lisFav.put(emp, R.drawable.fav);
@@ -141,8 +150,58 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
         }
     }
 
+
+
     @Override
     public int getItemCount() {
         return EmployeeList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Employee> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(PostListFull);
+                filteredList.addAll(PostSearchName);
+                filteredList.addAll(PostEmployees);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Employee item : PostListFull) {
+                    if (item.getCity().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+                for(Employee item: PostSearchName){
+                    if(item.getLast_name().toLowerCase().contains(filterPattern))
+                    {
+                        filteredList.add(item);
+                    }
+                }
+
+//                for(Employee item: PostEmployees){
+//                    if(item.getType().toLowerCase().contains(filterPattern))
+//                    {
+//                        filteredList.add(item);
+//                    }
+//                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            EmployeeList.clear();
+            EmployeeList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
