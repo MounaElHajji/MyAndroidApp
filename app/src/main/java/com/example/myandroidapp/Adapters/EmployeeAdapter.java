@@ -148,7 +148,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("city", EmployeeList.get(position).getCity());
                 i.putExtra("description", EmployeeList.get(position).getDescription());
                 i.putExtra("tel", EmployeeList.get(position).getTel());
-                i.putExtra("imageP", Uri.parse(EmployeeList.get(position).getImageP()));
+                i.putExtra("imagep", EmployeeList.get(position).getImageP());
 
                 context.startActivity(i);
             }
