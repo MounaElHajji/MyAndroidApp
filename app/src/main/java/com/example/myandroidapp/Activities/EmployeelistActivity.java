@@ -30,8 +30,6 @@ public class EmployeelistActivity extends AppCompatActivity {
 
 
     private RecyclerView recyclerViewVar;
-
-    List<Employee> EmployeeList;
     ApiInterface apiInterface;
     EmployeeAdapter employeeAdapter;
 

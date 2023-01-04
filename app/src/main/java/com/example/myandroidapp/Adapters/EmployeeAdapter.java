@@ -120,7 +120,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                         postList ) {
                     favEmployees1.add(f.getEmp());
                     if(post.getTel().equals(f.getEmp().getTel())){
-                        System.out.println("girdim");
                         holder.btnHeart.setImageResource(R.drawable.fav);
                     }
                 }
