@@ -1,26 +1,20 @@
 package com.example.myandroidapp.Activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myandroidapp.Adapters.EmployeeAdapter;
 import com.example.myandroidapp.Models.Employee;
@@ -36,19 +30,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class PlombrieList extends AppCompatActivity {
-    public static final String TAG ="MAIN" ;
-
+public class ServiceEmpActivity extends AppCompatActivity {
     private RecyclerView recyclerViewVar;
-
-    List<Employee> EmployeeList;
     ApiInterface apiInterface;
     EmployeeAdapter employeeAdapter;
+    public static final String TAG ="MAIN" ;
     EditText searchView;
     LinearLayout SearchLayout;
     Spinner myspinner, myspinnerVille;
-
 
 
     @Override
@@ -57,45 +46,21 @@ public class PlombrieList extends AppCompatActivity {
         setContentView(R.layout.employee_list_activity);
         myspinnerVille = findViewById(R.id.spinnerVille);
         searchView = findViewById(R.id.search_bar);
-       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
-
-        spinners();
-        setList();
-        getData();
+        Intent intent = getIntent();
+        String categ1 = intent.getStringExtra("categ");
         SearchByVille();
         SearchByName();
         DepndantList();
-
-
-
+        spinners();
+        setList();
+        getData(categ1);
     }
 
     private void spinners() {
         Spinner myspinner = findViewById(R.id.spinner1);
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(PlombrieList.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(ServiceEmpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
-        /*myspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
-
     }
     private void SearchByName() {
         searchView.addTextChangedListener(new TextWatcher() {
@@ -116,9 +81,7 @@ public class PlombrieList extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 employeeAdapter.getFilter().filter(myspinnerVille.getSelectedItem().toString());
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -130,10 +93,9 @@ public class PlombrieList extends AppCompatActivity {
     private void DepndantList() {
         //Spinners
         myspinner = findViewById(R.id.spinner1);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(PlombrieList.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(ServiceEmpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.filtrage));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(myAdapter);
-
         myspinnerVille = findViewById(R.id.spinnerVille);
         myspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -145,9 +107,6 @@ public class PlombrieList extends AppCompatActivity {
                 }
                 if(position==2){
                     myspinnerVille.setVisibility(View.VISIBLE);
-                  /*  ArrayAdapter<String> myAdapterVille = new ArrayAdapter<>(ElectriciteActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.ville));
-                    myAdapterVille.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    myspinnerVille.setAdapter(myAdapterVille);*/
                     getVilles();
                     SearchLayout.setVisibility(View.GONE);
                 }
@@ -157,34 +116,7 @@ public class PlombrieList extends AppCompatActivity {
             }
         });
     }
-    private void getVilles() {
-        List <String> ville =new ArrayList<>();
-        ArrayAdapter<String> villeAdapter= new ArrayAdapter<>(PlombrieList.this, android.R.layout.simple_list_item_1,ville);
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Ville>> call = apiInterface.getCities();
-        call.enqueue(new Callback<List<Ville>>() {
-            @Override
-            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
-                if(response.isSuccessful()) {
-                    for (Ville villeList :response.body()){
-                        String nom_ville= villeList.getNom_ville();
-                        System.out.println(nom_ville);
-                        // Ville object = new Ville(nom_ville);
-                        ville.add(nom_ville);
 
-                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        myspinnerVille.setAdapter(villeAdapter);
-                    }
-                }
-
-
-            }
-            @Override
-            public void onFailure(Call<List<Ville>> call, Throwable t) {
-                Toast.makeText(PlombrieList.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private void setList() {
         recyclerViewVar = findViewById(R.id.recycleView);
@@ -192,54 +124,52 @@ public class PlombrieList extends AppCompatActivity {
         recyclerViewVar.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void getData() {
+    private void getData(String categ) {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<Employee>> call = apiInterface.getPlombiers();
+        Call<List<Employee>> call = apiInterface.getByCateg(categ);
         call.enqueue(new Callback<List<Employee>>() {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(PlombrieList.this, response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ServiceEmpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 List<Employee> postList = response.body();
-                employeeAdapter = new EmployeeAdapter(PlombrieList.this, postList);
+                employeeAdapter = new EmployeeAdapter(ServiceEmpActivity.this, postList);
                 recyclerViewVar.setAdapter(employeeAdapter);
             }
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
-                Toast.makeText(PlombrieList.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ServiceEmpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem search = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) search.getActionView();
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    private void getVilles() {
+        List <String> Ville =new ArrayList<>();
+        ArrayAdapter <String> villeAdapter= new ArrayAdapter<>(ServiceEmpActivity.this, android.R.layout.simple_list_item_1,Ville);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<com.example.myandroidapp.Models.Ville>> call = apiInterface.getCities();
+        call.enqueue(new Callback<List<Ville>>() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
+                if(response.isSuccessful()) {
+                    for (Ville villeList :response.body()){
+                        String nom_ville= villeList.getNom_ville();
+                        // Ville object = new Ville(nom_ville);
+                        Ville.add(nom_ville);
+
+                        villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        myspinnerVille.setAdapter(villeAdapter);
+                    }
+                }
             }
-
             @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.e(TAG, "newText=" + newText);
-
-                employeeAdapter.getFilter().filter(newText);
-                return false;
+            public void onFailure(Call<List<Ville>> call, Throwable t) {
+                Toast.makeText(ServiceEmpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.e(TAG, "hasFocus=" + hasFocus);
-            }
-        });
-        return true;
-    }*/
+    }
 
     public void onBackClick(View view) {
         finish();
