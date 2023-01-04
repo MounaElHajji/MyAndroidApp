@@ -22,34 +22,11 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
-    @GET("employees/getAll")
-    Call<List<Employee>> getPost();
-
-    @GET("employees/getPlombier")
-    Call<List<Employee>> getPlombiers();
-
-    @GET("employees/getPeinture")
-    Call<List<Employee>> getPeniture();
-
-    @GET("employees/getElectricite")
-    Call<List<Employee>> getElectricite();
-
-    @GET("employees/getClimatisation")
-    Call<List<Employee>> getClimatisation();
-
-    @GET("employees/getBricolage")
-    Call<List<Employee>> getBricolage();
-
-    @GET("employees/getFemmeMenage")
-    Call<List<Employee>> getFemmeMenage();
-
     @GET("villes/getAllcities")
     Call<List<Ville>> getCities();
 
     @GET("employees/{id}")
     Call<Employee> getProfilePersonne(@Path("id") int id);
-    @GET("employees/{id}")
-    Call<Person> getProfilePersonne1(@Path("id") int id);
 
     @DELETE("account/{id}")
     Call<Void> DeleteAccount(@Path("id") int id);
@@ -70,9 +47,7 @@ public interface ApiInterface {
     @Multipart
     @POST("/favList/addFav")
     Call<Person> addFav(@Part("p1") int p1,@Part("p2") int p2);
-
-
-    //Ratings
+    
     @POST("/employees/{id}/ratings/{id_client}")
     Call<Rating> AddRating(@Body RatingEmp rating, @Path("id") int id, @Path("id_client") int id_client);
 
