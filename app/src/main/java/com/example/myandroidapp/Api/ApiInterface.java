@@ -1,5 +1,7 @@
 package com.example.myandroidapp.Api;
 
+import android.media.Rating;
+
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.ListFavoris;
 import com.example.myandroidapp.Models.Person;
@@ -52,13 +54,13 @@ public interface ApiInterface {
 
     //Ratings
     @POST("/employees/{id}/ratings/{id_client}")
-    Call<Employee> AddRating(@Body RatingEmp rating, @Path("id") int id,  @Path("id_client") int id_client);
+    Call<Rating> AddRating(@Body RatingEmp rating, @Path("id") int id, @Path("id_client") int id_client);
 
     @GET("/employees/{id}/ratings/{id_client}")
-    Call<Integer> SumRating(@Path("id") int id,  @Path("id_client") int id_client);
+    Call<Long> SumRating(@Path("id") int id,  @Path("id_client") int id_client);
 
     @GET("/employees/{id}/sumRatingByEmp/{id_client}")
-    Call<Integer> sumRatingsByImp(@Path("id") int id, @Path("id_client") int id_client);
+    Call<Long> sumRatingsByImp(@Path("id") int id, @Path("id_client") int id_client);
 
     @GET("/employees/{id_client}/RatingEmpByClient/{id}")
     Call<Long> getRatOfClientForEmp(@Path(value = "id_client") int id_client, @Path(value = "id") int id);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Rating;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -134,7 +135,6 @@ public class EmployeesDetails extends AppCompatActivity {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 long responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
-
                     ratingBar.setRating(responseFromAPI);
 
             }
@@ -150,19 +150,19 @@ public class EmployeesDetails extends AppCompatActivity {
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Employee> call = apiInterface.AddRating(rating, id_emp, id_current);
+        Call<Rating> call = apiInterface.AddRating(rating, id_emp, id_current);
 
-        call.enqueue(new Callback<Employee>() {
+        call.enqueue(new Callback<Rating>() {
             @Override
-            public void onResponse(Call<Employee> call, Response<Employee> response) {
+            public void onResponse(Call<Rating> call, Response<Rating> response) {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Employee responseFromAPI = response.body();
-                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getRating();
+                Rating responseFromAPI = response.body();
+                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI;
                 responseTV.setText(responseString);
             }
 
             @Override
-            public void onFailure(Call<Employee> call, Throwable t) {
+            public void onFailure(Call<Rating> call, Throwable t) {
                 responseTV.setText("Error found is : " + t.getMessage());
             }
         });
@@ -172,20 +172,20 @@ public class EmployeesDetails extends AppCompatActivity {
     {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.SumRating(id_emp, id_current);
+        Call<Long> call = apiInterface.SumRating(id_emp, id_current);
 
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Long>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<Long> call, Response<Long> response) {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Integer responseFromAPI = response.body();
-                String ratTextAverage = Integer.toString(responseFromAPI);
+                Long responseFromAPI = response.body();
+                String ratTextAverage = String.valueOf(responseFromAPI);
                 ratingBarTotal.setRating(responseFromAPI);
                 averageRating.setText(ratTextAverage);
             }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Long> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
@@ -195,19 +195,19 @@ public class EmployeesDetails extends AppCompatActivity {
     private void sumColumnsRating() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.sumRatingsByImp(id_emp, id_current);
+        Call<Long> call = apiInterface.sumRatingsByImp(id_emp, id_current);
 
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Long>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<Long> call, Response<Long> response) {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Integer responseFromAPI = response.body();
-                String ratText = Integer.toString(responseFromAPI);
+                Long responseFromAPI = response.body();
+                String ratText = String.valueOf(responseFromAPI);
                 ratingSumText.setText(ratText);
             }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Long> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
