@@ -132,7 +132,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         });
 
         Picasso.get()
-                .load(Uri.parse(EmployeeList.get(position).getImageP()))
+                .load(EmployeeList.get(position).getImageP())
                 .centerCrop()
                 .resize(150,150)
                 .into(holder.imageP);
