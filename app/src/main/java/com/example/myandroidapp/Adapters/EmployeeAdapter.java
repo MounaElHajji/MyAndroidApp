@@ -236,18 +236,11 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                     }
                 }
                 for(Employee item: PostSearchName){
-                    if(item.getLast_name().toLowerCase().contains(filterPattern))
+                    if(item.getLast_name().toLowerCase().contains(filterPattern) || item.getFirst_name().toLowerCase().contains(filterPattern))
                     {
                         filteredList.add(item);
                     }
                 }
-
-//                for(Employee item: PostEmployees){
-//                    if(item.getType().toLowerCase().contains(filterPattern))
-//                    {
-//                        filteredList.add(item);
-//                    }
-//                }
             }
 
             FilterResults results = new FilterResults();
