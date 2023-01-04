@@ -91,21 +91,41 @@ public class EmployeesDetails extends AppCompatActivity {
             ratingOfClientForEmp();
         }
 
-        if(ratingBar.getRating() != 0)
-        {
-            ratingBar.setIsIndicator(true);
-        }
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+//                int rating = (int) v;
+//                String message = null;
+//
+//                myRating = ratingBar.getRating();
+//                ratingBar.setRating(myRating);
+//                RateEmplployee(myRating);
+//                Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+        ratingBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                int rating = (int) v;
-                String message = null;
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    float touchPositionX = event.getX();
+                    float width = ratingBar.getWidth();
+                    float starsf = (touchPositionX / width) * 5.0f;
+                    int stars = (int)starsf + 1;
+                    RateEmplployee(Float.valueOf(stars));
+                    v.setPressed(false);
+//                    UpdateRating(String.valueOf(stars));
+                }
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    v.setPressed(true);
+                }
 
-                myRating = ratingBar.getRating();
-                ratingBar.setRating(myRating);
-                RateEmplployee(myRating);
-                Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
+                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    v.setPressed(false);
+                }
+
+                return false;
             }
         });
 
@@ -133,7 +153,6 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Integer responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
                 ratingBar.setRating(responseFromAPI);
@@ -177,7 +196,6 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Integer responseFromAPI = response.body();
                 String ratTextAverage = Integer.toString(responseFromAPI);
                 ratingBarTotal.setRating(responseFromAPI);
@@ -200,7 +218,6 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Integer responseFromAPI = response.body();
                 String ratText = Integer.toString(responseFromAPI);
                 ratingSumText.setText(ratText);
