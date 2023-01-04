@@ -14,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface AccountApi {
     @POST("/account/login")
@@ -24,4 +25,7 @@ public interface AccountApi {
 
     @GET("/services/listString")
     Call<List<String>> listServices();
+
+    @GET("/account/profiltype/{username}")
+    Call<String> getTypeProfil(@Path("username") String username);
 }
