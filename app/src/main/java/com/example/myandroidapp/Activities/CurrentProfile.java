@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class CurrentProfile extends AppCompatActivity {
     TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
     ImageView imageP;
     String type_profil;
+    LinearLayout clickFavoris;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,15 @@ public class CurrentProfile extends AppCompatActivity {
 
         imageP= findViewById(R.id.imageView);
         setContentView(R.layout.activity_current_profile);
+        clickFavoris = findViewById(R.id.clickFavoris);
 
+        clickFavoris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CurrentProfile.this, FavorisActivity.class);
+                startActivity(i);
+            }
+        });
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();

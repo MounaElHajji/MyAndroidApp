@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.example.myandroidapp.Models.RatingEmp;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.example.myandroidapp.retrofit.RetrofitS;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -31,12 +34,14 @@ public class EmployeesDetails extends AppCompatActivity {
 
     RatingBar ratingBar, ratingBarTotal;
     TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
-    String nom, ville, description, image,telephone, lastNameEmp,emploie, ratingValue,id,typeProfile;
+    String nom, ville, description, image,telephone, lastNameEmp,emploie, ratingValue,id,typeProfile, empPropfileImg;
+    ImageView imgProfile;
     float myRating = 0;
     ApiInterface apiInterface;
     SharedPreferences sh;
     int id_current, id_emp;
 
+    private Boolean HasRated = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Employee emp = new Employee();
@@ -59,6 +64,7 @@ public class EmployeesDetails extends AppCompatActivity {
         ratingSumText =findViewById(R.id.ratingSumText);
         employeeVille = findViewById(R.id.employeeVille);
         lastNamemployye = findViewById(R.id.textViewNom);
+        imgProfile = findViewById(R.id.imageView13);
 
 
         Intent intent = getIntent();
@@ -68,6 +74,7 @@ public class EmployeesDetails extends AppCompatActivity {
         image = intent.getStringExtra("imageP");
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("service_title");
+        empPropfileImg = intent.getStringExtra("imageP");
 //        ratingValue = intent.getStringExtra("label");
 
         id = intent.getStringExtra("id");
@@ -77,6 +84,7 @@ public class EmployeesDetails extends AppCompatActivity {
 
         SumRating();
         sumColumnsRating();
+
 
         if(id_current != id_emp)
         {
@@ -96,7 +104,17 @@ public class EmployeesDetails extends AppCompatActivity {
 
                 myRating = ratingBar.getRating();
                 ratingBar.setRating(myRating);
-                RateEmplployee(myRating);
+
+                if(HasRated == false)
+                {
+                    RateEmplployee(myRating);
+                    HasRated = true;
+                }
+                else if(HasRated == true)
+                {
+                    ratingOfClientForEmp();
+                }
+
                 Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
             }
         });
@@ -109,6 +127,12 @@ public class EmployeesDetails extends AppCompatActivity {
         telTxt.setText(telephone);
         employeeVille.setText(ville);
         lastNamemployye.setText(lastNameEmp);
+
+        Picasso.get()
+                .load(empPropfileImg)
+                .centerCrop()
+                .resize(150,150)
+                .into(imgProfile);
 
     }
 

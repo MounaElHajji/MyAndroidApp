@@ -109,6 +109,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
+        holder.text_nom1.setText(post.getLast_name());
         int id= sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
@@ -147,7 +148,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("city", EmployeeList.get(position).getCity());
                 i.putExtra("description", EmployeeList.get(position).getDescription());
                 i.putExtra("tel", EmployeeList.get(position).getTel());
-                i.putExtra("image", EmployeeList.get(position).getImage());
+                i.putExtra("imageP", Uri.parse(EmployeeList.get(position).getImageP()));
 
                 context.startActivity(i);
             }
@@ -190,7 +191,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  id, nom, ville, descritpion, tel;
+        TextView  id, nom, ville, descritpion, tel, text_nom1;
         ImageView imageP, btnHeart;
         Button btnVoir;
 
@@ -200,6 +201,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             nom = itemView.findViewById(R.id.text_nom);
             ville = itemView.findViewById(R.id.text_ville);
             descritpion = itemView.findViewById(R.id.text_description);
+            text_nom1 = itemView.findViewById(R.id.text_nom1);
             btnVoir = itemView.findViewById(R.id.btnVoir);
             btnHeart=itemView.findViewById(R.id.btnHeart);
         }
