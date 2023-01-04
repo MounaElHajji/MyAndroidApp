@@ -130,12 +130,16 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
             }
         });
+        if (EmployeeList.get(position).getImageP().isEmpty()) {
+            //iview.setImageResource(R.drawable.placeholder);
+        } else{
+            Picasso.get()
+                    .load(EmployeeList.get(position).getImageP())
+                    .centerCrop()
+                    .resize(150,150)
+                    .into(holder.imageP);
+        }
 
-        Picasso.get()
-                .load(Uri.parse(EmployeeList.get(position).getImageP()))
-                .centerCrop()
-                .resize(150,150)
-                .into(holder.imageP);
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
             @Override

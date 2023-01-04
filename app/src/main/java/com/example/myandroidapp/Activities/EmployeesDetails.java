@@ -76,6 +76,8 @@ public class EmployeesDetails extends AppCompatActivity {
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("service_title");
         empPropfileImg = intent.getStringExtra("imagep");
+//        ratingValue = intent.getStringExtra("label");
+
         id = intent.getStringExtra("id");
         id_emp = Integer.valueOf(id);
         typeProfile = intent.getStringExtra("typeProfil");
@@ -90,21 +92,41 @@ public class EmployeesDetails extends AppCompatActivity {
             ratingOfClientForEmp();
         }
 
-        if(ratingBar.getRating() != 0)
-        {
-            ratingBar.setIsIndicator(true);
-        }
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+//                int rating = (int) v;
+//                String message = null;
+//
+//                myRating = ratingBar.getRating();
+//                ratingBar.setRating(myRating);
+//                RateEmplployee(myRating);
+//                Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+        ratingBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                int rating = (int) v;
-                String message = null;
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    float touchPositionX = event.getX();
+                    float width = ratingBar.getWidth();
+                    float starsf = (touchPositionX / width) * 5.0f;
+                    int stars = (int)starsf + 1;
+                    RateEmplployee(Float.valueOf(stars));
+                    v.setPressed(false);
+//                    UpdateRating(String.valueOf(stars));
+                }
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    v.setPressed(true);
+                }
 
-                myRating = ratingBar.getRating();
-                ratingBar.setRating(myRating);
-                RateEmplployee(myRating);
-                Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
+                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    v.setPressed(false);
+                }
+
+                return false;
             }
         });
 
@@ -127,19 +149,19 @@ public class EmployeesDetails extends AppCompatActivity {
     private void ratingOfClientForEmp()
     {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Long> call = apiInterface.getRatOfClientForEmp(id_current, id_emp);
+        Call<Integer> call = apiInterface.getRatOfClientForEmp(id_current, id_emp);
 
-        call.enqueue(new Callback<Long>() {
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<Long> call, Response<Long> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                long responseFromAPI = response.body();
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Integer responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
                     ratingBar.setRating(responseFromAPI);
 
+
             }
             @Override
-            public void onFailure(Call<Long> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
@@ -203,11 +225,13 @@ public class EmployeesDetails extends AppCompatActivity {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Long responseFromAPI = response.body();
                 String ratText = String.valueOf(responseFromAPI);
+
                 ratingSumText.setText(ratText);
             }
 
             @Override
             public void onFailure(Call<Long> call, Throwable t) {
+
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
