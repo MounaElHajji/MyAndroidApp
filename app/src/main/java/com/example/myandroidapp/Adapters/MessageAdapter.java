@@ -29,6 +29,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
+    /*
     @Override
     public int getItemViewType(int position) {
         switch(listMessages.get(position).getViewType())
@@ -42,6 +43,16 @@ public class MessageAdapter extends RecyclerView.Adapter {
             default :
                 return -1;
         }
+    }
+
+     */
+
+    @Override
+    public int getItemViewType(int position) {
+        if (listMessages.get(position).getMessageFrom().getPerson_id() == 4) {
+            return LAYOUT_ONE;
+        }
+        else return LAYOUT_TWO;
     }
 
     @NonNull
@@ -72,6 +83,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         // Format LocalDateTime to String
         String msgDate = listMessages.get(position).getCreatedDate().format(dateTimeFormatter);
 
+        /*
         switch(listMessages.get(position).getViewType())
         {
 
@@ -86,6 +98,18 @@ public class MessageAdapter extends RecyclerView.Adapter {
                // String msgDate1 = listMessages.get(position).getCreatedDate();
                 ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate);
                 break;
+        }
+         */
+
+        if (listMessages.get(position).getMessageFrom().getPerson_id() == 4) {
+            String sentMessage = listMessages.get(position).getMessageText();
+            //String msgDate = listMessages.get(position).getCreatedDate();
+            ((SenderMessageViewHolder) holder).setView(sentMessage, msgDate);
+        }
+        else {
+            String receivedMessage = listMessages.get(position).getMessageText();
+            // String msgDate1 = listMessages.get(position).getCreatedDate();
+            ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate);
         }
     }
 

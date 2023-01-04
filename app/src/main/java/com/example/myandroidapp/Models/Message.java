@@ -6,15 +6,15 @@ public class Message {
     public static final int LAYOUT_ONE = 1; // my msg
     public static final int LAYOUT_TWO = 2; // the other's msg
 
-    private final int viewType;
+   // private final int viewType;
     private int messageId;
     private Person messageFrom;
     private Person messageTo;
     private String messageText;
     private LocalDateTime createdDate;
 
-    public Message(int viewType, int messageId, Person messageFrom, Person messageTo, String messageText, LocalDateTime createdDate) {
-        this.viewType = viewType;
+    public Message(int messageId, Person messageFrom, Person messageTo, String messageText, LocalDateTime createdDate) {
+        //this.viewType = viewType;
         this.messageId = messageId;
         this.messageFrom = messageFrom;
         this.messageTo = messageTo;
@@ -22,15 +22,18 @@ public class Message {
         this.createdDate = createdDate;
     }
 
-    public Message(int viewType, String messageText, LocalDateTime createdDate) {
-        this.viewType = viewType;
+    public Message(String messageText, LocalDateTime createdDate) {
+        //this.viewType = viewType;
         this.messageText = messageText;
         this.createdDate = createdDate;
     }
 
+    /*
     public int getViewType() {
         return viewType;
     }
+
+     */
 
     public int getMessageId() {
         return messageId;

@@ -2,7 +2,7 @@ package com.example.myandroidapp.Models;
 
 public class Person {
 
-    private Long id;
+    private int person_id;
     private String cin;
     private String firstName;
     private String lastName;
@@ -13,12 +13,12 @@ public class Person {
     private String description;
     private Service service;
 
-    public Long getId() {
-        return id;
+    public int getPerson_id() {
+        return person_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 
     public void setDescription(String description) {

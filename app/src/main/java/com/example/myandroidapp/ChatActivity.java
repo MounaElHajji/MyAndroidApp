@@ -38,7 +38,7 @@ public class ChatActivity extends AppCompatActivity {
 
     // retrofit
     RetrofitS retrofit= new RetrofitS();
-    ApiInterface api = retrofit.getRetrofit().create(ApiInterface.class);
+    ApiInterface api = retrofit.getRetrofitInstance().create(ApiInterface.class);
 
     Handler handler = new Handler();
     Runnable runnable;
@@ -72,6 +72,18 @@ public class ChatActivity extends AppCompatActivity {
         for ( Message msg : listMessages ) {
             if (msg.getMessageFrom().equals(4)) {
                 listMessagesToDisplay.add( i,new Message(
+                        msg.getMessageText(), msg.getCreatedDate()
+                ));
+                i++;
+            }
+
+        }
+
+        /*
+
+        for ( Message msg : listMessages ) {
+            if (msg.getMessageFrom().equals(4)) {
+                listMessagesToDisplay.add( i,new Message(
                         Message.LAYOUT_ONE, msg.getMessageText(), msg.getCreatedDate()
                 ));
                 i++;
@@ -85,12 +97,14 @@ public class ChatActivity extends AppCompatActivity {
             }
         }
 
+         */
+
         String str = "2016-03-04 11:30";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
 
         listMessagesToDisplay.add( 0,new Message(
-                Message.LAYOUT_ONE, "hala hala", dateTime
+                "hala hala", dateTime
         ));
 
         adapter = new MessageAdapter(listMessagesToDisplay,ChatActivity.this);
@@ -238,6 +252,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onFailure(Call<List<Message>> call, Throwable t) {
                 Toast.makeText(ChatActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 // Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                System.out.println("Faiiiiiled");
             }
         });
 

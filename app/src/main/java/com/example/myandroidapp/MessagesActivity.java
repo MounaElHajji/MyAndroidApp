@@ -37,7 +37,7 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
     // retrofit
     RetrofitS retrofit= new RetrofitS();
-    ApiInterface api =retrofit.getRetrofit().create(ApiInterface.class);
+    ApiInterface api =retrofit.getRetrofitInstance().create(ApiInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
