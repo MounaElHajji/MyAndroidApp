@@ -1,62 +1,74 @@
 package com.example.myandroidapp.Models;
 
+import java.time.LocalDateTime;
+
 public class Message {
     public static final int LAYOUT_ONE = 1; // my msg
     public static final int LAYOUT_TWO = 2; // the other's msg
 
     private final int viewType;
-    private Person personFrom;
-    private Person personTo;
-    private String message;
-    private String date;
+    private int messageId;
+    private Person messageFrom;
+    private Person messageTo;
+    private String messageText;
+    private LocalDateTime createdDate;
 
-    public Message(int viewType, Person personFrom, Person personTo, String message, String date) {
+    public Message(int viewType, int messageId, Person messageFrom, Person messageTo, String messageText, LocalDateTime createdDate) {
         this.viewType = viewType;
-        this.personFrom = personFrom;
-        this.personTo = personTo;
-        this.message = message;
-        this.date = date;
+        this.messageId = messageId;
+        this.messageFrom = messageFrom;
+        this.messageTo = messageTo;
+        this.messageText = messageText;
+        this.createdDate = createdDate;
     }
 
-    public Message(int viewType, String message, String date) {
+    public Message(int viewType, String messageText, LocalDateTime createdDate) {
         this.viewType = viewType;
-        this.message = message;
-        this.date = date;
+        this.messageText = messageText;
+        this.createdDate = createdDate;
     }
 
     public int getViewType() {
         return viewType;
     }
 
-    public Person getPersonFrom() {
-        return personFrom;
+    public int getMessageId() {
+        return messageId;
     }
 
-    public void setPersonFrom(Person personFrom) {
-        this.personFrom = personFrom;
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 
-    public Person getPersonTo() {
-        return personTo;
+    public Person getMessageFrom() {
+        return messageFrom;
     }
 
-    public void setPersonTo(Person personTo) {
-        this.personTo = personTo;
+    public void setMessageFrom(Person messageFrom) {
+        this.messageFrom = messageFrom;
     }
 
-    public String getMessage() {
-        return message;
+    public Person getMessageTo() {
+        return messageTo;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageTo(Person messageTo) {
+        this.messageTo = messageTo;
     }
 
-    public String getDate() {
-        return date;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 }

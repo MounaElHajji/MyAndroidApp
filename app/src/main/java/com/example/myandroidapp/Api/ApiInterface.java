@@ -21,5 +21,5 @@ public interface ApiInterface {
     Call<List<Message>> getConversations(@Path("myId") int id);
 
     @GET("/chat/listMessages/{from}/{to}")
-    Call<List<Message>> getChatMsgs(@Path("from") int idFrom, @Path("to") int idTo);
+    Call<List<Message>> getChatMsgs(@Path("from") int from,@Path("to") int to);
 }

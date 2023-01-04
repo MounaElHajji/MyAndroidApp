@@ -31,14 +31,14 @@ public class ChatActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     MessageAdapter adapter;
-    List<Message> listMessages;
+    List<Message> listMessages = new ArrayList<>();
     LinearLayoutManager layoutManager;
 
-    List<Message> listMessagesToDisplay;
+    List<Message> listMessagesToDisplay = new ArrayList<>();
 
     // retrofit
     RetrofitS retrofit= new RetrofitS();
-    ApiInterface api =retrofit.getRetrofit().create(ApiInterface.class);
+    ApiInterface api = retrofit.getRetrofit().create(ApiInterface.class);
 
     Handler handler = new Handler();
     Runnable runnable;
@@ -70,20 +70,28 @@ public class ChatActivity extends AppCompatActivity {
          */
 
         for ( Message msg : listMessages ) {
-            if (msg.getPersonFrom().equals(4)) {
+            if (msg.getMessageFrom().equals(4)) {
                 listMessagesToDisplay.add( i,new Message(
-                        Message.LAYOUT_ONE, msg.getMessage(), msg.getDate()
+                        Message.LAYOUT_ONE, msg.getMessageText(), msg.getCreatedDate()
                 ));
                 i++;
             }
-            else if (msg.getPersonTo().equals(4)) {
+            else if (msg.getMessageTo().equals(4)) {
 
                 listMessagesToDisplay.add( i,new Message(
-                        Message.LAYOUT_TWO, msg.getMessage(), msg.getDate()
+                        Message.LAYOUT_TWO, msg.getMessageText(), msg.getCreatedDate()
                 ));
                 i++;
             }
         }
+
+        String str = "2016-03-04 11:30";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+
+        listMessagesToDisplay.add( 0,new Message(
+                Message.LAYOUT_ONE, "hala hala", dateTime
+        ));
 
         adapter = new MessageAdapter(listMessagesToDisplay,ChatActivity.this);
         recyclerView.setAdapter(adapter);

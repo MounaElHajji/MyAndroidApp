@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.Models.Message;
 import com.example.myandroidapp.R;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter {
@@ -22,7 +24,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
     List<Message> listMessages;
     Context context;
 
-    public MessageAdapter(List<Message> listMessages, Context context) {
+    public MessageAdapter(@NonNull List<Message> listMessages, Context context) {
         this.listMessages = listMessages;
         this.context = context;
     }
@@ -65,18 +67,24 @@ public class MessageAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        // Format LocalDateTime to String
+        String msgDate = listMessages.get(position).getCreatedDate().format(dateTimeFormatter);
+
         switch(listMessages.get(position).getViewType())
         {
+
             case LAYOUT_ONE :
-                String sentMessage = listMessages.get(position).getMessage();
-                String msgDate = listMessages.get(position).getDate();
+                String sentMessage = listMessages.get(position).getMessageText();
+                //String msgDate = listMessages.get(position).getCreatedDate();
                 ((SenderMessageViewHolder) holder).setView(sentMessage, msgDate);
                 break;
 
             case LAYOUT_TWO :
-                String receivedMessage = listMessages.get(position).getMessage();
-                String msgDate1 = listMessages.get(position).getDate();
-                ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate1);
+                String receivedMessage = listMessages.get(position).getMessageText();
+               // String msgDate1 = listMessages.get(position).getCreatedDate();
+                ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate);
                 break;
         }
     }
