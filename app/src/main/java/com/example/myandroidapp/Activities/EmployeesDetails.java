@@ -74,7 +74,7 @@ public class EmployeesDetails extends AppCompatActivity {
         image = intent.getStringExtra("imageP");
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("service_title");
-        empPropfileImg = intent.getStringExtra("imageP");
+        empPropfileImg = intent.getStringExtra("imagep");
 //        ratingValue = intent.getStringExtra("label");
 
         id = intent.getStringExtra("id");
@@ -91,10 +91,10 @@ public class EmployeesDetails extends AppCompatActivity {
             ratingOfClientForEmp();
         }
 
-//        if(ratingBar.getRating() != 0)
-//        {
-//            ratingBar.setIsIndicator(true);
-//        }
+        if(ratingBar.getRating() != 0)
+        {
+            ratingBar.setIsIndicator(true);
+        }
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -104,17 +104,7 @@ public class EmployeesDetails extends AppCompatActivity {
 
                 myRating = ratingBar.getRating();
                 ratingBar.setRating(myRating);
-
-                if(HasRated == false)
-                {
-                    RateEmplployee(myRating);
-                    HasRated = true;
-                }
-                else if(HasRated == true)
-                {
-                    ratingOfClientForEmp();
-                }
-
+                RateEmplployee(myRating);
                 Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
             }
         });
@@ -129,11 +119,10 @@ public class EmployeesDetails extends AppCompatActivity {
         lastNamemployye.setText(lastNameEmp);
 
         Picasso.get()
-                .load(empPropfileImg)
+                .load(Uri.parse(empPropfileImg))
                 .centerCrop()
                 .resize(150,150)
                 .into(imgProfile);
-
     }
 
     private void ratingOfClientForEmp()
