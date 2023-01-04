@@ -75,8 +75,6 @@ public class EmployeesDetails extends AppCompatActivity {
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("service_title");
         empPropfileImg = intent.getStringExtra("imagep");
-//        ratingValue = intent.getStringExtra("label");
-
         id = intent.getStringExtra("id");
         id_emp = Integer.valueOf(id);
         typeProfile = intent.getStringExtra("typeProfil");
@@ -128,18 +126,20 @@ public class EmployeesDetails extends AppCompatActivity {
     private void ratingOfClientForEmp()
     {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Integer> call = apiInterface.getRatOfClientForEmp(id_current, id_emp);
+        Call<Long> call = apiInterface.getRatOfClientForEmp(id_current, id_emp);
 
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Long>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
+            public void onResponse(Call<Long> call, Response<Long> response) {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Integer responseFromAPI = response.body();
+                long responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
-                ratingBar.setRating(responseFromAPI);
+
+                    ratingBar.setRating(responseFromAPI);
+
             }
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Long> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
@@ -208,9 +208,6 @@ public class EmployeesDetails extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });

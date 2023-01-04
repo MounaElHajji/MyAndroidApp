@@ -27,8 +27,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EmployeelistActivity extends AppCompatActivity {
-
-
     private RecyclerView recyclerViewVar;
     ApiInterface apiInterface;
     EmployeeAdapter employeeAdapter;

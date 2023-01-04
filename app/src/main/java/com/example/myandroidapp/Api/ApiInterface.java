@@ -61,7 +61,7 @@ public interface ApiInterface {
     Call<Integer> sumRatingsByImp(@Path("id") int id, @Path("id_client") int id_client);
 
     @GET("/employees/{id_client}/RatingEmpByClient/{id}")
-    Call<Integer> getRatOfClientForEmp(@Path(value = "id_client") int id_client, @Path(value = "id") int id);
+    Call<Long> getRatOfClientForEmp(@Path(value = "id_client") int id_client, @Path(value = "id") int id);
 
     @PUT("/{id}/ratings/{id_rating}")
     Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body RatingEmp ratingRequest);
