@@ -1,10 +1,13 @@
 package com.example.myandroidapp.Activities;
 
+import static com.example.myandroidapp.Activities.ServiceEmpActivity.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +21,8 @@ import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -38,14 +43,17 @@ public class CurrentProfile extends AppCompatActivity {
         type_profil = sharedPref.getString("type_profil", "");
         if(type_profil.equals("employe")) {
             setContentView(R.layout.activity_current_profile_empl);
+            imageP= findViewById(R.id.imageView);
         }
         else{
             setContentView(R.layout.activity_current_profile);
+           imageP= findViewById(R.id.imageView13);
         }
 
-        imageP= findViewById(R.id.imageView);
-        setContentView(R.layout.activity_current_profile);
-        clickFavoris = findViewById(R.id.clickFavoris);
+       setContentView(R.layout.activity_current_profile);
+        imageP= findViewById(R.id.imageView13);
+
+        /*clickFavoris = findViewById(R.id.clickFavoris);
 
         clickFavoris.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +61,7 @@ public class CurrentProfile extends AppCompatActivity {
                 Intent i = new Intent(CurrentProfile.this, FavorisActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();
@@ -99,12 +107,15 @@ public class CurrentProfile extends AppCompatActivity {
                 emploiTxt.setText(empEmploie);
                 cinTxt.setText(empCin);
                 descTxt.setText(empDesc);
-
-                Picasso.get()
+                System.out.println(imagep);
+               Picasso.get()
                         .load(Uri.parse(imagep))
                         .centerCrop()
                         .resize(150,150)
                         .into(imageP);
+               // Picasso.with(getApplicationContext()).load(new File(imagep)).into(imageP);
+
+                Log.d(TAG, imagep);
             }
 
             @Override

@@ -181,8 +181,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    System.out.println("heloo asmaaaaaaaaaaaaaaaaa from call " + type_profile);
-                    System.out.println("from shared" + type_profil);
                     Toast.makeText(LoginActivity.this, "Oops, réessayez!, login inexistant", Toast.LENGTH_SHORT).show();
                 }
             }

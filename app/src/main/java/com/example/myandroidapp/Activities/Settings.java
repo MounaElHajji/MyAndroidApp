@@ -75,6 +75,10 @@ public class Settings extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(Settings.this, "Success account deleted", Toast.LENGTH_LONG).show();
+                    SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("userlogin", false);
+                    editor.commit();
                 }
 
 

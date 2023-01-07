@@ -130,6 +130,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
             }
         });
+        System.out.println("l image est "+EmployeeList.get(position).getImageP());
         if (EmployeeList.get(position).getImageP().isEmpty()) {
             //iview.setImageResource(R.drawable.placeholder);
         } else{

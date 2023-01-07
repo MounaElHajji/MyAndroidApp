@@ -53,7 +53,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
                 context.startActivity(i);
             }
         });
-
         if(services.get(position).getImage() != null){
             Picasso.get().load(services.get(position).getImage()).into(holder.image);
         }
