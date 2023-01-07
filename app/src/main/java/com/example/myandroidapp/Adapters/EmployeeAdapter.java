@@ -1,4 +1,5 @@
 package com.example.myandroidapp.Adapters;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder>  implements Filterable  {
+public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHolder> implements Filterable {
 
     List<Employee> EmployeeList;
     private List<Employee> PostListFull;
@@ -49,8 +50,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     ApiInterface apiInterface;
     SharedPreferences sh;
 
-    HashMap<Employee, Integer> lisFav= new HashMap<>();
-
+    HashMap<Employee, Integer> lisFav = new HashMap<>();
 
 
     public EmployeeAdapter(Context context, List<Employee> EmployeeList) {
@@ -63,35 +63,37 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
 
-        for (Employee emp:
+        for (Employee emp :
                 EmployeeList) {
             lisFav.put(emp, R.drawable.ic_baseline_favorite_border_24);
         }
 
     }
 
-    public List<Employee> getListFav(){
-        int id= sh.getInt("id", 0);
+    public List<Employee> getListFav() {
+        int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
             @Override
             public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     return;
                 }
                 List<ListFavoris> postList = response.body();
-                for (ListFavoris f:
-                        postList ) {
+                for (ListFavoris f :
+                        postList) {
                     favEmployees.add(f.getEmp());
                 }
 
             }
+
             @Override
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
             }
         });
-        return  favEmployees;
+        return favEmployees;
     }
+
     @NonNull
     @Override
     public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -105,39 +107,40 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
         Employee post = EmployeeList.get(position);
-        List<Employee> favEmployees1= new ArrayList<>();
+        List<Employee> favEmployees1 = new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
         holder.text_nom1.setText(post.getLast_name());
-        int id= sh.getInt("id", 0);
+        int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
             @Override
             public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
                 List<ListFavoris> postList = response.body();
-                for (ListFavoris f:
-                        postList ) {
+                for (ListFavoris f :
+                        postList) {
                     favEmployees1.add(f.getEmp());
-                    if(post.getTel().equals(f.getEmp().getTel())){
+                    if (post.getTel().equals(f.getEmp().getTel())) {
                         holder.btnHeart.setImageResource(R.drawable.fav);
                     }
                 }
 
 
             }
+
             @Override
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
             }
         });
-        System.out.println("l image est "+EmployeeList.get(position).getImageP());
+        System.out.println("l image est " + EmployeeList.get(position).getImageP());
         if (EmployeeList.get(position).getImageP().isEmpty()) {
             //iview.setImageResource(R.drawable.placeholder);
-        } else{
+        } else {
             Picasso.get()
                     .load(EmployeeList.get(position).getImageP())
                     .centerCrop()
-                    .resize(150,150)
+                    .resize(150, 150)
                     .into(holder.imageP);
         }
 
@@ -158,44 +161,46 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             }
         });
         holder.btnHeart.setOnClickListener(new View.OnClickListener() {
-                                               @RequiresApi(api = Build.VERSION_CODES.N)
-                                               @Override
-                                               public void onClick(View view) {
-                                                   String p2 = EmployeeList.get(position).getId();
-                                                   int p1= sh.getInt("id", 0);
-                                                   // System.out
-                                                   if(lisFav.get(EmployeeList.get(position))==R.drawable.fav){
-                                                       holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                                                       lisFav.replace(EmployeeList.get(position),R.drawable.fav, R.drawable.ic_baseline_favorite_border_24);
-                                                       Call<Void> call2=apiInterface.DeleteFav(p1,Integer.parseInt(p2));
-                                                       call2.enqueue(new Callback<Void>() {
-                                                           @Override
-                                                           public void onResponse(Call<Void> call, Response<Void> response) {
-                                                           }
-                                                           @Override
-                                                           public void onFailure(Call<Void> call, Throwable t) {
-                                                           }
-                                                       });
-                                                   }else{
-                                                       holder.btnHeart.setImageResource(R.drawable.fav);
-                                                       lisFav.replace(EmployeeList.get(position),R.drawable.ic_baseline_favorite_border_24, R.drawable.fav);
-                                                       Call<Person> call1 = apiInterface.addFav(p1, Integer.parseInt(p2));
-                                                       call1.enqueue(new Callback<Person>() {
-                                                           @Override
-                                                           public void onFailure(Call<Person> call, Throwable t) {
-                                                           }
-                                                           @Override
-                                                           public void onResponse(Call<Person> call, Response<Person> response) {
-                                                           }
-                                                       });
-                                                   }
-                                               }
-                                           }
-        );
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View view) {
+                String pEmp = EmployeeList.get(position).getId();
+                int p2 = Integer.valueOf(pEmp);
+                int p1= sh.getInt("id", 0);
+                apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+                // System.out
+                if(holder.btnHeart.getDrawable().getConstantState() == context.getResources().getDrawable(R.drawable.fav).getConstantState()){
+                    holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    lisFav.replace(EmployeeList.get(position),R.drawable.fav, R.drawable.ic_baseline_favorite_border_24);
+                    Call<Void> call2=apiInterface.DeleteFav(p1,p2);
+                    call2.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            System.out.println("faaav");
+                        }
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                        }
+                    });
+                }else{
+                    holder.btnHeart.setImageResource(R.drawable.fav);
+                    lisFav.replace(EmployeeList.get(position),R.drawable.ic_baseline_favorite_border_24, R.drawable.fav);
+                    Call<Person> call1 = apiInterface.addFav(p1, p2);
+                    call1.enqueue(new Callback<Person>() {
+                        @Override
+                        public void onFailure(Call<Person> call, Throwable t) {
+                        }
+                        @Override
+                        public void onResponse(Call<Person> call, Response<Person> response) {
+                        }
+                    });
+                }
+            }
+        });
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  id, nom, ville, descritpion, tel, text_nom1;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView id, nom, ville, descritpion, tel, text_nom1;
         ImageView imageP, btnHeart;
         Button btnVoir;
 
@@ -207,7 +212,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             descritpion = itemView.findViewById(R.id.text_description);
             text_nom1 = itemView.findViewById(R.id.text_nom1);
             btnVoir = itemView.findViewById(R.id.btnVoir);
-            btnHeart=itemView.findViewById(R.id.btnHeart);
+            btnHeart = itemView.findViewById(R.id.btnHeart);
         }
     }
 
@@ -236,9 +241,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                         filteredList.add(item);
                     }
                 }
-                for(Employee item: PostSearchName){
-                    if(item.getLast_name().toLowerCase().contains(filterPattern) || item.getFirst_name().toLowerCase().contains(filterPattern))
-                    {
+                for (Employee item : PostSearchName) {
+                    if (item.getLast_name().toLowerCase().contains(filterPattern) || item.getFirst_name().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }

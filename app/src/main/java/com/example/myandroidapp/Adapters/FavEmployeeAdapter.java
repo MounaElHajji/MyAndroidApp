@@ -81,6 +81,7 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
     public void onBindViewHolder(@NonNull FavEmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Employee post = EmployeeList.get(position);
         holder.nom.setText(post.getFirst_name());
+        holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +112,7 @@ public class FavEmployeeAdapter extends RecyclerView.Adapter<FavEmployeeAdapter.
                     call2.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+                            System.out.println("faaav");
                         }
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
