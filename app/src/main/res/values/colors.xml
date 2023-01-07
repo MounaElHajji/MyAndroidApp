@@ -11,6 +11,7 @@
     <color name="grey_blue">#4485C0</color>
     <color name="blue">#35B5EC</color>
     <color name="strong_grey">#6E717C</color>
+    <color name="BtnVoirColor">#00BFFF</color>
     <color name="colorPrimary">#49BEFF</color>
     <color name="colorPrimaryDark">#65DCE5</color>
     <color name="colorAccent">#0D5D98</color>
@@ -25,4 +26,5 @@
     <color name="followersBg">#65DCE5</color>
     <color name="followingBg">#49BEFF</color>
     <color name="grey">#E5E5E5</color>
+
 </resources>
