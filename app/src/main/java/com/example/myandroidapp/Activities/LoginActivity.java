@@ -107,8 +107,8 @@ public class LoginActivity extends AppCompatActivity {
 
         RetrofitS retrofitS= new RetrofitS();
         AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
-        String passwd=String.valueOf(pwd.getText());
-        String usrname=String.valueOf(username.getText());
+        String passwd=String.valueOf(pwd.getText()).trim();
+        String usrname=String.valueOf(username.getText()).trim();
         Account account= new Account();
         account.setPassword(passwd);
         account.setUsername(usrname);

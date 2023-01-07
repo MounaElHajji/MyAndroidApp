@@ -9,12 +9,6 @@ public class RetrofitClient {
 
     private static final String BASE_URL = "http://192.168.149.86:8080/";
 
-
-
-
-
-
-
     public static Retrofit getRetrofitInstance(){
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
