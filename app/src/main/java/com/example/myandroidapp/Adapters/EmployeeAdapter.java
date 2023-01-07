@@ -83,6 +83,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
         holder.text_nom1.setText(post.getLast_name());
+        holder.telephoneVar.setText(post.getTel());
         int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
@@ -173,7 +174,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView id, nom, ville, descritpion, tel, text_nom1;
+        TextView id, nom, ville, descritpion, tel, text_nom1, telephoneVar;
         ImageView imageP, btnHeart;
         Button btnVoir;
 
@@ -186,6 +187,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             text_nom1 = itemView.findViewById(R.id.text_nom1);
             btnVoir = itemView.findViewById(R.id.btnVoir);
             btnHeart = itemView.findViewById(R.id.btnHeart);
+            telephoneVar = itemView.findViewById(R.id.TelTxt);
+
         }
     }
 
