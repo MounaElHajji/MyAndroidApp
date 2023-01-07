@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
-
         for (Employee emp:
                 EmployeeList) {
             lisFav.put(emp, R.drawable.ic_baseline_favorite_border_24);
@@ -108,8 +108,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         List<Employee> favEmployees1= new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
-        holder.descritpion.setText(post.getTel());
+        holder.descritpion.setText(post.getDescription());
         holder.text_nom1.setText(post.getLast_name());
+        holder.telephoneVar.setText(post.getTel());
         int id= sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
@@ -123,8 +124,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                         holder.btnHeart.setImageResource(R.drawable.fav);
                     }
                 }
-
-
             }
             @Override
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
@@ -190,9 +189,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView  id, nom, ville, descritpion, tel, text_nom1;
+        TextView  nom, ville, descritpion, text_nom1, telephoneVar;
         ImageView imageP, btnHeart;
-        Button btnVoir;
+        TextView btnVoir;
 
         public ViewHolder(@NonNull View itemLayoutView) {
             super(itemLayoutView);
@@ -201,10 +200,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             ville = itemView.findViewById(R.id.text_ville);
             descritpion = itemView.findViewById(R.id.text_description);
             text_nom1 = itemView.findViewById(R.id.text_nom1);
+            telephoneVar = itemView.findViewById(R.id.TelTxt);
             btnVoir = itemView.findViewById(R.id.btnVoir);
             btnHeart=itemView.findViewById(R.id.btnHeart);
         }
     }
+
+
+
 
     @Override
     public int getItemCount() {

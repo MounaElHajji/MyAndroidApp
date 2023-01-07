@@ -82,4 +82,10 @@ public interface ApiInterface {
 
     @PUT("/{id}/ratings/{id_rating}")
     Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body RatingEmp ratingRequest);
+
+    @GET("/employees/getByCateg/{cat}")
+    Call<List<Employee>> getByCateg(@Path("cat") String category);
+
+    @GET("/employees/sumRatingOfClient/{id_client}")
+    Call<Integer> getRatOfClientForEmp(@Path(value = "id_client") int id_client);
 }

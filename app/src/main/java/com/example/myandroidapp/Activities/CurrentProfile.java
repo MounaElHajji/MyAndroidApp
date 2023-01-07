@@ -27,15 +27,21 @@ import retrofit2.Response;
 public class CurrentProfile extends AppCompatActivity {
     Employee emp = new Employee();
     ApiInterface apiInterface;
-    TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
+    TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt, ratingClient;
     ImageView imageP;
     String type_profil;
-    LinearLayout clickFavoris;
+    SharedPreferences sh;
+    int id_current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         type_profil = sharedPref.getString("type_profil", "");
+
+        sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        id_current= sh.getInt("id",0);
+
+
         if(type_profil.equals("employe")) {
             setContentView(R.layout.activity_current_profile_empl);
         }
@@ -43,22 +49,41 @@ public class CurrentProfile extends AppCompatActivity {
             setContentView(R.layout.activity_current_profile);
         }
 
-        imageP= findViewById(R.id.imageView);
-        setContentView(R.layout.activity_current_profile);
-        clickFavoris = findViewById(R.id.clickFavoris);
+        sumRatingOfEmp();
 
-        clickFavoris.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(CurrentProfile.this, FavorisActivity.class);
-                startActivity(i);
-            }
-        });
+        imageP= findViewById(R.id.imageView13);
+        ratingClient = findViewById(R.id.ratingClient);
+        setContentView(R.layout.activity_current_profile);
+
+
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();
-        OnclickButtonListener();
     }
+
+    private void sumRatingOfEmp() {
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        // calling a method to create an update and passing our modal class.
+        Call<Integer> call = apiInterface.getRatOfClientForEmp(id_current);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Integer responseFromAPI = response.body();
+                String ratText = Integer.toString(responseFromAPI);
+                ratingClient.setText(ratText);
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+                // setting text to our text view when
+                // we get error response from API.
+                ratingClient.setText("Error found is : " + t.getMessage());
+            }
+        });
+    }
+
     private void getVardFromLayout() {
         villeTxt = findViewById(R.id.textView4);
         nomTxt = findViewById(R.id.textView);
@@ -72,8 +97,7 @@ public class CurrentProfile extends AppCompatActivity {
         SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        int id= sh.getInt("id",0);
-        Call<Employee> call = apiInterface.getProfilePersonne(id);
+        Call<Employee> call = apiInterface.getProfilePersonne(id_current);
         call.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
@@ -116,18 +140,7 @@ public class CurrentProfile extends AppCompatActivity {
     }
 
 
-    //heart icon listener
-    public void OnclickButtonListener() {
 
-        ImageView imgview = findViewById(R.id.imageView6);
-        imgview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CurrentProfile.this,FavorisActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     public void onBackClick(View view) {
         finish();
