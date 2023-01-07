@@ -47,6 +47,7 @@
             android:paddingLeft="15dp"
             android:paddingBottom="15dp"
             tools:ignore="MissingConstraints"
+            android:scrollbars="horizontal"
 
             />
 

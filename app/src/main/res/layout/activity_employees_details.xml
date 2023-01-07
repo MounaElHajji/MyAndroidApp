@@ -104,6 +104,15 @@
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/heartf"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="222dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fav" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -398,7 +407,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
                 android:text="CIN:"
-                android:textColor="#00BFFF"
+                android:textColor="@color/gray"
                 android:textSize="23sp" />
 
             <TextView
