@@ -127,6 +127,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("description", EmployeeList.get(position).getDescription());
                 i.putExtra("tel", EmployeeList.get(position).getTel());
                 i.putExtra("imagep", EmployeeList.get(position).getImageP());
+                i.putExtra("service_title", EmployeeList.get(position).getService().getService_title());
                 String tmp= "false";
                 if(holder.btnHeart.getDrawable().getConstantState() == context.getResources().getDrawable(R.drawable.fav).getConstantState()){
                     tmp="true";
