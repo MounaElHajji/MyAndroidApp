@@ -36,10 +36,11 @@ public class CurrentProfile extends AppCompatActivity {
     ImageView imageP;
     String type_profil;
     LinearLayout clickFavoris;
+    SharedPreferences sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         type_profil = sharedPref.getString("type_profil", "");
         if(type_profil.equals("employe")) {
             setContentView(R.layout.activity_current_profile_empl);
@@ -50,8 +51,8 @@ public class CurrentProfile extends AppCompatActivity {
            imageP= findViewById(R.id.imageView13);
         }
 
-       setContentView(R.layout.activity_current_profile);
-        imageP= findViewById(R.id.imageView13);
+//       setContentView(R.layout.activity_current_profile);
+//        imageP= findViewById(R.id.imageView13);
 
         /*clickFavoris = findViewById(R.id.clickFavoris);
 
@@ -68,12 +69,22 @@ public class CurrentProfile extends AppCompatActivity {
         OnclickButtonListener();
     }
     private void getVardFromLayout() {
-        villeTxt = findViewById(R.id.textView4);
-        nomTxt = findViewById(R.id.textView);
-        cinTxt = findViewById(R.id.textView8);
-        emploiTxt = findViewById(R.id.textView10);
-        descTxt = findViewById(R.id.textView12);
-        telTxt = findViewById(R.id.textView6);
+
+        if(type_profil.equals("employe")) {
+            villeTxt = findViewById(R.id.textView4);
+            nomTxt = findViewById(R.id.textView);
+            cinTxt = findViewById(R.id.textView8);
+            emploiTxt = findViewById(R.id.textView10);
+            descTxt = findViewById(R.id.textView12);
+            telTxt = findViewById(R.id.textView6);
+        }
+        else{
+            villeTxt = findViewById(R.id.textView4);
+            nomTxt = findViewById(R.id.textView);
+            cinTxt = findViewById(R.id.textView8);
+            telTxt = findViewById(R.id.textView6);
+
+        }
     }
 
     private void getUserDetails() {
@@ -98,24 +109,38 @@ public class CurrentProfile extends AppCompatActivity {
                 String empEmploie = reponseEmp.getType_profil();
                 String imagep= reponseEmp.getImageP();
 
+                if(type_profil.equals("employe")) {
+                    villeTxt.setText(empVille);
+                    telTxt.setText(empTel);
+                    nomTxt.setText(empNom +" "+empPrenom);
+                    emploiTxt.setText(empEmploie);
+                    cinTxt.setText(empCin);
+                    descTxt.setText(empDesc);
+                    System.out.println(imagep);
+                    Picasso.get()
+                            .load(Uri.parse(imagep))
+                            .centerCrop()
+                            .resize(150,150)
+                            .into(imageP);
 
+                    Log.d(TAG, imagep);
 
-                //set the data in the layout to the dat coming from the backend
-                villeTxt.setText(empVille);
-                telTxt.setText(empTel);
-                nomTxt.setText(empNom +" "+empPrenom);
-                emploiTxt.setText(empEmploie);
-                cinTxt.setText(empCin);
-                descTxt.setText(empDesc);
-                System.out.println(imagep);
-               Picasso.get()
-                        .load(Uri.parse(imagep))
-                        .centerCrop()
-                        .resize(150,150)
-                        .into(imageP);
-               // Picasso.with(getApplicationContext()).load(new File(imagep)).into(imageP);
+                }
+                else{
+                    villeTxt.setText(empVille);
+                    telTxt.setText(empTel);
+                    nomTxt.setText(empNom +" "+empPrenom);
+                    cinTxt.setText(empCin);
+                    System.out.println(imagep);
+                    Picasso.get()
+                            .load(Uri.parse(imagep))
+                            .centerCrop()
+                            .resize(150,150)
+                            .into(imageP);
 
-                Log.d(TAG, imagep);
+                    Log.d(TAG, imagep);
+                }
+
             }
 
             @Override
@@ -159,7 +184,7 @@ public class CurrentProfile extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, EmployeelistActivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
         finish();
     }
@@ -172,6 +197,18 @@ public class CurrentProfile extends AppCompatActivity {
 
     public void onProfilClick(View view) {
         Intent intent = new Intent(this, CurrentProfile.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onMessageEmplClick(View view){
+        Intent intent = new Intent(this, EmployeelistActivity.class);
+
+        startActivity(intent);
+        finish();
+    }
+
+    public void onHomeEmployeClick(View view){
+        Intent intent = new Intent(this, EmployeelistActivity.class);
         startActivity(intent);
         finish();
     }

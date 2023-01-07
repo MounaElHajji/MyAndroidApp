@@ -43,7 +43,7 @@ public class ServiceEmpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.employee_list_activity);
+        setContentView(R.layout.employee_list_activity_client);
         myspinnerVille = findViewById(R.id.spinnerVille);
         searchView = findViewById(R.id.search_bar);
         Intent intent = getIntent();
@@ -190,7 +190,7 @@ public class ServiceEmpActivity extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, EmployeelistActivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
         finish();
     }

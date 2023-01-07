@@ -117,6 +117,17 @@ public class EmployeelistActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void onMessageEmplClick(View view){
+        Intent intent = new Intent(this, EmployeelistActivity.class);
 
+        startActivity(intent);
+        finish();
+    }
+
+    public void onHomeEmployeClick(View view) {
+        Intent intent = new Intent(this, EmployeelistActivity.class);
+        startActivity(intent);
+        finish();
+    }
     // -------- Footer icons listeners /
 }

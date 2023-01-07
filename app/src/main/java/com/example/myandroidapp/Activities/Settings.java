@@ -45,9 +45,6 @@ public class Settings extends AppCompatActivity {
             OnclickButtonListener();
         }
 
-
-
-
     }
 
     //Delete  Button  listener
@@ -103,9 +100,8 @@ public class Settings extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("userlogin", false);
+        editor.clear();
         editor.commit();
-
-
         Intent intent = new Intent(Settings.this,
                 LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -145,7 +141,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void onHomeClick(View view) {
-        Intent intent = new Intent(this, EmployeelistActivity.class);
+        Intent intent = new Intent(this, listeServices.class);
         startActivity(intent);
         finish();
     }
