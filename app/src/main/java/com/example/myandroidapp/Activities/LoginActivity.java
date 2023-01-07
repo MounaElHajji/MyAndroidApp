@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.R;
+import com.example.myandroidapp.retrofit.RetrofitBack;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
 import java.util.logging.Level;
@@ -144,10 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     public void typeprofil(String login) {
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        Retrofit adapter = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.5:8080")
-                .addConverterFactory(new ToStringConverterFactory())
-                .build();
+        Retrofit adapter = RetrofitBack.getRetrofitIns();
 
         AccountApi  api = adapter.create(AccountApi.class);
         System.out.println(login);
