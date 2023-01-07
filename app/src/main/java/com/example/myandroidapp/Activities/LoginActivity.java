@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.R;
+import com.example.myandroidapp.retrofit.RetrofitBack;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
 import java.util.logging.Level;
@@ -107,8 +108,8 @@ public class LoginActivity extends AppCompatActivity {
 
         RetrofitS retrofitS= new RetrofitS();
         AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
-        String passwd=String.valueOf(pwd.getText());
-        String usrname=String.valueOf(username.getText());
+        String passwd=String.valueOf(pwd.getText()).trim();
+        String usrname=String.valueOf(username.getText()).trim();
         Account account= new Account();
         account.setPassword(passwd);
         account.setUsername(usrname);
@@ -128,8 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     myEdit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
                     myEdit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
                     myEdit.commit();
-                    startActivity(i);
-                    finish();
+                    typeprofil(account1.getUsername());
                 }else{
                     Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();
                 }
@@ -145,10 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     public void typeprofil(String login) {
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        Retrofit adapter = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.15:8080")
-                .addConverterFactory(new ToStringConverterFactory())
-                .build();
+        Retrofit adapter = RetrofitBack.getRetrofitIns();
 
         AccountApi  api = adapter.create(AccountApi.class);
         System.out.println(login);
@@ -168,7 +165,6 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("type_profil", "employe");
                         editor.commit();
                         type_profil = sharedPref.getString("type_profil", "");
-
                         loginEmployee();
 
                     } else {
@@ -176,13 +172,10 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("type_profil", "client");
                         editor.commit();
                         type_profil = sharedPref.getString("type_profil", "");
-
                         loginClient();
                     }
                 }
                 else {
-                    System.out.println("heloo asmaaaaaaaaaaaaaaaaa from call " + type_profile);
-                    System.out.println("from shared" + type_profil);
                     Toast.makeText(LoginActivity.this, "Oops, réessayez!, login inexistant", Toast.LENGTH_SHORT).show();
                 }
             }

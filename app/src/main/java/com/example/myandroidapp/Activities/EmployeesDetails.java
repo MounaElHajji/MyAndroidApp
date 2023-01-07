@@ -2,9 +2,11 @@ package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Rating;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -15,6 +17,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +26,7 @@ import retrofit2.Response;
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.RatingEmp;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
@@ -35,13 +40,14 @@ public class EmployeesDetails extends AppCompatActivity {
     RatingBar ratingBar, ratingBarTotal;
     TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
     String nom, ville, description, image,telephone, lastNameEmp,emploie, ratingValue,id,typeProfile, empPropfileImg;
-    ImageView imgProfile;
+    ImageView imgProfile, fav;
     float myRating = 0;
     ApiInterface apiInterface;
     SharedPreferences sh;
     int id_current, id_emp;
 
     private Boolean HasRated = true;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Employee emp = new Employee();
@@ -65,7 +71,7 @@ public class EmployeesDetails extends AppCompatActivity {
         employeeVille = findViewById(R.id.employeeVille);
         lastNamemployye = findViewById(R.id.textViewNom);
         imgProfile = findViewById(R.id.imageView13);
-
+        fav = findViewById(R.id.heartf);
 
         Intent intent = getIntent();
         nom = intent.getStringExtra("firstName");
@@ -90,19 +96,6 @@ public class EmployeesDetails extends AppCompatActivity {
         {
             ratingOfClientForEmp();
         }
-
-//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-//                int rating = (int) v;
-//                String message = null;
-//
-//                myRating = ratingBar.getRating();
-//                ratingBar.setRating(myRating);
-//                RateEmplployee(myRating);
-//                Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
         ratingBar.setOnTouchListener(new View.OnTouchListener() {
@@ -138,11 +131,18 @@ public class EmployeesDetails extends AppCompatActivity {
         employeeVille.setText(ville);
         lastNamemployye.setText(lastNameEmp);
 
+        if(intent.getStringExtra("fav").equals("true")){
+            fav.setImageResource(R.drawable.fav);
+        }else{
+            fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
+
         Picasso.get()
                 .load(Uri.parse(empPropfileImg))
                 .centerCrop()
                 .resize(150,150)
                 .into(imgProfile);
+        ButterKnife.bind(this);
     }
 
     private void ratingOfClientForEmp()
@@ -155,7 +155,9 @@ public class EmployeesDetails extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 Integer responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
-                ratingBar.setRating(responseFromAPI);
+                    ratingBar.setRating(responseFromAPI);
+
+
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
@@ -164,24 +166,53 @@ public class EmployeesDetails extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.heartf)
+    public void clickHeart(){
+        int id1=sh.getInt("id", 0);
+        System.out.println("fav click");
+        if(fav.getDrawable().getConstantState() == EmployeesDetails.this.getResources().getDrawable(R.drawable.fav).getConstantState()){
+            fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            Call<Void> call2=apiInterface.DeleteFav(id1, Integer.parseInt(id));
+            call2.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                }
+            });
+        }else{
+            fav.setImageResource(R.drawable.fav);
+            Call<Person> call1 = apiInterface.addFav(id1, Integer.parseInt(id));
+            call1.enqueue(new Callback<Person>() {
+                @Override
+                public void onFailure(Call<Person> call, Throwable t) {
+                }
+                @Override
+                public void onResponse(Call<Person> call, Response<Person> response) {
+                }
+            });
+        }
+    }
+
     private void RateEmplployee(Float label) {
         RatingEmp rating = new RatingEmp(label);
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Employee> call = apiInterface.AddRating(rating, id_emp, id_current);
+        Call<Rating> call = apiInterface.AddRating(rating, id_emp, id_current);
 
-        call.enqueue(new Callback<Employee>() {
+        call.enqueue(new Callback<Rating>() {
             @Override
-            public void onResponse(Call<Employee> call, Response<Employee> response) {
+            public void onResponse(Call<Rating> call, Response<Rating> response) {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Employee responseFromAPI = response.body();
-                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getRating();
+                Rating responseFromAPI = response.body();
+                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI;
                 responseTV.setText(responseString);
             }
 
             @Override
-            public void onFailure(Call<Employee> call, Throwable t) {
+            public void onFailure(Call<Rating> call, Throwable t) {
                 responseTV.setText("Error found is : " + t.getMessage());
             }
         });
@@ -191,19 +222,20 @@ public class EmployeesDetails extends AppCompatActivity {
     {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.SumRating(id_emp, id_current);
+        Call<Long> call = apiInterface.SumRating(id_emp, id_current);
 
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Long>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Integer responseFromAPI = response.body();
-                String ratTextAverage = Integer.toString(responseFromAPI);
+            public void onResponse(Call<Long> call, Response<Long> response) {
+                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                Long responseFromAPI = response.body();
+                String ratTextAverage = String.valueOf(responseFromAPI);
                 ratingBarTotal.setRating(responseFromAPI);
                 averageRating.setText(ratTextAverage);
             }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Long> call, Throwable t) {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
@@ -213,21 +245,21 @@ public class EmployeesDetails extends AppCompatActivity {
     private void sumColumnsRating() {
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         // calling a method to create an update and passing our modal class.
-        Call<Integer> call = apiInterface.sumRatingsByImp(id_emp, id_current);
+        Call<Long> call = apiInterface.sumRatingsByImp(id_emp, id_current);
 
-        call.enqueue(new Callback<Integer>() {
+        call.enqueue(new Callback<Long>() {
             @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Integer responseFromAPI = response.body();
-                String ratText = Integer.toString(responseFromAPI);
+            public void onResponse(Call<Long> call, Response<Long> response) {
+                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                Long responseFromAPI = response.body();
+                String ratText = String.valueOf(responseFromAPI);
+
                 ratingSumText.setText(ratText);
             }
 
             @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
+            public void onFailure(Call<Long> call, Throwable t) {
 
-                // setting text to our text view when
-                // we get error response from API.
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });

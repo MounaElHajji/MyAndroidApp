@@ -269,10 +269,9 @@ public class inscription extends AppCompatActivity {
     }
 
     private  boolean isValidPwd(String pwd){
-        String PASSWORD_PATTERN =
-                "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-   /*String PASSWORD_PATTERN =
-            "[a-zA-Z]+";*/
+//        String PASSWORD_PATTERN =
+//                "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+   String PASSWORD_PATTERN = "[a-zA-Z]+";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(pwd);
         return matcher.matches();
@@ -307,7 +306,7 @@ public class inscription extends AppCompatActivity {
     /******/
     @OnClick(R.id.btnRegister)
     public void clickRegister(){
-        if(fonction.getSelectedItemPosition()==0 || ville.getSelectedItemPosition()==0 ||
+        if(fonction.getSelectedItemPosition()==0 ||
                 mail.getText().toString().matches("") || prenom.getText().toString().matches("") || nom.getText().toString().matches("")
                 || cin.getText().toString().matches("") || pwd.getText().toString().matches("")) {
             msg.setText("Veuillez remplir tous les champs!");
@@ -315,9 +314,8 @@ public class inscription extends AppCompatActivity {
             msg.setText("Email ou Tél n'est pas valide!");
         }else if(fonction.getSelectedItemPosition()==1 && service.getSelectedItemPosition()==0){
             msg.setText("Veuillez choisir un service!");
-//        }else if(!isValidPwd(pwd.getText().toString())){
-//            msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" +
-//                    "des symboles et de longueur minimale 8!");
+       }else if(!isValidPwd(pwd.getText().toString())){
+           msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" + "des symboles et de longueur minimale 8!");
         }else { loginExists(mail.getText().toString()); }
 
     }
@@ -326,17 +324,16 @@ public class inscription extends AppCompatActivity {
         Person person = new Person();
         Account account = new Account();
         Service service1 = new Service();
-        person.setDescription(desc.getText().toString());
-        person.setCin(cin.getText().toString());
-        person.setFirstName(prenom.getText().toString());
-        person.setCity(ville.getSelectedItem().toString());
-        person.setImage("");
-        person.setLastName(nom.getText().toString());
+        person.setDescription(desc.getText().toString().trim());
+        person.setCin(cin.getText().toString().trim());
+        person.setFirstName(prenom.getText().toString().trim());
+        person.setCity(ville.getSelectedItem().toString().trim());
+        person.setLastName(nom.getText().toString().trim());
         person.setImage(path);
-        person.setTel(mail.getText().toString());
-        person.setTypeProfil(fonction.getSelectedItem().toString());
-        account.setPassword(pwd.getText().toString());
-        account.setUsername(mail.getText().toString());
+        person.setTel(mail.getText().toString().trim());
+        person.setTypeProfil(fonction.getSelectedItem().toString().trim());
+        account.setPassword(pwd.getText().toString().trim());
+        account.setUsername(mail.getText().toString().trim());
         if(fonction.getSelectedItemPosition()==2){
             service1.setService_title("Client");
             service1.setService_id(7);
