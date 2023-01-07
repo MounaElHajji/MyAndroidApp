@@ -1,46 +1,38 @@
 package com.example.myandroidapp.Models;
 
-import java.time.LocalDateTime;
+//import java.time.String;
 
 public class Message {
-    public static final int LAYOUT_ONE = 1; // my msg
-    public static final int LAYOUT_TWO = 2; // the other's msg
+    //public static final int LAYOUT_ONE = 1; // my msg
+    //public static final int LAYOUT_TWO = 2; // the other's msg
 
-   // private final int viewType;
+    private int viewType;
     private int messageId;
     private Person messageFrom;
     private Person messageTo;
     private String messageText;
-    private LocalDateTime createdDate;
+    private String date;
 
-    public Message(int messageId, Person messageFrom, Person messageTo, String messageText, LocalDateTime createdDate) {
-        //this.viewType = viewType;
-        this.messageId = messageId;
+    public Message(int viewType, Person messageFrom, Person messageTo, String message, String date) {
+        this.viewType = viewType;
         this.messageFrom = messageFrom;
         this.messageTo = messageTo;
-        this.messageText = messageText;
-        this.createdDate = createdDate;
+        this.messageText = message;
+        this.date = date;
     }
 
-    public Message(String messageText, LocalDateTime createdDate) {
-        //this.viewType = viewType;
-        this.messageText = messageText;
-        this.createdDate = createdDate;
+    public Message(int viewType, String message, String date) {
+        this.viewType = viewType;
+        this.messageText = message;
+        this.date = date;
     }
-
-    /*
-    public int getViewType() {
-        return viewType;
-    }
-
-     */
 
     public int getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public int getViewType() {
+        return viewType;
     }
 
     public Person getMessageFrom() {
@@ -67,11 +59,26 @@ public class Message {
         this.messageText = messageText;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "viewType=" + viewType +
+                ", messageId=" + messageId +
+                ", messageFrom=" + messageFrom +
+                ", messageTo=" + messageTo +
+                ", messageText='" + messageText + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
+
+    public Message() {
     }
 }

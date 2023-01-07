@@ -1,10 +1,12 @@
 package com.example.myandroidapp.Api;
 
 import com.example.myandroidapp.Models.Message;
+import com.example.myandroidapp.Models.Person;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -21,9 +23,12 @@ public interface ApiInterface {
     @GET("/chat/listChats/{myId}")
     Call<List<Message>> getConversations(@Path("myId") int id);
 
-    @GET("/chat/listMessages/{from}/{to}")
+    @GET("employees/{id}")
+    Call<Person> getProfilePersonne(@Path("id") int id);
+
+    @GET("/chat/chat/listMessages/{from}/{to}")
     Call<List<Message>> getChatMsgs(@Path("from") int from,@Path("to") int to);
 
-    @POST("/privateMessage/{to}")
-    Call<Message> saveSentMsg(@Path("to") int to);
+    @POST("/chat/privateMessage/save")
+    Call<Message> saveSentMsg(@Body Message message);
 }

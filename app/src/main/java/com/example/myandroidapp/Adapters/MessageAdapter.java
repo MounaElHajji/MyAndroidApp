@@ -1,7 +1,7 @@
 package com.example.myandroidapp.Adapters;
 
-import static com.example.myandroidapp.Models.Message.LAYOUT_ONE;
-import static com.example.myandroidapp.Models.Message.LAYOUT_TWO;
+//import static com.example.myandroidapp.Models.Message.LAYOUT_ONE;
+//import static com.example.myandroidapp.Models.Message.LAYOUT_TWO;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,6 +21,9 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter {
 
+    public static final int LAYOUT_ONE = 1; // my msg
+    public static final int LAYOUT_TWO = 2; // the other's msg
+
     List<Message> listMessages;
     Context context;
 
@@ -29,7 +32,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
-    /*
     @Override
     public int getItemViewType(int position) {
         switch(listMessages.get(position).getViewType())
@@ -43,16 +45,6 @@ public class MessageAdapter extends RecyclerView.Adapter {
             default :
                 return -1;
         }
-    }
-
-     */
-
-    @Override
-    public int getItemViewType(int position) {
-        if (listMessages.get(position).getMessageFrom().getPerson_id() == 4) {
-            return LAYOUT_ONE;
-        }
-        else return LAYOUT_TWO;
     }
 
     @NonNull
@@ -81,7 +73,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         // Format LocalDateTime to String
-        String msgDate = listMessages.get(position).getCreatedDate().format(dateTimeFormatter);
+       // String msgDate = listMessages.get(position).getCreatedDate().format(dateTimeFormatter);
 
         /*
         switch(listMessages.get(position).getViewType())
@@ -99,17 +91,23 @@ public class MessageAdapter extends RecyclerView.Adapter {
                 ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate);
                 break;
         }
+
          */
 
-        if (listMessages.get(position).getMessageFrom().getPerson_id() == 4) {
-            String sentMessage = listMessages.get(position).getMessageText();
-            //String msgDate = listMessages.get(position).getCreatedDate();
-            ((SenderMessageViewHolder) holder).setView(sentMessage, msgDate);
-        }
-        else {
-            String receivedMessage = listMessages.get(position).getMessageText();
-            // String msgDate1 = listMessages.get(position).getCreatedDate();
-            ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate);
+        switch(listMessages.get(position).getViewType())
+        {
+
+            case LAYOUT_ONE :
+                String sentMessage = listMessages.get(position).getMessageText();
+                String msgDate = listMessages.get(position).getDate();
+                ((SenderMessageViewHolder) holder).setView(sentMessage, msgDate);
+                break;
+
+            case LAYOUT_TWO :
+                String receivedMessage = listMessages.get(position).getMessageText();
+                String msgDate1 = listMessages.get(position).getDate();
+                ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate1);
+                break;
         }
     }
 
@@ -128,6 +126,15 @@ public class MessageAdapter extends RecyclerView.Adapter {
             messageDate = itemView.findViewById(R.id.textDateTime);
         }
 
+        /*
+        private void setView(String textMessage, String textDate)
+        {
+            textMessageSent.setText(textMessage);
+            messageDate.setText(textDate);
+        }
+
+         */
+
         private void setView(String textMessage, String textDate)
         {
             textMessageSent.setText(textMessage);
@@ -145,7 +152,14 @@ public class MessageAdapter extends RecyclerView.Adapter {
             messageDate = itemView.findViewById(R.id.textDateTime);
         }
 
+        /*
         private void setView(String textMessage, String textDate)
+        {
+            textMessageReceived.setText(textMessage);
+            messageDate.setText(textDate);
+        }
+        */
+         private void setView(String textMessage, String textDate)
         {
             textMessageReceived.setText(textMessage);
             messageDate.setText(textDate);

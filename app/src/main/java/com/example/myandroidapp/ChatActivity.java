@@ -1,8 +1,12 @@
 package com.example.myandroidapp;
 
+import static com.example.myandroidapp.Adapters.MessageAdapter.LAYOUT_ONE;
+import static com.example.myandroidapp.Adapters.MessageAdapter.LAYOUT_TWO;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,12 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myandroidapp.Adapters.MessageAdapter;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Message;
+import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
 
     Handler handler = new Handler();
     Runnable runnable;
-    int delay = 5000;
+    int delay = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,43 +76,54 @@ public class ChatActivity extends AppCompatActivity {
         }
          */
 
-        for ( Message msg : listMessages ) {
-            if (msg.getMessageFrom().equals(4)) {
-                listMessagesToDisplay.add( i,new Message(
-                        msg.getMessageText(), msg.getCreatedDate()
-                ));
-                i++;
-            }
-
-        }
-
-        /*
+/*
 
         for ( Message msg : listMessages ) {
             if (msg.getMessageFrom().equals(4)) {
                 listMessagesToDisplay.add( i,new Message(
-                        Message.LAYOUT_ONE, msg.getMessageText(), msg.getCreatedDate()
+                        LAYOUT_ONE, msg.getMessageText(), msg.getCreatedDate()
                 ));
                 i++;
             }
             else if (msg.getMessageTo().equals(4)) {
 
                 listMessagesToDisplay.add( i,new Message(
-                        Message.LAYOUT_TWO, msg.getMessageText(), msg.getCreatedDate()
+                        LAYOUT_TWO, msg.getMessageText(), msg.getCreatedDate()
                 ));
                 i++;
             }
         }
 
-         */
+ */
 
+        for ( Message msg : listMessages ) {
+            if (msg.getMessageFrom().equals(4)) {
+                listMessagesToDisplay.add( i,new Message(
+                        LAYOUT_ONE, msg.getMessageText(), msg.getDate()
+                ));
+                i++;
+            }
+            else if (msg.getMessageTo().equals(4)) {
+
+                listMessagesToDisplay.add( i,new Message(
+                        LAYOUT_TWO, msg.getMessageText(), msg.getDate()
+                ));
+                i++;
+            }
+        }
+
+
+
+        /*
         String str = "2016-03-04 11:30";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
 
         listMessagesToDisplay.add( 0,new Message(
-                "hala hala", dateTime
+                LAYOUT_ONE, "hala hala" , "22/12/1999"
         ));
+
+         */
 
         adapter = new MessageAdapter(listMessagesToDisplay,ChatActivity.this);
         recyclerView.setAdapter(adapter);
@@ -117,10 +135,12 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
 
+
         listMessages = getListMessages(); // this line shld go inside the run() method
 
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
+               // listMessages = getListMessages();
                 handler.postDelayed(runnable, delay);
 
                 int itemsOldCount = recyclerView.getAdapter().getItemCount();
@@ -143,6 +163,8 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         }, delay);
+
+
         super.onResume();
     }
 
@@ -158,23 +180,101 @@ public class ChatActivity extends AppCompatActivity {
         EditText newMessageText = (EditText) findViewById(R.id.inputMessage);
         String newMessage = newMessageText.getText().toString();
 
-        listMessages = getListMessages();
-
         /*
         /// --- this is optional, just for the frontend now, shld be replaced by the msg-saving method of backend
         listMessages.add( 0,new Message(
                 Message.LAYOUT_ONE, newMessage, "20/12/2022 18:02"
         ));
 
+
+
          */
+   /*
+        Message msgToSend = new Message();
 
-        adapter = new MessageAdapter(listMessages,ChatActivity.this);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        api.saveSentMsg(msgToSend).enqueue(new Callback<Message>() {
+            @Override
+            public void onResponse(Call<Message> call, Response<Message> response) {
+                if(response.isSuccessful()) {
 
-        /// ---
+                }else{
+                    Toast.makeText(ChatActivity.this, "Could not send the msg", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Message> call, Throwable t) {
+                Toast.makeText(ChatActivity.this, "Could not send the msg !!", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(ChatActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });;
 
-        newMessageText.setText("");
+   */
+
+
+        // we set the message object :
+       // Message msgToSend = new Message(0,null,null,newMessage,"test date");
+        Message msgToSend = new Message();
+
+        msgToSend.setDate("2023-01-07 22:51:01");
+        msgToSend.setMessageText(newMessage);
+
+        // we should get the two persons objects before saving the msg :
+
+        api.getProfilePersonne(4).enqueue(new Callback<Person>() {
+            @Override
+            public void onResponse(Call<Person> call, Response<Person> response) {
+                //get the data from the response
+                final Person person1 = response.body();
+                msgToSend.setMessageFrom(person1);
+                System.out.println("PERSON 1 : " + person1.toString());
+
+                // get person 2 :
+
+                api.getProfilePersonne(1).enqueue(new Callback<Person>() {
+                    @Override
+                    public void onResponse(Call<Person> call, Response<Person> response) {
+                        //get the data from the response
+                        final Person person2 = response.body();
+                        msgToSend.setMessageTo(person2);
+                        System.out.println("PERSON 2 : " + person2.toString());
+
+                        // now we save the msg :
+
+                        api.saveSentMsg(msgToSend).enqueue(new Callback<Message>() {
+                            @Override
+                            public void onResponse(Call<Message> call, Response<Message> response) {
+                                Toast.makeText(ChatActivity.this, "Message sent !", Toast.LENGTH_SHORT).show();
+                                System.out.println("messaaaaaage : " + msgToSend.toString());
+
+                                listMessages = getListMessages();  // renew the data
+
+                                adapter = new MessageAdapter(listMessages,ChatActivity.this);
+                                recyclerView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+
+                                /// ---
+
+                                newMessageText.setText("");
+                            }
+                            @Override
+                            public void onFailure(Call<Message> call, Throwable t) {
+                                Toast.makeText(ChatActivity.this, "Failed to send the message", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<Person> call, Throwable t) {
+                        System.out.println("PERSON 2 NADA");
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<Person> call, Throwable t) {
+                System.out.println("PERSON 1 NADA");
+            }
+        });
 
         /*
         Intent i = new Intent(ChatActivity.this, ChatActivity.class);
@@ -243,9 +343,14 @@ public class ChatActivity extends AppCompatActivity {
         api.getChatMsgs(4,1).enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                if(!response.isSuccessful()) {
+                    Toast.makeText(ChatActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // display response as string
                 listMessages = response.body();
                 System.out.println("got it");
+                System.out.println(response.body());
             }
 
             @Override
@@ -253,6 +358,8 @@ public class ChatActivity extends AppCompatActivity {
                 Toast.makeText(ChatActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 // Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
                 System.out.println("Faiiiiiled");
+                System.out.println("test" + call);
+
             }
         });
 

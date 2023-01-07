@@ -92,4 +92,20 @@ public class Person {
     public void setService(Service service) {
         this.service = service;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "person_id=" + person_id +
+                ", cin='" + cin + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", city='" + city + '\'' +
+                ", tel='" + tel + '\'' +
+                ", imageP='" + imageP + '\'' +
+                ", typeProfil='" + typeProfil + '\'' +
+                ", description='" + description + '\'' +
+                ", service=" + service +
+                '}';
+    }
 }
