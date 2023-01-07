@@ -2,6 +2,7 @@ package com.example.myandroidapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +26,7 @@ import retrofit2.Response;
 import com.example.myandroidapp.Api.AccountApi;
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
+import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.RatingEmp;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
@@ -36,13 +40,14 @@ public class EmployeesDetails extends AppCompatActivity {
     RatingBar ratingBar, ratingBarTotal;
     TextView villeTxt, nomTxt, adressTxt, emploiTxt, descTxt, telTxt, responseTV, averageRating, ratingSumText, employeeVille, lastNamemployye;
     String nom, ville, description, image,telephone, lastNameEmp,emploie, ratingValue,id,typeProfile, empPropfileImg;
-    ImageView imgProfile;
+    ImageView imgProfile, fav;
     float myRating = 0;
     ApiInterface apiInterface;
     SharedPreferences sh;
     int id_current, id_emp;
 
     private Boolean HasRated = true;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Employee emp = new Employee();
@@ -66,7 +71,7 @@ public class EmployeesDetails extends AppCompatActivity {
         employeeVille = findViewById(R.id.employeeVille);
         lastNamemployye = findViewById(R.id.textViewNom);
         imgProfile = findViewById(R.id.imageView13);
-
+        fav = findViewById(R.id.heartf);
 
         Intent intent = getIntent();
         nom = intent.getStringExtra("firstName");
@@ -91,19 +96,6 @@ public class EmployeesDetails extends AppCompatActivity {
         {
             ratingOfClientForEmp();
         }
-
-//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-//                int rating = (int) v;
-//                String message = null;
-//
-//                myRating = ratingBar.getRating();
-//                ratingBar.setRating(myRating);
-//                RateEmplployee(myRating);
-//                Toast.makeText(EmployeesDetails.this, message, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
 
         ratingBar.setOnTouchListener(new View.OnTouchListener() {
@@ -139,11 +131,18 @@ public class EmployeesDetails extends AppCompatActivity {
         employeeVille.setText(ville);
         lastNamemployye.setText(lastNameEmp);
 
+        if(intent.getStringExtra("fav").equals("true")){
+            fav.setImageResource(R.drawable.fav);
+        }else{
+            fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
+
         Picasso.get()
                 .load(Uri.parse(empPropfileImg))
                 .centerCrop()
                 .resize(150,150)
                 .into(imgProfile);
+        ButterKnife.bind(this);
     }
 
     private void ratingOfClientForEmp()
@@ -165,6 +164,35 @@ public class EmployeesDetails extends AppCompatActivity {
                 averageRating.setText("Error found is : " + t.getMessage());
             }
         });
+    }
+
+    @OnClick(R.id.heartf)
+    public void clickHeart(){
+        int id1=sh.getInt("id", 0);
+        System.out.println("fav click");
+        if(fav.getDrawable().getConstantState() == EmployeesDetails.this.getResources().getDrawable(R.drawable.fav).getConstantState()){
+            fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            Call<Void> call2=apiInterface.DeleteFav(id1, Integer.parseInt(id));
+            call2.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                }
+            });
+        }else{
+            fav.setImageResource(R.drawable.fav);
+            Call<Person> call1 = apiInterface.addFav(id1, Integer.parseInt(id));
+            call1.enqueue(new Callback<Person>() {
+                @Override
+                public void onFailure(Call<Person> call, Throwable t) {
+                }
+                @Override
+                public void onResponse(Call<Person> call, Response<Person> response) {
+                }
+            });
+        }
     }
 
     private void RateEmplployee(Float label) {

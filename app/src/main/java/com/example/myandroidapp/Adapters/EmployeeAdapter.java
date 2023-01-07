@@ -1,5 +1,6 @@
 package com.example.myandroidapp.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,38 +62,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         PostEmployees = new ArrayList<>(EmployeeList);
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-
-
-        for (Employee emp :
-                EmployeeList) {
-            lisFav.put(emp, R.drawable.ic_baseline_favorite_border_24);
-        }
-
     }
 
-    public List<Employee> getListFav() {
-        int id = sh.getInt("id", 0);
-        Call<List<ListFavoris>> call = apiInterface.getFav(id);
-        call.enqueue(new Callback<List<ListFavoris>>() {
-            @Override
-            public void onResponse(Call<List<ListFavoris>> call, Response<List<ListFavoris>> response) {
-                if (!response.isSuccessful()) {
-                    return;
-                }
-                List<ListFavoris> postList = response.body();
-                for (ListFavoris f :
-                        postList) {
-                    favEmployees.add(f.getEmp());
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
-            }
-        });
-        return favEmployees;
-    }
 
     @NonNull
     @Override
@@ -105,7 +76,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Employee post = EmployeeList.get(position);
         List<Employee> favEmployees1 = new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
@@ -133,7 +104,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
             }
         });
-        System.out.println("l image est " + EmployeeList.get(position).getImageP());
         if (EmployeeList.get(position).getImageP().isEmpty()) {
             //iview.setImageResource(R.drawable.placeholder);
         } else {
@@ -156,7 +126,11 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 i.putExtra("description", EmployeeList.get(position).getDescription());
                 i.putExtra("tel", EmployeeList.get(position).getTel());
                 i.putExtra("imagep", EmployeeList.get(position).getImageP());
-
+                String tmp= "false";
+                if(holder.btnHeart.getDrawable().getConstantState() == context.getResources().getDrawable(R.drawable.fav).getConstantState()){
+                    tmp="true";
+                }
+                i.putExtra("fav", tmp);
                 context.startActivity(i);
             }
         });
@@ -176,7 +150,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                     call2.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            System.out.println("faaav");
                         }
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
