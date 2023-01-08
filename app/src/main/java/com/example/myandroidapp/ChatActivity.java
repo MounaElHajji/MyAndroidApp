@@ -3,7 +3,9 @@ package com.example.myandroidapp;
 import static com.example.myandroidapp.Adapters.MessageAdapter.LAYOUT_ONE;
 import static com.example.myandroidapp.Adapters.MessageAdapter.LAYOUT_TWO;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -43,24 +45,53 @@ public class ChatActivity extends AppCompatActivity {
 
     List<Message> listMessagesToDisplay = new ArrayList<>();
 
+    //
+    String theirName, theirTypeProfil, theirImage, theirStringId;
+    int theirId;
+    TextView nameTextView;
+
     // retrofit
     RetrofitS retrofit= new RetrofitS();
     ApiInterface api = retrofit.getRetrofitInstance().create(ApiInterface.class);
 
     Handler handler = new Handler();
     Runnable runnable;
-    int delay = 1000;
+    int delay = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        // Get the session's id :
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int myId = sh.getInt("myId",0);
+
+        nameTextView = findViewById(R.id.textName);
+
+        //
+
         recyclerView = findViewById(R.id.chatRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);    // to show the recyclerView list from the bottom
         recyclerView.setLayoutManager(layoutManager);
+
+        ///////////// get Extras values :
+
+        Bundle extras = getIntent().getExtras();
+        theirId = extras.getInt("theirId",0);
+        //theirId = Integer.valueOf(theirStringId);
+
+        theirName = extras.getString("theirFirstName") + " " + extras.getString("theirLastName");
+        theirTypeProfil = extras.getString("theirTypeProfil");
+        theirImage = extras.getString("theirImage");
+
+        /////////////
+
+        nameTextView.setText(theirName);
+
+        // get the data :
 
         int i = 0;
         listMessages = getListMessages();
@@ -97,13 +128,13 @@ public class ChatActivity extends AppCompatActivity {
  */
 
         for ( Message msg : listMessages ) {
-            if (msg.getMessageFrom().equals(4)) {
+            if (msg.getMessageFrom().equals(myId)) {
                 listMessagesToDisplay.add( i,new Message(
                         LAYOUT_ONE, msg.getMessageText(), msg.getDate()
                 ));
                 i++;
             }
-            else if (msg.getMessageTo().equals(4)) {
+            else if (msg.getMessageTo().equals(myId)) {
 
                 listMessagesToDisplay.add( i,new Message(
                         LAYOUT_TWO, msg.getMessageText(), msg.getDate()
@@ -180,6 +211,14 @@ public class ChatActivity extends AppCompatActivity {
         EditText newMessageText = (EditText) findViewById(R.id.inputMessage);
         String newMessage = newMessageText.getText().toString();
 
+        // Get the session's id :
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int myId = sh.getInt("myId",0);
+
+        /// get their id :
+        Bundle extras = getIntent().getExtras();
+        theirId = extras.getInt("theirId",0);
+
         /*
         /// --- this is optional, just for the frontend now, shld be replaced by the msg-saving method of backend
         listMessages.add( 0,new Message(
@@ -220,7 +259,7 @@ public class ChatActivity extends AppCompatActivity {
 
         // we should get the two persons objects before saving the msg :
 
-        api.getProfilePersonne(4).enqueue(new Callback<Person>() {
+        api.getProfilePersonne(myId).enqueue(new Callback<Person>() {
             @Override
             public void onResponse(Call<Person> call, Response<Person> response) {
                 //get the data from the response
@@ -230,7 +269,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // get person 2 :
 
-                api.getProfilePersonne(1).enqueue(new Callback<Person>() {
+                api.getProfilePersonne(theirId).enqueue(new Callback<Person>() {
                     @Override
                     public void onResponse(Call<Person> call, Response<Person> response) {
                         //get the data from the response
@@ -307,6 +346,14 @@ public class ChatActivity extends AppCompatActivity {
 
     public List<Message> getListMessages() {
 
+        // Get the session's id :
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int myId = sh.getInt("myId",0);
+
+        // get their id :
+        Bundle extras = getIntent().getExtras();
+        theirId = extras.getInt("theirId",0);
+
         listMessages = new ArrayList<>();
 
         //////// msgs must be selected from newest to oldest
@@ -340,7 +387,7 @@ public class ChatActivity extends AppCompatActivity {
 
          */
 
-        api.getChatMsgs(4,1).enqueue(new Callback<List<Message>>() {
+        api.getChatMsgs(myId,theirId).enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if(!response.isSuccessful()) {

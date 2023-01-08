@@ -1,8 +1,11 @@
 package com.example.myandroidapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +23,7 @@ import com.example.myandroidapp.Models.Message;
 import com.example.myandroidapp.retrofit.RetrofitS;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +37,8 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
-    private List<Conversation> listConversations;
+    private List<Message> listConversations;
+    TextView nameTextView;
 
     // retrofit
     RetrofitS retrofit= new RetrofitS();
@@ -41,15 +46,29 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
+
+        nameTextView = findViewById(R.id.myNameText);
+
+        // sharedpref : to remove later, just to test for now
+        SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("myId", 5);
+        editor.putString("myName", "Kawtar Bek");
+        editor.commit();
+
+        //
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String myName = sh.getString("myName","");
+        nameTextView.setText(myName);
 
         recyclerView = findViewById(R.id.conversationsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listConversations = getListConversations();
+        System.out.println("i got it " + listConversations.toString());
 
         adapter = new ConversationAdapter(listConversations,this,this);
         recyclerView.setAdapter(adapter);
@@ -57,15 +76,20 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
     }
 
     @Override
-    public void onItemClicked(Conversation conversation) {
+    public void onItemClicked(Message conversation) {
         Intent i = new Intent(this,ChatActivity.class);
         startActivity(i);
     }
 
-    public List<Conversation> getListConversations() {
+    public List<Message> getListConversations() {
 
         listConversations = new ArrayList<>();
 
+        // Get the session's id :
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int myId = sh.getInt("myId",0);
+
+        /*
         for(int i=0 ; i<10 ; i++) {
             Conversation conversation = new Conversation(
                     "First name " + i,
@@ -76,14 +100,21 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
             listConversations.add(conversation);
         }
+        */
 
 
-        /*
-        api.getConversations(4).enqueue(new Callback<List<Message>>() {
+
+        api.getConversations(myId).enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 // display response as string
-                //listConversations = response.body();
+                listConversations = response.body();
+                Collections.reverse(listConversations);
+
+                System.out.println("well   : " + listConversations.toString());
+
+                adapter = new ConversationAdapter(listConversations,MessagesActivity.this,MessagesActivity.this);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -93,7 +124,7 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
             }
         });
 
-         */
+
 
         return listConversations;
     }

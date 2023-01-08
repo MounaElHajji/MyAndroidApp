@@ -20,7 +20,7 @@ public interface ApiInterface {
     @GET("employees/checkLogin/{login}")
     Call<Boolean> checkLogin(@Path("login") String login);
 
-    @GET("/chat/listChats/{myId}")
+    @GET("/chat/chat/listChats/{myId}")
     Call<List<Message>> getConversations(@Path("myId") int id);
 
     @GET("employees/{id}")

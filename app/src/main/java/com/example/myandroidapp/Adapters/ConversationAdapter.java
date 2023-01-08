@@ -1,6 +1,8 @@
 package com.example.myandroidapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myandroidapp.ChatActivity;
 import com.example.myandroidapp.Listeners.ListMessagesListener;
 import com.example.myandroidapp.Models.Conversation;
+import com.example.myandroidapp.Models.Message;
+import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.Listeners.ListMessagesListener;
 import com.example.myandroidapp.Models.Conversation;
@@ -23,11 +28,11 @@ import java.util.List;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ViewHolder> {
 
-    List<Conversation> listConversations;
+    List<Message> listConversations;
     Context context;
     private ListMessagesListener listener;
 
-    public ConversationAdapter(List<Conversation> listConversations, Context context, ListMessagesListener listener) {
+    public ConversationAdapter(List<Message> listConversations, Context context, ListMessagesListener listener) {
         this.listConversations = listConversations;
         this.context = context;
         this.listener = listener;
@@ -45,19 +50,56 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Conversation conversation = listConversations.get(position);
+        Message conversation = listConversations.get(position);
 
-        holder.textName.setText(conversation.getFirstName() + " " + conversation.getLastName());
-        holder.textService.setText(conversation.getTypeProfil());
+        // Get the session's id :
+        SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        int myId = sh.getInt("myId",0);
 
+        // specify the person i am talking to :
+        Person personWith = new Person();
+        if (conversation.getMessageFrom().getPerson_id() == myId) {
+            personWith = conversation.getMessageTo();
+        }
+        else { personWith = conversation.getMessageFrom(); }
+
+        holder.textName.setText(personWith.getFirstName() + " " + personWith.getLastName());
+        holder.textService.setText(conversation.getMessageText());
+
+        /*
         if(listConversations.get(position).getImageP() != null){
             Picasso.get().load(listConversations.get(position).getImageP()).into(holder.image);
+        }
+         */
+
+        if(personWith.getImage() != null){
+            Picasso.get().load(personWith.getImage()).into(holder.image);
         }
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClicked(listConversations.get(holder.getAdapterPosition()));
+                int thisPosition = holder.getAdapterPosition();
+                listener.onItemClicked(listConversations.get(thisPosition));
+
+                // specify the person i am talking to :
+                Person personWith = new Person();
+                if (listConversations.get(thisPosition).getMessageFrom().getPerson_id() == myId) {
+                    personWith = listConversations.get(thisPosition).getMessageTo();
+                }
+                else { personWith = listConversations.get(thisPosition).getMessageFrom(); }
+
+                // putExtras of the other person's attributs
+                Intent i = new Intent(context, ChatActivity.class);
+                i.putExtra("theirId", personWith.getPerson_id());
+                i.putExtra("theirFirstName", personWith.getFirstName());
+                i.putExtra("theirLastName", personWith.getLastName());
+                i.putExtra("theirTypeProfil", personWith.getTypeProfil());
+                i.putExtra("theirImage", personWith.getImage());
+
+                System.out.println("thats their id ------- " + personWith.getPerson_id());
+
+                context.startActivity(i);
             }
         });
     }
