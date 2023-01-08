@@ -2,7 +2,7 @@ package com.example.myandroidapp.Models;
 
 public class Person {
 
-    private int person_id;
+    private int id;
     private String cin;
     private String firstName;
     private String lastName;
@@ -14,11 +14,11 @@ public class Person {
     private Service service;
 
     public int getPerson_id() {
-        return person_id;
+        return id;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setPerson_id(int id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {
@@ -96,7 +96,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "person_id=" + person_id +
+                "person_id=" + id +
                 ", cin='" + cin + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

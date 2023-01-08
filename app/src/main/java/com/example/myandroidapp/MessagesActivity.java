@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +55,7 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
         // sharedpref : to remove later, just to test for now
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("myId", 5);
+        editor.putInt("myId", 4);
         editor.putString("myName", "Kawtar Bek");
         editor.commit();
 
@@ -66,6 +67,7 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
         recyclerView = findViewById(R.id.conversationsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         listConversations = getListConversations();
         System.out.println("i got it " + listConversations.toString());

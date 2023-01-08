@@ -7,6 +7,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myandroidapp.Models.Message;
 import com.example.myandroidapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -106,6 +108,9 @@ public class MessageAdapter extends RecyclerView.Adapter {
             case LAYOUT_TWO :
                 String receivedMessage = listMessages.get(position).getMessageText();
                 String msgDate1 = listMessages.get(position).getDate();
+                //String image = listMessages.get(position).getMessageTo().getImage();
+                //Picasso.get().load(image).into(holder.imageView);
+
                 ((ReceiverMessageViewHolder) holder).setView(receivedMessage, msgDate1);
                 break;
         }
@@ -145,11 +150,13 @@ public class MessageAdapter extends RecyclerView.Adapter {
     class ReceiverMessageViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView textMessageReceived, messageDate;
+        //public ImageView imageView;
 
         public ReceiverMessageViewHolder(@NonNull View itemView) {
             super(itemView);
             textMessageReceived = itemView.findViewById(R.id.textMessage);
             messageDate = itemView.findViewById(R.id.textDateTime);
+            //imageView = itemView.findViewById(R.id.image);
         }
 
         /*
@@ -163,6 +170,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         {
             textMessageReceived.setText(textMessage);
             messageDate.setText(textDate);
+
         }
     }
 }
