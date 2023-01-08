@@ -95,24 +95,16 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="new york, usa"
+            android:text="Kenitra "
             android:textAllCaps="true"
             android:textColor="@color/address"
             android:textSize="14sp" />
 
 
 
+
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/heartf"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="222dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fav" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -238,11 +230,13 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="410dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/backgroundlistview"
+        android:layout_height="500dp"
+        android:layout_below="@+id/rellay1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/backgroundloginonsc"
         android:elevation="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -250,53 +244,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp">
+
+            <ImageView
+                android:id="@+id/heartf"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/fav" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="1"
+                    android:text="Description:"
+                    android:textColor="@color/TxthomeColor"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text=" 8ans d'expériences"
+
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/idTest"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:text=" id"-->
+
+                <!--                android:textAlignment="textStart"-->
+                <!--                android:textColor="@color/black"-->
+                <!--                android:textSize="20sp" />-->
+            </LinearLayout>
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="60dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10sp"
-                android:layout_weight="1"
-                android:text="Description:"
-                android:textColor="@color/gray"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text=" 8ans d'expériences"
-
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/idTest"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_weight="1"-->
-            <!--                android:text=" id"-->
-
-            <!--                android:textAlignment="textStart"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:textSize="20sp" />-->
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -308,8 +323,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_location_city_24"
-                />
+                android:src="@drawable/ic_baseline_home_24" />
 
 
             <TextView
@@ -319,7 +333,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
                 android:text="Ville:"
-                android:textColor="@color/gray"
+                android:textColor="@color/TxthomeColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -339,7 +353,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
 
-            android:alpha="0.5"
+            android:alpha="0.2"
             android:background="#585858" />
 
         <LinearLayout
@@ -356,8 +370,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_email"
-                />
+                android:src="@drawable/email" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -366,8 +379,8 @@
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
                 android:text="Num tel/email:"
-                android:textSize="20sp"
-                android:textColor="@color/gray"/>
+                android:textColor="@color/TxthomeColor"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -386,7 +399,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="0dp"
-            android:alpha="0.5"
+            android:alpha="0.2"
             android:background="#585858" />
 
         <LinearLayout
@@ -400,6 +413,12 @@
 
             >
 
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_person_24" />
+
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
@@ -407,7 +426,7 @@
                 android:layout_marginLeft="10sp"
                 android:layout_weight="1"
                 android:text="CIN:"
-                android:textColor="@color/gray"
+                android:textColor="@color/TxthomeColor"
                 android:textSize="23sp" />
 
             <TextView
@@ -423,21 +442,19 @@
         </LinearLayout>
 
 
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="0dp"
-            android:alpha="0.5"
+            android:alpha="0.2"
             android:background="#585858" />
-
 
 
         <TextView
             android:id="@+id/idTVResponse"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="65dp" />
 
         <!--        <Button-->
         <!--            android:id="@+id/buttonRat"-->

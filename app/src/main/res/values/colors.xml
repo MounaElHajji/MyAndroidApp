@@ -25,6 +25,9 @@
     <color name="gradStart">#63C9FF</color>
     <color name="followersBg">#65DCE5</color>
     <color name="followingBg">#49BEFF</color>
+    <color name="homeColor">#ffa36d</color>
+    <color name="TxthomeColor">#d44e00</color>
+
     <color name="grey">#E5E5E5</color>
 
 </resources>
