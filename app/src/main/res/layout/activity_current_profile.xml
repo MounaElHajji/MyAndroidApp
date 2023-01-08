@@ -53,7 +53,7 @@
                 android:layout_marginTop="15sp"
                 android:fontFamily="sans-serif-light"
                 android:text="Nom"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <TextView
@@ -65,7 +65,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15sp"
                 android:fontFamily="sans-serif-light"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="20sp"/>
 
         </LinearLayout>
