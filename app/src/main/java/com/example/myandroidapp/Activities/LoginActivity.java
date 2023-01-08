@@ -119,16 +119,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()) {
                     /*logout*/
-                            SharedPreferences.Editor edit =  sharedPref.edit();
+                    SharedPreferences.Editor edit =  sharedPref.edit();
                     edit.putBoolean("userlogin", true);
                     edit.commit();
 
                     Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
                     Account account1= response.body();
-                    SharedPreferences.Editor myEdit = sharedPref.edit();
-                    myEdit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
-                    myEdit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
-                    myEdit.commit();
+                    edit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
+                    edit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
+                    edit.commit();
                     typeprofil(account1.getUsername());
                 }else{
                     Toast.makeText(LoginActivity.this, "login failed!!!", Toast.LENGTH_SHORT).show();
