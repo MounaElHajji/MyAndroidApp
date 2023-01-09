@@ -70,7 +70,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     public EmployeeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.items, null);
-
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
         return viewHolder;
     }
@@ -83,8 +82,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.ville.setText(post.getCity());
         holder.descritpion.setText(post.getTel());
         holder.text_nom1.setText(post.getLast_name());
-        holder.telephoneVar.setText(post.getTel());
-       // holder.employeeType.setText(post.getService().getService_title());
         int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
@@ -97,6 +94,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                     if (post.getTel().equals(f.getEmp().getTel())) {
                         holder.btnHeart.setImageResource(R.drawable.fav);
                     }
+                    else{
+                        holder.btnHeart.setImageResource(R.drawable.fav);
+                    }
+
                 }
 
 
@@ -113,6 +114,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                     .load(EmployeeList.get(position).getImageP())
                     .centerCrop()
                     .resize(150, 150)
+                    .placeholder(R.drawable.personne)
                     .into(holder.imageP);
         }
 
@@ -191,6 +193,17 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             btnHeart = itemView.findViewById(R.id.btnHeart);
             telephoneVar = itemView.findViewById(R.id.TelTxt);
             employeeType = itemView.findViewById(R.id.employee_type);
+            int id = sh.getInt("id", 0);
+            String type_profil = sh.getString("type_profil", "");
+            if(type_profil.equals("client")) {
+               btnHeart.setImageResource(R.drawable.fav);
+                System.out.println("Client");
+            }
+            else{
+                btnHeart.setVisibility(View.GONE);
+                System.out.println("Emplll");
+
+            }
 
 
         }
