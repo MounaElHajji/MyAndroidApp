@@ -31,6 +31,11 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+
+
+
+
     @BindView(R.id.editTextTextPersonName)
     EditText username;
 
@@ -47,8 +52,13 @@ public class LoginActivity extends AppCompatActivity {
     TextView signUp;
 
     SharedPreferences sharedPref;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+// getting the data which is stored in shared preferences.
+
+
         sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         Boolean islogin = sharedPref.getBoolean("userlogin", false);
        /* if(islogin){
@@ -79,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     @OnClick(R.id.forgot_password)
     public void  forgot_password(){
-        Intent i= new Intent(this,ResetpasswordActivity.class);
+        Intent i= new Intent(this,ForgotPasswordActivity.class);
         startActivity(i);
     }
 
@@ -90,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
         AccountApi api=retrofitS.getRetrofit().create(AccountApi.class);
         String passwd=String.valueOf(pwd.getText());
         String usrname=String.valueOf(username.getText());
+
+
         Account account= new Account();
         account.setPassword(passwd);
         account.setUsername(usrname);
@@ -107,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                     Account account1= response.body();
                     SharedPreferences.Editor myEdit = sharedPref.edit();
                     myEdit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
-                    myEdit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
+                    myEdit.putInt("id", account1.getPerson().getId());
                     myEdit.commit();
                     startActivity(i);
                     finish();

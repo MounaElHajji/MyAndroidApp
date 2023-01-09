@@ -1,18 +1,23 @@
 package com.example.myandroidapp.Models;
 
 public class Account {
-    private  Long id;
+    private  int id;
     private String username;
     private String password;
 
     public Account() {
     }
 
-    public void setId(Long id) {
+    public Account(String password, String email) {
+        this.username=email;
+        this.password=password;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

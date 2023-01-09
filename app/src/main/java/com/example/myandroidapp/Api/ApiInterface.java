@@ -78,4 +78,12 @@ public interface ApiInterface {
 
     @PUT("/{id}/ratings/{id_rating}")
     Call<Employee> updateRating(@Path("id") String id, @Path("id_rating") int id_rating, @Body Rating ratingRequest);
+
+    @PUT("/account/user/login")
+    Call <Account>  updateAccount(@Body Account account);
+
+
+
+    @POST("/account/edit")
+    Call<Account> edit(@Body Account account);
 }

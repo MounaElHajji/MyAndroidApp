@@ -3,7 +3,6 @@ package com.example.myandroidapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
-import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -49,9 +47,9 @@ public class CurrentProfile extends AppCompatActivity {
 
     private void getUserDetails() {
         SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-
-        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         int id= sh.getInt("id",0);
+        apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+
         Call<Employee> call = apiInterface.getProfilePersonne(id);
         call.enqueue(new Callback<Employee>() {
             @Override
@@ -77,11 +75,11 @@ public class CurrentProfile extends AppCompatActivity {
                 cinTxt.setText(empCin);
                 descTxt.setText(empDesc);
 
-                Picasso.get()
+                /*Picasso.get()
                         .load(Uri.parse(imagep))
                         .centerCrop()
                         .resize(150,150)
-                        .into(imageP);
+                        .into(imageP);*/
 
             }
 

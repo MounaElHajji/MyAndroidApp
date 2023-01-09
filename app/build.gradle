@@ -5,6 +5,10 @@ plugins {
 android {
     namespace 'com.example.myandroidapp'
     compileSdk 32
+    packagingOptions {
+        exclude 'META-INF/NOTICE.md'
+        exclude 'META-INF/LICENSE.md'
+    }
 
     defaultConfig {
         applicationId "com.example.myandroidapp"
@@ -53,6 +57,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
     implementation 'com.karumi:dexter:5.0.0'
+    implementation 'com.sun.mail:android-mail:1.6.6'
+    implementation 'com.sun.mail:android-activation:1.6.6'
 
 }
 
