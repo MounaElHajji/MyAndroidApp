@@ -2,6 +2,7 @@ package com.example.myandroidapp.Api;
 
 import android.media.Rating;
 
+import com.example.myandroidapp.Models.Account;
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.ListFavoris;
 import com.example.myandroidapp.Models.Message;
@@ -76,6 +77,15 @@ public interface ApiInterface {
 
     @POST("/chat/privateMessage/save")
     Call<Message> saveSentMsg(@Body Message message);
+
+    //passwordupdate
+    @PUT("/account/user/login")
+    Call <Account>  updateAccount(@Body Account account);
+
+
+   //profile update
+    @POST("/account/edit")
+    Call<Account> edit(@Body Account account);
 
 
 
