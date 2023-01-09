@@ -52,7 +52,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
     SharedPreferences sh;
 
     HashMap<Employee, Integer> lisFav = new HashMap<>();
-
+//    SharedPreferences sharedPref;
 
     public EmployeeAdapter(Context context, List<Employee> EmployeeList) {
         this.context = context;
@@ -77,6 +77,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull EmployeeAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
         Employee post = EmployeeList.get(position);
         List<Employee> favEmployees1 = new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
@@ -84,6 +85,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.descritpion.setText(post.getTel());
         holder.text_nom1.setText(post.getLast_name());
         int id = sh.getInt("id", 0);
+        String type_profil = sh.getString("type_profil", "");
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {
             @Override
@@ -92,9 +94,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                 for (ListFavoris f :
                         postList) {
                     favEmployees1.add(f.getEmp());
-                    if (post.getTel().equals(f.getEmp().getTel())) {
+                    if (post.getTel().equals(f.getEmp().getTel()) && type_profil.equals("client")) {
                         holder.btnHeart.setImageResource(R.drawable.fav);
                     }
+                    else{
+                        holder.btnHeart.setImageResource(R.drawable.fav);
+                        holder.btnHeart.setVisibility(View.GONE);
+                    }
+
                 }
 
 
