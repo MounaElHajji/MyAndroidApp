@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.signUp)
     TextView signUp;
+
     String type_profil;
     SharedPreferences sharedPref;
     @Override
@@ -113,13 +114,13 @@ public class LoginActivity extends AppCompatActivity {
         Account account= new Account();
         account.setPassword(passwd);
         account.setUsername(usrname);
-        Intent i= new Intent(this, listeServices.class);
+//        Intent i= new Intent(this, listeServices.class);
         api.loginAccount(account) .enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()) {
                     /*logout*/
-                            SharedPreferences.Editor edit =  sharedPref.edit();
+                    SharedPreferences.Editor edit =  sharedPref.edit();
                     edit.putBoolean("userlogin", true);
                     edit.commit();
 
@@ -143,10 +144,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void typeprofil(String login) {
-        SharedPreferences sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        Retrofit adapter = RetrofitBack.getRetrofitIns();
-
+        Retrofit adapter = new Retrofit.Builder()
+                .baseUrl("http://192.168.171.70:8080")
+                .addConverterFactory(new ToStringConverterFactory())
+                .build();
         AccountApi  api = adapter.create(AccountApi.class);
         System.out.println(login);
         Call<String> call = api.getTypeProfil(login);
@@ -155,8 +158,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
 
                 String type_profile = response.body();
-
-
 
                 if (response.isSuccessful()) {
 
