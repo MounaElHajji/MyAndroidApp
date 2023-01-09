@@ -65,7 +65,7 @@ public class EmployeesDetails extends AppCompatActivity {
         villeTxt = findViewById(R.id.textView4);
         nomTxt = findViewById(R.id.textView);
         adressTxt = findViewById(R.id.textView8);
-        emploiTxt = findViewById(R.id.textView10);
+        emploiTxt = findViewById(R.id.employee_type);
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
         ratingBar = findViewById(R.id.ratingBar);
@@ -150,6 +150,7 @@ public class EmployeesDetails extends AppCompatActivity {
                 .load(Uri.parse(empPropfileImg))
                 .centerCrop()
                 .resize(150,150)
+                .placeholder(R.drawable.personne)
                 .into(imgProfile);
 
         ButterKnife.bind(this);
