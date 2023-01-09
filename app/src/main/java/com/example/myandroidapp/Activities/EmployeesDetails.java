@@ -97,7 +97,7 @@ public class EmployeesDetails extends AppCompatActivity {
         SumRating();
         sumColumnsRating();
         String type_profil = sh.getString("type_profil", "");
-        if(typeProfile.equals("Employé")) {
+        if(type_profil.equals("Employé")) {
            layout.setVisibility(View.GONE);
            fav.setVisibility(View.GONE);
         }

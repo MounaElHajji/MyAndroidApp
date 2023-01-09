@@ -95,7 +95,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
                         holder.btnHeart.setImageResource(R.drawable.fav);
                     }
                     else{
-                        holder.btnHeart.setImageResource(R.drawable.fav);
+                        holder.btnHeart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     }
 
                 }
@@ -107,16 +107,14 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             public void onFailure(Call<List<ListFavoris>> call, Throwable t) {
             }
         });
-        if (EmployeeList.get(position).getImageP().isEmpty()) {
-            //iview.setImageResource(R.drawable.placeholder);
-        } else {
+
             Picasso.get()
                     .load(EmployeeList.get(position).getImageP())
                     .centerCrop()
                     .resize(150, 150)
                     .placeholder(R.drawable.personne)
                     .into(holder.imageP);
-        }
+
 
 
         holder.btnVoir.setOnClickListener(new View.OnClickListener() {
@@ -197,12 +195,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             String type_profil = sh.getString("type_profil", "");
             if(type_profil.equals("client")) {
                btnHeart.setImageResource(R.drawable.fav);
-                System.out.println("Client");
             }
             else{
                 btnHeart.setVisibility(View.GONE);
-                System.out.println("Emplll");
-
             }
 
 
