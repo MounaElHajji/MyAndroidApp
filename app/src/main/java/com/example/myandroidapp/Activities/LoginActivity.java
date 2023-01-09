@@ -126,7 +126,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "login successful!", Toast.LENGTH_SHORT).show();
                     Account account1= response.body();
                     edit.putString("name", account1.getPerson().getFirstName() + " "+account1.getPerson().getLastName());
-                    edit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
+                    //edit.putInt("id", Integer.parseInt(account1.getPerson().getId().toString()));
+                    edit.putInt("id", account1.getPerson().getId());
+
                     edit.commit();
                     typeprofil(account1.getUsername());
                 }else{

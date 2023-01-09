@@ -28,4 +28,7 @@ public interface AccountApi {
 
     @GET("/account/profiltype/{username}")
     Call<String> getTypeProfil(@Path("username") String username);
+
+    @GET("employees/{id}")
+    Call<Person> getProfilePersonne(@Path("id") int id);
 }

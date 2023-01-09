@@ -4,6 +4,7 @@ import android.media.Rating;
 
 import com.example.myandroidapp.Models.Employee;
 import com.example.myandroidapp.Models.ListFavoris;
+import com.example.myandroidapp.Models.Message;
 import com.example.myandroidapp.Models.Person;
 import com.example.myandroidapp.Models.RatingEmp;
 import com.example.myandroidapp.Models.Ville;
@@ -64,5 +65,18 @@ public interface ApiInterface {
 
     @GET("/employees/{id_client}/RatingEmpByClient/{id}")
     Call<Integer> getRatOfClientForEmp(@Path(value = "id_client") int id_client, @Path(value = "id") int id);
+
+    // Messagerie functions :
+
+    @GET("/chat/chat/listChats/{myId}")
+    Call<List<Message>> getConversations(@Path("myId") int id);
+
+    @GET("/chat/chat/listMessages/{from}/{to}")
+    Call<List<Message>> getChatMsgs(@Path("from") int from,@Path("to") int to);
+
+    @POST("/chat/privateMessage/save")
+    Call<Message> saveSentMsg(@Body Message message);
+
+
 
 }

@@ -329,7 +329,7 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView4"
+            android:id="@+id/appCompatImageView1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
 
@@ -533,7 +533,7 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+            android:id="@+id/appCompatImageView9"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="0dp"
