@@ -2,9 +2,11 @@ package com.example.myandroidapp.Activities;
 
 import static com.example.myandroidapp.Activities.ServiceEmpActivity.TAG;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.myandroidapp.Api.ApiInterface;
 import com.example.myandroidapp.Models.Employee;
@@ -162,6 +165,30 @@ public class CurrentProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    int requestCode = 0;
+    public void callMe(View view){
+        Uri telnumber = Uri.parse("tel:0689339528");
+        Intent call = new Intent(Intent.ACTION_CALL, telnumber);
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+
+            Toast.makeText(this, "Oops,vous n'avez pas de persmission, veuillez l'activer!", Toast.LENGTH_SHORT).show();
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, requestCode);
+            return;
+        }
+        startActivity(call);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == requestCode) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:0689339528"));
+                startActivity(callIntent);
+            }
+        }
     }
 
     public void onBackClick(View view) {

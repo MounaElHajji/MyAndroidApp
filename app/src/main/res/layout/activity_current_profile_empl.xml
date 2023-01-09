@@ -72,6 +72,20 @@
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="334dp"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="160dp"
+            android:backgroundTint="#00FFFFFF"
+            android:clickable="true"
+            android:onClick="callMe"
+            app:srcCompat="@drawable/ic_baseline_local_phone_24" />
+
     </RelativeLayout>
 
     <!--    <LinearLayout-->
@@ -161,9 +175,7 @@
 
 
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView
         android:orientation="vertical"
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
@@ -225,6 +237,7 @@
 
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -514,13 +527,5 @@
         android:layout_marginBottom="181dp"
         android:alpha="0.2"
         android:background="#585858" />
-
-    <include
-        android:id="@+id/include2"
-        layout="@layout/footer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </RelativeLayout>

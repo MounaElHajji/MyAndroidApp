@@ -118,7 +118,7 @@
         />
 
     <include
-        layout="@layout/footer_layout"
+        layout="@layout/employee_footer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

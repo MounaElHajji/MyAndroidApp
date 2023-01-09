@@ -1,11 +1,14 @@
 package com.example.myandroidapp.Activities;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +34,7 @@ public class Settings extends AppCompatActivity {
     String type_profil;
     @BindView(R.id.editButton)
     TextView edit;
-
+    private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,28 +42,28 @@ public class Settings extends AppCompatActivity {
         type_profil = sharedPref.getString("type_profil", "");
         if(type_profil.equals("employe")){
             setContentView(R.layout.activity_settings_empl);
-            OnclickButtonListener();
+            prepareDialog();
         }else{
             setContentView(R.layout.activity_settings);
-            OnclickButtonListener();
+            prepareDialog();
         }
 
     }
 
     //Delete  Button  listener
-    public void OnclickButtonListener() {
-
-        Button bouton = findViewById(R.id.deleteButton);
-        bouton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeleteuserAccount();
-                Intent intent = new Intent(Settings.this,HomeActivity.class);
-                startActivity(intent);
-
-            }
-        });
-    }
+//    public void OnclickButtonListener() {
+//
+//        Button bouton = findViewById(R.id.deleteButton);
+//        bouton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DeleteuserAccount();
+//                Intent intent = new Intent(Settings.this,HomeActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        });
+//    }
     private void DeleteuserAccount() {
         SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
@@ -72,25 +75,55 @@ public class Settings extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(Settings.this, "Success account deleted", Toast.LENGTH_LONG).show();
-                    SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putBoolean("userlogin", false);
-                    editor.commit();
                 }
-
-
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(Settings.this, "failed to delete account ", Toast.LENGTH_LONG).show();
-
             }
         });
-
+        SharedPreferences.Editor editor = sh.edit();
+        editor.putBoolean("userlogin", false);
+        editor.commit();
+        Intent intent = new Intent(Settings.this,HomeActivity.class);
+        startActivity(intent);
+    }
+    public void prepareDialog(){
+        //Create the Dialog here
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.pop_message);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        Button Ok = dialog.findViewById(R.id.btn_okay);
+        Button Annuler = dialog.findViewById(R.id.btn_cancel);
+        Ok.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DeleteuserAccount();
+                        dialog.dismiss();
+                    }
+                }
+        );
+        Annuler.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Settings.this, "la suppression du compte est annulé", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }
+        );
     }
 
 
+    public void popUpMessage(View view){
+        dialog.show(); // Showing the dialog here
+    }
 
     public void onEditClick(View view) {
         Intent intent = new Intent(Settings.this, EditProfile.class);
