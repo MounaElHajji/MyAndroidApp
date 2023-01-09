@@ -166,30 +166,7 @@ public class CurrentProfile extends AppCompatActivity {
             }
         });
     }
-    int requestCode = 0;
-    public void callMe(View view){
-        Uri telnumber = Uri.parse("tel:0689339528");
-        Intent call = new Intent(Intent.ACTION_CALL, telnumber);
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
 
-            Toast.makeText(this, "Oops,vous n'avez pas de persmission, veuillez l'activer!", Toast.LENGTH_SHORT).show();
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, requestCode);
-            return;
-        }
-        startActivity(call);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == requestCode) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:0689339528"));
-                startActivity(callIntent);
-            }
-        }
-    }
 
     public void onBackClick(View view) {
         finish();
