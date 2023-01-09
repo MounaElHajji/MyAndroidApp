@@ -30,9 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CurrentProfile extends AppCompatActivity {
-    Employee emp = new Employee();
     ApiInterface apiInterface;
-    TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt;
+    TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt, prenomTxt;
     ImageView imageP;
     String type_profil;
     LinearLayout clickFavoris;
@@ -40,19 +39,17 @@ public class CurrentProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
-        type_profil = sharedPref.getString("type_profil", "");
+             sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+       type_profil = sharedPref.getString("type_profil", "");
         if(type_profil.equals("employe")) {
             setContentView(R.layout.activity_current_profile_empl);
-            imageP= findViewById(R.id.imageView);
+            imageP= findViewById(R.id.imageView6);
         }
         else{
             setContentView(R.layout.activity_current_profile);
-           imageP= findViewById(R.id.imageView13);
+           imageP= findViewById(R.id.imageView6);
         }
 
-//       setContentView(R.layout.activity_current_profile);
-//        imageP= findViewById(R.id.imageView13);
 
         /*clickFavoris = findViewById(R.id.clickFavoris);
 
@@ -72,26 +69,27 @@ public class CurrentProfile extends AppCompatActivity {
 
         if(type_profil.equals("employe")) {
             villeTxt = findViewById(R.id.textView4);
-            nomTxt = findViewById(R.id.textView);
-            cinTxt = findViewById(R.id.textView8);
-            emploiTxt = findViewById(R.id.textView10);
-            descTxt = findViewById(R.id.textView12);
+            nomTxt = findViewById(R.id.text_nom);
+            prenomTxt = findViewById(R.id.text_nom1);
+            cinTxt = findViewById(R.id.textCin);
+            descTxt = findViewById(R.id.Description);
             telTxt = findViewById(R.id.textView6);
         }
         else{
             villeTxt = findViewById(R.id.textView4);
-            nomTxt = findViewById(R.id.textView);
+            nomTxt = findViewById(R.id.text_nom);
+            prenomTxt = findViewById(R.id.text_nom1);
             cinTxt = findViewById(R.id.textView8);
             telTxt = findViewById(R.id.textView6);
-
+            prenomTxt = findViewById(R.id.text_nom1);
         }
     }
 
     private void getUserDetails() {
-        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        int id= sh.getInt("id",0);
+        int id= sharedPref.getInt("id",0);
         Call<Employee> call = apiInterface.getProfilePersonne(id);
         call.enqueue(new Callback<Employee>() {
             @Override
@@ -108,13 +106,14 @@ public class CurrentProfile extends AppCompatActivity {
                 String empDesc = reponseEmp.getDescription();
                 String empEmploie = reponseEmp.getType_profil();
                 String imagep= reponseEmp.getImageP();
+                System.out.println("fkjeifjcefjcidse : " + reponseEmp.toString());
 
                 if(type_profil.equals("employe")) {
                     villeTxt.setText(empVille);
                     telTxt.setText(empTel);
-                    nomTxt.setText(empNom +" "+empPrenom);
-                    emploiTxt.setText(empEmploie);
                     cinTxt.setText(empCin);
+                    nomTxt.setText(empNom);
+                    prenomTxt.setText(empPrenom);
                     descTxt.setText(empDesc);
                     System.out.println(imagep);
                     Picasso.get()
@@ -129,8 +128,8 @@ public class CurrentProfile extends AppCompatActivity {
                 else{
                     villeTxt.setText(empVille);
                     telTxt.setText(empTel);
-                    nomTxt.setText(empNom +" "+empPrenom);
-                    cinTxt.setText(empCin);
+                    nomTxt.setText(empNom);
+                    prenomTxt.setText(empPrenom);
                     System.out.println(imagep);
                     Picasso.get()
                             .load(Uri.parse(imagep))

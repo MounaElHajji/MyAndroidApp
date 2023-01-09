@@ -84,7 +84,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         holder.descritpion.setText(post.getTel());
         holder.text_nom1.setText(post.getLast_name());
         holder.telephoneVar.setText(post.getTel());
-        holder.employeeType.setText(post.getService().getService_title());
+       // holder.employeeType.setText(post.getService().getService_title());
         int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
         call.enqueue(new Callback<List<ListFavoris>>() {

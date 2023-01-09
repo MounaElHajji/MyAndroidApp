@@ -303,4 +303,28 @@
             app:layout_constraintVertical_bias="0.915"
             tools:ignore="MissingConstraints" />
 
+        <TextView
+            android:id="@+id/alreadyHaveAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Vous avez déja un compte ? "
+            android:textColor="@color/strong_grey"
+            app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintStart_toStartOf="@+id/service"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+        <TextView
+            android:id="@+id/authentification"
+            android:layout_width="111dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginLeft="176dp"
+            android:layout_marginTop="16dp"
+            android:text="Se connecter"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/alreadyHaveAccount"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
     </androidx.constraintlayout.widget.ConstraintLayout></ScrollView>

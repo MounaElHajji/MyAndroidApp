@@ -22,7 +22,7 @@
             android:background="@drawable/circle_border">
 
             <ImageView
-                android:id="@+id/imageView13"
+                android:id="@+id/imageView6"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="9dp"
@@ -72,89 +72,91 @@
 
     </RelativeLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linlay1"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/rellay1"-->
-<!--        android:orientation="horizontal">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linlay1"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/rellay1"-->
+    <!--        android:orientation="horizontal">-->
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="@color/followersBg"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingBottom="5dp"-->
-<!--            android:paddingTop="5dp">-->
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@color/followersBg"-->
+    <!--            android:gravity="center"-->
+    <!--            android:paddingBottom="5dp"-->
+    <!--            android:paddingTop="5dp">-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center_horizontal"-->
-<!--                android:orientation="vertical">-->
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center_horizontal"-->
+    <!--                android:orientation="vertical">-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/ratingClient"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="sans-serif-light"-->
-<!--                    android:text="453K"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="25sp" />-->
+    <!--                <TextView-->
+    <!--                    android:id="@+id/ratingClient"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="sans-serif-light"-->
+    <!--                    android:text="453K"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="25sp" />-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="sans-serif-light"-->
-<!--                    android:text="followers"-->
-<!--                    android:textAllCaps="true"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="13sp" />-->
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="sans-serif-light"-->
+    <!--                    android:text="followers"-->
+    <!--                    android:textAllCaps="true"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="13sp" />-->
 
-<!--            </LinearLayout>-->
+    <!--            </LinearLayout>-->
 
-<!--        </RelativeLayout>-->
+    <!--        </RelativeLayout>-->
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="@color/followingBg"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingBottom="5dp"-->
-<!--            android:paddingTop="5dp">-->
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@color/followingBg"-->
+    <!--            android:gravity="center"-->
+    <!--            android:paddingBottom="5dp"-->
+    <!--            android:paddingTop="5dp">-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center_horizontal"-->
-<!--                android:orientation="vertical">-->
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center_horizontal"-->
+    <!--                android:orientation="vertical">-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="sans-serif-light"-->
-<!--                    android:text="873"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="25sp" />-->
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="sans-serif-light"-->
+    <!--                    android:text="873"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="25sp" />-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:fontFamily="sans-serif-light"-->
-<!--                    android:text="following"-->
-<!--                    android:textAllCaps="true"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="13sp" />-->
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:fontFamily="sans-serif-light"-->
+    <!--                    android:text="following"-->
+    <!--                    android:textAllCaps="true"-->
+    <!--                    android:textColor="@color/white"-->
+    <!--                    android:textSize="13sp" />-->
 
-<!--            </LinearLayout>-->
+    <!--            </LinearLayout>-->
 
-<!--        </RelativeLayout>-->
+    <!--        </RelativeLayout>-->
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
+
+
 
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -207,7 +209,7 @@
                         android:text="@string/ville_client"
                         android:textColor="@color/TxthomeColor"
                         android:textSize="22sp"
-                         />
+                        />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -292,13 +294,16 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+
+
+
     <LinearLayout
         android:id="@+id/rellay4"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_below="@id/rellay3"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="61dp"
+        android:layout_marginTop="170dp"
         android:layout_gravity="center"
         android:orientation="horizontal">
 
@@ -385,5 +390,13 @@
         android:layout_marginBottom="181dp"
         android:alpha="0.2"
         android:background="#585858" />
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </RelativeLayout>
