@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.media.Rating;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class EmployeesDetails extends AppCompatActivity {
     String nom, ville, description, image,telephone, lastNameEmp,emploie, ratingValue,id,typeProfile, empPropfileImg;
     ImageView imgProfile, fav;
     float myRating = 0;
+    View layout;
     ApiInterface apiInterface;
     SharedPreferences sh;
     int id_current, id_emp;
@@ -74,6 +76,7 @@ public class EmployeesDetails extends AppCompatActivity {
         employeeVille = findViewById(R.id.employeeVille);
         lastNamemployye = findViewById(R.id.textViewNom);
         imgProfile = findViewById(R.id.imageView13);
+        layout= findViewById(R.id.layout3);
         fav = findViewById(R.id.heartf);
 
         Intent intent = getIntent();
@@ -93,8 +96,11 @@ public class EmployeesDetails extends AppCompatActivity {
 
         SumRating();
         sumColumnsRating();
-
-
+        String type_profil = sh.getString("type_profil", "");
+        if(typeProfile.equals("Employé")) {
+           layout.setVisibility(View.GONE);
+           fav.setVisibility(View.GONE);
+        }
         if(id_current != id_emp)
         {
             ratingOfClientForEmp();
@@ -145,6 +151,7 @@ public class EmployeesDetails extends AppCompatActivity {
                 .centerCrop()
                 .resize(150,150)
                 .into(imgProfile);
+
         ButterKnife.bind(this);
     }
 
@@ -159,8 +166,6 @@ public class EmployeesDetails extends AppCompatActivity {
                 Integer responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
                     ratingBar.setRating(responseFromAPI);
-
-
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
