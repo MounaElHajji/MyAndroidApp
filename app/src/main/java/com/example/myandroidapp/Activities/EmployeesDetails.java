@@ -65,7 +65,6 @@ public class EmployeesDetails extends AppCompatActivity {
         villeTxt = findViewById(R.id.textView4);
         nomTxt = findViewById(R.id.textView);
         adressTxt = findViewById(R.id.textView8);
-        emploiTxt = findViewById(R.id.employee_type);
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
         ratingBar = findViewById(R.id.ratingBar);
