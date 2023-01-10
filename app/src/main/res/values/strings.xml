@@ -5,9 +5,9 @@
     <string name="password">Mot De Passe</string>
     <string name="adress_phone">Mot De Passe</string>
     <string name="Modifier_fonnee_btn">Modifier</string>
-    <string name="email_phone">Email Adresse / Num Telephone</string>
-    <string name="login">LOGIN</string>
-    <string name="forgot_password">Mot De Pass Oubliee?</string>
+    <string name="email_phone">Email Adresse / Numéro de Téléphone</string>
+    <string name="login">Se connecter</string>
+    <string name="forgot_password">Mot De Passe Oublié !</string>
     <string name="or">OR</string>
     <string name="google_icon">google icon</string>
     <string name="facebook_icon">facebook icon</string>
@@ -26,8 +26,8 @@
     <string name="selectionner_une_image">Selectionner Une Image</string>
     <string name="cin_mod">CIN</string>
     <string name="Evaluer">Evaluer</string>
-    <string name="new_user">Nouveau Utilisateur?</string>
-    <string name="register_now">Crrer Un Compte</string>
+    <string name="new_user">Un nouvel utilisateur ? </string>
+    <string name="register_now">Créer Un Compte</string>
     <string-array name="filtrage">
         <item>Filtrer Par</item>
         <item>Nom</item>
