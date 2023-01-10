@@ -87,12 +87,14 @@ public class EmployeesDetails extends AppCompatActivity {
         telephone = intent.getStringExtra("tel");
         emploie = intent.getStringExtra("service_title");
         empPropfileImg = intent.getStringExtra("imagep");
+        emploie=intent.getStringExtra("emploi");
 //        ratingValue = intent.getStringExtra("label");
 
         id = intent.getStringExtra("id");
         id_emp = Integer.valueOf(id);
         typeProfile = intent.getStringExtra("typeProfil");
         lastNameEmp = intent.getStringExtra("lastName");
+
 
         SumRating();
         sumColumnsRating();
@@ -139,20 +141,21 @@ public class EmployeesDetails extends AppCompatActivity {
         telTxt.setText(telephone);
         employeeVille.setText(ville);
         lastNamemployye.setText(lastNameEmp);
-
+        emploiTxt.setText(emploie);
         if(intent.getStringExtra("fav").equals("true")){
             fav.setImageResource(R.drawable.fav);
         }else{
             fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
         }
 
-        Picasso.get()
-                .load(Uri.parse(empPropfileImg))
-                .centerCrop()
-                .resize(150,150)
-                .placeholder(R.drawable.personne)
-                .into(imgProfile);
-
+        if (empPropfileImg!=null) {
+            Picasso.get()
+                    .load(Uri.parse(empPropfileImg))
+                    .centerCrop()
+                    .resize(150, 150)
+                    .placeholder(R.drawable.personne)
+                    .into(imgProfile);
+        }
         ButterKnife.bind(this);
     }
 
