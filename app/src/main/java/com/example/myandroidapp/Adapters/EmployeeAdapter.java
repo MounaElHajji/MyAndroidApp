@@ -80,7 +80,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         List<Employee> favEmployees1 = new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
-        holder.descritpion.setText(post.getDescription());
+        holder.descritpion.setText(post.getTel());
         holder.text_nom1.setText(post.getLast_name());
         int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);
@@ -108,12 +108,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             }
         });
 
-            Picasso.get()
-                    .load(EmployeeList.get(position).getImageP())
-                    .centerCrop()
-                    .resize(150, 150)
-                    .placeholder(R.drawable.personne)
-                    .into(holder.imageP);
+        Picasso.get()
+                .load(EmployeeList.get(position).getImageP())
+                .centerCrop()
+                .resize(150, 150)
+                .placeholder(R.drawable.personne)
+                .into(holder.imageP);
 
 
 
@@ -190,11 +190,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             btnVoir = itemView.findViewById(R.id.btnVoir);
             btnHeart = itemView.findViewById(R.id.btnHeart);
             telephoneVar = itemView.findViewById(R.id.TelTxt);
-           employeeType = itemView.findViewById(R.id.employee_type);
-
+            employeeType = itemView.findViewById(R.id.employee_type);
             int id = sh.getInt("id", 0);
             String type_profil = sh.getString("type_profil", "");
-            if(type_profil.equals("employe")){
+            if(type_profil.equals("employe")) {
                 btnHeart.setVisibility(View.GONE);
             }
 

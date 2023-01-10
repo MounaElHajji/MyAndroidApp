@@ -65,9 +65,11 @@ public class EmployeesDetails extends AppCompatActivity {
         villeTxt = findViewById(R.id.textView4);
         nomTxt = findViewById(R.id.textView);
         adressTxt = findViewById(R.id.textView8);
+        emploiTxt = findViewById(R.id.employee_type);
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
         ratingBar = findViewById(R.id.ratingBar);
+        responseTV = findViewById(R.id.idTVResponse);
         averageRating = findViewById(R.id.rating);
         ratingBarTotal = findViewById(R.id.ratingBar2);
         ratingSumText =findViewById(R.id.ratingSumText);
@@ -96,8 +98,8 @@ public class EmployeesDetails extends AppCompatActivity {
         sumColumnsRating();
         String type_profil = sh.getString("type_profil", "");
         if(type_profil.equals("employe")) {
-           layout.setVisibility(View.GONE);
-           fav.setVisibility(View.GONE);
+            layout.setVisibility(View.GONE);
+            fav.setVisibility(View.GONE);
         }
         if(id_current != id_emp)
         {
@@ -164,7 +166,7 @@ public class EmployeesDetails extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 Integer responseFromAPI = response.body();
                 myRating = ratingBar.getRating();
-                    ratingBar.setRating(responseFromAPI);
+                ratingBar.setRating(responseFromAPI);
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
@@ -215,7 +217,7 @@ public class EmployeesDetails extends AppCompatActivity {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Rating responseFromAPI = response.body();
                 String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI;
-//                responseTV.setText(responseString);
+                responseTV.setText(responseString);
             }
 
             @Override

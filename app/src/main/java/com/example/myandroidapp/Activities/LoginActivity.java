@@ -146,7 +146,10 @@ public class LoginActivity extends AppCompatActivity {
     public void typeprofil(String login) {
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        Retrofit adapter = RetrofitBack.getRetrofitIns();
+        Retrofit adapter =  new Retrofit.Builder()
+                .baseUrl("http://192.168.149.86:8080")
+                .addConverterFactory(new ToStringConverterFactory())
+                .build();
 
         AccountApi  api = adapter.create(AccountApi.class);
         System.out.println(login);
