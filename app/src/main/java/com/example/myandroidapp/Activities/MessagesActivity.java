@@ -28,6 +28,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class MessagesActivity extends AppCompatActivity implements ListMessagesListener {
 
@@ -36,6 +37,8 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
     private List<Message> listConversations;
     TextView nameTextView;
+    SwipeRefreshLayout swipeRefreshLayout;
+
     RetrofitClient retrofit= new RetrofitClient();
     ApiInterface api =retrofit.getRetrofitInstance().create(ApiInterface.class);
 
@@ -45,6 +48,7 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
         setContentView(R.layout.activity_messages);
 
         nameTextView = findViewById(R.id.myNameText);
+        swipeRefreshLayout = findViewById(R.id.refresher);
 
         /*
         // sharedpref : to remove later, just to test for now
@@ -71,6 +75,19 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
         adapter = new ConversationAdapter(listConversations,this,this);
         recyclerView.setAdapter(adapter);
+
+        //  swipe refresh layout :
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listConversations = getListConversations();
+                adapter = new ConversationAdapter(listConversations,MessagesActivity.this,MessagesActivity.this);
+                recyclerView.setAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 
