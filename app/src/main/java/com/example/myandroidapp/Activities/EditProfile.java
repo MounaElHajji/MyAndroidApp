@@ -122,7 +122,6 @@ public class EditProfile extends AppCompatActivity {
                 person.setImage(path);
                 person.setLastName(lastname.getText().toString());
                 person.setTel(username.getText().toString());
-                Service serv= new Service();
                 Service s= new Service();
                 if(service.getVisibility()==View.GONE) {
                     s.setService_title("Client");
@@ -166,11 +165,7 @@ public class EditProfile extends AppCompatActivity {
         call.enqueue(new Callback<Account>() {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
-                if(response.isSuccessful()) {
-                    Toast.makeText(EditProfile.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                    System.out.println("person:" +person +"  "+ account);
-                }
-                Toast.makeText(EditProfile.this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -178,6 +173,8 @@ public class EditProfile extends AppCompatActivity {
 
             }
         });
+        Intent i = new Intent(this, CurrentProfile.class);
+        startActivity(i);
     }
 
     RetrofitS retrofitS = new RetrofitS();
@@ -201,10 +198,10 @@ public class EditProfile extends AppCompatActivity {
                 String empDesc = reponseEmp.getDescription();
                 String empEmploie = reponseEmp.getType_profil();
                 String imagep= reponseEmp.getImageP();
-                final int[] i = {0};
                 ArrayAdapter<String> villeAdapter= new ArrayAdapter<>(EditProfile.this, android.R.layout.simple_list_item_1,Ville);
                 ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
                 Call<List<com.example.myandroidapp.Models.Ville>> call1 = apiInterface.getCities();
+                int i=0;
                 call1.enqueue(new Callback<List<Ville>>() {
                     @Override
                     public void onResponse(Call<List<Ville>> call, Response<List<Ville>> response) {
@@ -216,6 +213,10 @@ public class EditProfile extends AppCompatActivity {
 
                                 villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 ville.setAdapter(villeAdapter);
+                                if(empVille.equals(nom_ville)){
+                                    ville.setSelection(Ville.indexOf(nom_ville));
+                                }
+
                             }
 
                         }
@@ -232,13 +233,15 @@ public class EditProfile extends AppCompatActivity {
                 lastname.setText(empPrenom);
                 cin.setText(empCin);
                 description.setText(empDesc);
-
-              Picasso.get()
-                        .load(Uri.parse(imagep))
-                        .centerCrop()
-                        .resize(150,150)
-                      .placeholder(R.drawable.personne)
-                        .into(imageP);
+                ville.setSelection(villeAdapter.getPosition(empVille));
+                if(imagep!=null) {
+                    Picasso.get()
+                            .load(Uri.parse(imagep))
+                            .centerCrop()
+                            .resize(150, 150)
+                            .placeholder(R.drawable.personne)
+                            .into(imageP);
+                }
 
                 if(empEmploie.equals("Client")){
                     description.setVisibility(View.GONE);

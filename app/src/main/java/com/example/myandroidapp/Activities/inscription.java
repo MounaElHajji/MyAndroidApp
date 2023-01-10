@@ -151,7 +151,6 @@ public class inscription extends AppCompatActivity {
                     for (String s :
                             lis) {
                         Services.add(s);
-                        System.out.println(s);
                     }
                 }
 
@@ -317,9 +316,11 @@ public class inscription extends AppCompatActivity {
             msg.setText("Email ou Tél n'est pas valide!");
         }else if(fonction.getSelectedItemPosition()==1 && service.getSelectedItemPosition()==0){
             msg.setText("Veuillez choisir un service!");
-       }else if(!isValidPwd(pwd.getText().toString())){
-           msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" + "des symboles et de longueur minimale 8!");
-        }else { loginExists(mail.getText().toString()); }
+       }
+        //else if(!isValidPwd(pwd.getText().toString())){
+         //  msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" + "des symboles et de longueur minimale 8!");
+        //}
+        else { loginExists(mail.getText().toString()); }
 
     }
 

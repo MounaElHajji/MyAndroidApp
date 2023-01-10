@@ -27,18 +27,23 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CurrentProfile extends AppCompatActivity {
     ApiInterface apiInterface;
-    TextView villeTxt, nomTxt, cinTxt, emploiTxt, descTxt, telTxt, prenomTxt;
+    TextView villeTxt, nomTxt, cinTxt, descTxt, telTxt, prenomTxt;
     ImageView imageP;
     String type_profil;
-    LinearLayout clickFavoris;
     SharedPreferences sharedPref;
+    @BindView(R.id.SettngsText)
+    TextView settings;
+    @BindView(R.id.EditProfile)
+    TextView edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,21 +57,21 @@ public class CurrentProfile extends AppCompatActivity {
             setContentView(R.layout.activity_current_profile);
            imageP= findViewById(R.id.imageView6);
         }
-
-
-        /*clickFavoris = findViewById(R.id.clickFavoris);
-
-        clickFavoris.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(CurrentProfile.this, FavorisActivity.class);
-                startActivity(i);
-            }
-        });*/
         ButterKnife.bind(this);
         getVardFromLayout();
         getUserDetails();
         OnclickButtonListener();
+    }
+
+    @OnClick(R.id.EditProfile)
+    void EditProfile(){
+        Intent i= new Intent(this, EditProfile.class);
+        startActivity(i);
+    }
+    @OnClick(R.id.SettngsText)
+    void settings(){
+        Intent i= new Intent(this, Settings.class);
+        startActivity(i);
     }
     private void getVardFromLayout() {
 
@@ -119,13 +124,15 @@ public class CurrentProfile extends AppCompatActivity {
                     prenomTxt.setText(empPrenom);
                     descTxt.setText(empDesc);
                     System.out.println(imagep);
-                    Picasso.get()
-                            .load(Uri.parse(imagep))
-                            .centerCrop()
-                            .resize(150,150)
-                            .into(imageP);
+                    if(imagep!=null) {
+                        Picasso.get()
+                                .load(Uri.parse(imagep))
+                                .centerCrop()
+                                .resize(150, 150)
+                                .into(imageP);
 
-                    Log.d(TAG, imagep);
+                        Log.d(TAG, imagep);
+                    }
 
                 }
                 else{
@@ -133,14 +140,14 @@ public class CurrentProfile extends AppCompatActivity {
                     telTxt.setText(empTel);
                     nomTxt.setText(empNom);
                     prenomTxt.setText(empPrenom);
-                    System.out.println(imagep);
+                    if(imagep!=null) {
                     Picasso.get()
                             .load(Uri.parse(imagep))
                             .centerCrop()
                             .resize(150,150)
                             .into(imageP);
 
-                    Log.d(TAG, imagep);
+                    Log.d(TAG, imagep);}
                 }
 
             }

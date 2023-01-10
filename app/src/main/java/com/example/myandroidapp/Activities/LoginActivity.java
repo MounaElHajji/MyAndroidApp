@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Retrofit adapter =  new Retrofit.Builder()
-                .baseUrl("http://192.168.135.44:8080")
+                .baseUrl("http://192.168.149.86:8080")
                 .addConverterFactory(new ToStringConverterFactory())
                 .build();
 
@@ -197,7 +197,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<String> call, Throwable t) {
 
                 Toast.makeText(LoginActivity.this, "oops, réessayez! une erreur est rencontré", Toast.LENGTH_SHORT).show();
-//                Log.d("Error", " Throwable is " +t.toString());
             }
         });
     }
