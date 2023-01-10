@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myandroidapp.Adapters.ConversationAdapter;
 import com.example.myandroidapp.Api.ApiInterface;
@@ -41,6 +42,8 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
     private List<Message> listConversations;
     TextView nameTextView;
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     // retrofit
     RetrofitS retrofit= new RetrofitS();
     ApiInterface api =retrofit.getRetrofitInstance().create(ApiInterface.class);
@@ -51,6 +54,8 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
         setContentView(R.layout.activity_messages);
 
         nameTextView = findViewById(R.id.myNameText);
+        swipeRefreshLayout = findViewById(R.id.refresher);
+
 
         // sharedpref : to remove later, just to test for now
         SharedPreferences sharedPref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
@@ -74,6 +79,19 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
         adapter = new ConversationAdapter(listConversations,this,this);
         recyclerView.setAdapter(adapter);
+
+        //  swipe refresh layout :
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listConversations = getListConversations();
+                adapter = new ConversationAdapter(listConversations,MessagesActivity.this,MessagesActivity.this);
+                recyclerView.setAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 

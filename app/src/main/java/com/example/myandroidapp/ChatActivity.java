@@ -56,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
 
     Handler handler = new Handler();
     Runnable runnable;
-    int delay = 200;
+    int delay = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,73 +92,7 @@ public class ChatActivity extends AppCompatActivity {
         nameTextView.setText(theirName);
 
         // get the data :
-
-        int i = 0;
         listMessages = getListMessages();
-
-        /*
-        Bundle bundle = getIntent().getExtras();
-
-        if(bundle != null)
-        {
-            listMessages.add( new Message(
-                    Message.LAYOUT_ONE, bundle.getString("newMsg"), "20/12/2022"
-            ));
-        }
-         */
-
-/*
-
-        for ( Message msg : listMessages ) {
-            if (msg.getMessageFrom().equals(4)) {
-                listMessagesToDisplay.add( i,new Message(
-                        LAYOUT_ONE, msg.getMessageText(), msg.getCreatedDate()
-                ));
-                i++;
-            }
-            else if (msg.getMessageTo().equals(4)) {
-
-                listMessagesToDisplay.add( i,new Message(
-                        LAYOUT_TWO, msg.getMessageText(), msg.getCreatedDate()
-                ));
-                i++;
-            }
-        }
-
- */
-
-        for ( Message msg : listMessages ) {
-            if (msg.getMessageFrom().equals(myId)) {
-                listMessagesToDisplay.add( i,new Message(
-                        LAYOUT_ONE, msg.getMessageText(), msg.getDate()
-                ));
-                i++;
-            }
-            else if (msg.getMessageTo().equals(myId)) {
-
-                listMessagesToDisplay.add( i,new Message(
-                        LAYOUT_TWO, msg.getMessageText(), msg.getDate()
-                ));
-                i++;
-            }
-        }
-
-
-
-        /*
-        String str = "2016-03-04 11:30";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-
-        listMessagesToDisplay.add( 0,new Message(
-                LAYOUT_ONE, "hala hala" , "22/12/1999"
-        ));
-
-         */
-
-        adapter = new MessageAdapter(listMessagesToDisplay,ChatActivity.this);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
     ///////// Every 5 seconds this method will be run (update the recyclerView) :
@@ -167,11 +101,11 @@ public class ChatActivity extends AppCompatActivity {
     protected void onResume() {
 
 
-        listMessages = getListMessages(); // this line shld go inside the run() method
+       listMessages = getListMessages(); // this line shld go inside the run() method
 
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
-               // listMessages = getListMessages();
+                //listMessages = getListMessages();
                 handler.postDelayed(runnable, delay);
 
                 int itemsOldCount = recyclerView.getAdapter().getItemCount();
@@ -218,37 +152,6 @@ public class ChatActivity extends AppCompatActivity {
         /// get their id :
         Bundle extras = getIntent().getExtras();
         theirId = extras.getInt("theirId",0);
-
-        /*
-        /// --- this is optional, just for the frontend now, shld be replaced by the msg-saving method of backend
-        listMessages.add( 0,new Message(
-                Message.LAYOUT_ONE, newMessage, "20/12/2022 18:02"
-        ));
-
-
-
-         */
-   /*
-        Message msgToSend = new Message();
-
-        api.saveSentMsg(msgToSend).enqueue(new Callback<Message>() {
-            @Override
-            public void onResponse(Call<Message> call, Response<Message> response) {
-                if(response.isSuccessful()) {
-
-                }else{
-                    Toast.makeText(ChatActivity.this, "Could not send the msg", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<Message> call, Throwable t) {
-                Toast.makeText(ChatActivity.this, "Could not send the msg !!", Toast.LENGTH_SHORT).show();
-                Logger.getLogger(ChatActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-            }
-        });;
-
-   */
-
 
         // we set the message object :
        // Message msgToSend = new Message(0,null,null,newMessage,"test date");
@@ -358,34 +261,6 @@ public class ChatActivity extends AppCompatActivity {
 
         //////// msgs must be selected from newest to oldest
 
-        /*
-
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "what's up !!!!!!!!!!!!!", "18/12/2022"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "test test", "17/12/2022"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "16/12/2022"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_ONE, "???", "15/12/2022"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "it's me", "12/12/2022 "
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_ONE, "hi, who is this ?", "12/12/2022 22:00"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "come on answer", "12/12/2022 20:02"
-        ));
-        listMessages.add( new Message(
-                Message.LAYOUT_TWO, "hello Kawtar", "12/12/2022 18:02"
-        ));
-
-         */
 
         api.getChatMsgs(myId,theirId).enqueue(new Callback<List<Message>>() {
             @Override
@@ -398,6 +273,10 @@ public class ChatActivity extends AppCompatActivity {
                 listMessages = response.body();
                 System.out.println("got it");
                 System.out.println(response.body());
+
+                adapter = new MessageAdapter(listMessages,ChatActivity.this);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -409,6 +288,8 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+        System.out.println("w haadiii : " + listMessages.toString());
 
         return listMessages;
     }
