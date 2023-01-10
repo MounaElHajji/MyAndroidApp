@@ -70,10 +70,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             Picasso.get().load(listConversations.get(position).getImageP()).into(holder.image);
         }
          */
-
+/*
         if(personWith.getImage() != null){
             Picasso.get().load(personWith.getImage()).into(holder.image);
         }
+        
+ */
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override

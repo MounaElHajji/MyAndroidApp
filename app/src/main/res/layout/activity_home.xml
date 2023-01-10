@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.HomeActivity">
+    tools:context=".Activities.HomeActivity"
+    android:background="@drawable/home_activity_bg">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -14,51 +15,6 @@
 
 
         >
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:text=""
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:text="Nom de l'appli"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_gravity="center"
-            android:text="Rendez votre vie quotidienne plus facile"
-            android:textColor="#090909"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:layout_gravity="center"
-            android:text=""
-            tools:ignore="MissingConstraints" />
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/logo2"
-            android:layout_gravity="center"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:text=""
-            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/button"
@@ -66,8 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="se connecter"
-            android:backgroundTint="#35B5EC"
-            tools:ignore="MissingConstraints" />
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_350sdp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="10dp"
@@ -83,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="s'inscrire"
-            android:backgroundTint="#35B5EC"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
