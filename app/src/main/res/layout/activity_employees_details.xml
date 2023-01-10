@@ -25,6 +25,7 @@
         android:id="@+id/rellay1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/grad"
         android:paddingBottom="20dp">
 
         <RelativeLayout
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            >
+            android:background="@drawable/image_border">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
@@ -41,16 +42,16 @@
                 android:layout_margin="5dp"
                 android:elevation="10dp"
                 app:cardCornerRadius="300dp">
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.463"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.463"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
             </androidx.cardview.widget.CardView>
 
 
@@ -514,7 +515,44 @@
             android:alpha="0.2"
             android:background="#585858" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
 
+            >
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_work_24" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_weight="1"
+                android:text="@string/fonctionalite"
+                android:textColor="@color/TxthomeColor"
+                android:textSize="23sp" />
+
+            <TextView
+                android:id="@+id/employee_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AE121245"
+
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -533,16 +571,39 @@
             android:layout_marginLeft="0dp"
             android:alpha="0.2"
             android:background="#585858" />
+
+        <TextView
+            android:id="@+id/idTVResponse"
+            android:layout_width="match_parent"
+            android:layout_height="65dp" />
+
+        <!--        <Button-->
+        <!--            android:id="@+id/buttonRat"-->
+        <!--            android:layout_width="100dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:text="rate"-->
+        <!--            />-->
+
     </LinearLayout>
 
-    <include
-        layout="@layout/footer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/SettngsText"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="1dp" />
 
+
+
+    <!--    <include-->
+    <!--        android:id="@+id/include2"-->
+    <!--        layout="@layout/footer_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        tools:layout_editor_absoluteX="78dp"-->
+    <!--        tools:layout_editor_absoluteY="730dp" />-->
+
+    <!--    <include-->
+    <!--        android:id="@+id/include2"-->
+    <!--        layout="@layout/employee_footer_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </RelativeLayout>

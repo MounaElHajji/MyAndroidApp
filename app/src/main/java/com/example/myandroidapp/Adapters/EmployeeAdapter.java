@@ -190,13 +190,10 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
             btnVoir = itemView.findViewById(R.id.btnVoir);
             btnHeart = itemView.findViewById(R.id.btnHeart);
             telephoneVar = itemView.findViewById(R.id.TelTxt);
-            employeeType = itemView.findViewById(R.id.employee_type);
+           employeeType = itemView.findViewById(R.id.employee_type);
             int id = sh.getInt("id", 0);
             String type_profil = sh.getString("type_profil", "");
-            if(type_profil.equals("client")) {
-               btnHeart.setImageResource(R.drawable.fav);
-            }
-            else{
+            if(type_profil.equals("employe")){
                 btnHeart.setVisibility(View.GONE);
             }
 

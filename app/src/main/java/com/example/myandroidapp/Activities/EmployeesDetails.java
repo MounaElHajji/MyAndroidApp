@@ -216,7 +216,7 @@ public class EmployeesDetails extends AppCompatActivity {
                 Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Rating responseFromAPI = response.body();
                 String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI;
-                responseTV.setText(responseString);
+//                responseTV.setText(responseString);
             }
 
             @Override
