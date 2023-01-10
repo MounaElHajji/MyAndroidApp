@@ -69,7 +69,6 @@ public class EmployeesDetails extends AppCompatActivity {
         descTxt = findViewById(R.id.textView12);
         telTxt = findViewById(R.id.textView6);
         ratingBar = findViewById(R.id.ratingBar);
-        responseTV = findViewById(R.id.idTVResponse);
         averageRating = findViewById(R.id.rating);
         ratingBarTotal = findViewById(R.id.ratingBar2);
         ratingSumText =findViewById(R.id.ratingSumText);
