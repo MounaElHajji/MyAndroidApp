@@ -36,8 +36,6 @@ public class MessagesActivity extends AppCompatActivity implements ListMessagesL
 
     private List<Message> listConversations;
     TextView nameTextView;
-
-    // retrofit
     RetrofitClient retrofit= new RetrofitClient();
     ApiInterface api =retrofit.getRetrofitInstance().create(ApiInterface.class);
 

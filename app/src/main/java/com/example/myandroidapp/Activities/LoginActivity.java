@@ -51,6 +51,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.signUp)
     TextView signUp;
+
+    @BindView(R.id.forgotPassword)
+    TextView forgot;
     String type_profil;
     SharedPreferences sharedPref;
     @Override
@@ -71,6 +74,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+    @OnClick(R.id.forgotPassword)
+    public void forgotPassword() {
+        Intent i= new Intent(this, ForgotPasswordActivity.class);
+        startActivity(i);
+    }
+
     @OnCheckedChanged(R.id.pwdsh)
     public void onCheckedChanged() {
         if (pwdsh.isChecked()) {
