@@ -80,7 +80,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.ViewHo
         List<Employee> favEmployees1 = new ArrayList<>();
         holder.nom.setText(post.getFirst_name());
         holder.ville.setText(post.getCity());
-        holder.descritpion.setText(post.getTel());
+        holder.descritpion.setText(post.getDescription());
         holder.text_nom1.setText(post.getLast_name());
         int id = sh.getInt("id", 0);
         Call<List<ListFavoris>> call = apiInterface.getFav(id);

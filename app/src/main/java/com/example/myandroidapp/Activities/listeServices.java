@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +62,9 @@ public class listeServices extends AppCompatActivity {
                 ArrayList<Service> postList = (ArrayList<Service>) response.body();
 
 
-               serviceAdapter= new ServiceAdapter(listeServices.this, postList);
+                serviceAdapter= new ServiceAdapter(listeServices.this, postList);
+                GridLayoutManager layoutManager=new GridLayoutManager(listeServices.this,2);
+                recyclerViewVar.setLayoutManager(layoutManager);
                 recyclerViewVar.setAdapter(serviceAdapter);
 
             }

@@ -42,16 +42,16 @@
                 android:layout_margin="5dp"
                 android:elevation="10dp"
                 app:cardCornerRadius="300dp">
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.463"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.463"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
             </androidx.cardview.widget.CardView>
 
 
@@ -63,35 +63,30 @@
             android:layout_below="@+id/imgUser"
             android:layout_marginLeft="100dp"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:text="Ibrahim"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="Prenom"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="40dp"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView13"
-                app:layout_constraintVertical_bias="0.786" />
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/textViewNom"
-                android:layout_width="73dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
-                android:text="nahi"
-                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Nom"
                 android:textColor="@color/black"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView13"
-                app:layout_constraintVertical_bias="0.786" />
-
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -273,8 +268,8 @@
                 app:srcCompat="@drawable/fav" />
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardphone"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 app:riv_oval="true"
                 android:elevation="10dp"
                 android:padding="15dp"
@@ -286,8 +281,8 @@
 
                 <ImageButton
                     android:id="@+id/phone"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
                     android:background="#00FFFFFF"
                     android:clickable="true"
                     android:onClick="callMe"
@@ -356,7 +351,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
 
-            android:alpha="0.2"
+            android:alpha="0.1"
             android:background="#585858" />
 
         <LinearLayout
@@ -403,15 +398,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="0dp"
-            android:alpha="0.2"
-            android:background="#585858" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-
-            android:alpha="0.2"
+            android:alpha="0.1"
             android:background="#585858" />
 
         <LinearLayout
@@ -452,20 +439,14 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="0dp"
-            android:alpha="0.2"
-            android:background="#585858" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView6"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="0dp"
-            android:alpha="0.2"
+            android:alpha="0.1"
             android:background="#585858" />
 
         <LinearLayout
@@ -560,50 +541,16 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="0dp"
-            android:alpha="0.2"
+            android:alpha="0.1"
             android:background="#585858" />
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView8"
+        <include
+            layout="@layout/footer_layout"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="0dp"
-            android:alpha="0.2"
-            android:background="#585858" />
-
-        <TextView
-            android:id="@+id/idTVResponse"
-            android:layout_width="match_parent"
-            android:layout_height="65dp" />
-
-        <!--        <Button-->
-        <!--            android:id="@+id/buttonRat"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_gravity="center"-->
-        <!--            android:text="rate"-->
-        <!--            />-->
+            android:layout_height="60dp"
+            android:layout_marginTop="26dp" />
 
     </LinearLayout>
 
-
-
-
-    <!--    <include-->
-    <!--        android:id="@+id/include2"-->
-    <!--        layout="@layout/footer_layout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        tools:layout_editor_absoluteX="78dp"-->
-    <!--        tools:layout_editor_absoluteY="730dp" />-->
-
-<!--    <include-->
-<!--        android:id="@+id/include2"-->
-<!--        layout="@layout/employee_footer_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </RelativeLayout>

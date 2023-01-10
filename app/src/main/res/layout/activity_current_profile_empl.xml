@@ -7,10 +7,34 @@
     tools:context=".Activities.CurrentProfile">
 
     <RelativeLayout
+        android:id="@+id/rellay10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/image_border"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/text_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="@string/Mes_donnees_Personnelles"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/rellay1"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/grad"
+        android:layout_height="180dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/rellay10"
         android:paddingBottom="20dp">
 
         <RelativeLayout
@@ -18,21 +42,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/circle_border">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="9dp"
-                android:layout_marginBottom="9dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/rounded_image"
-                android:padding="3dp"
-                android:scaleType="centerInside" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:elevation="10dp"
+                android:layout_marginTop="-5dp"
+                app:cardCornerRadius="300dp">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_supervised_user_circle_24"  />
+
+            </androidx.cardview.widget.CardView>
 
 
         </RelativeLayout>
@@ -41,125 +69,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgUser"
-            android:layout_marginLeft="140dp"
+            android:layout_marginLeft="100dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/text_nom"
-                android:layout_width="60dp"
+                android:id="@+id/text_nom1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="16dp"
+                android:text="Prenom"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15sp"
+                android:layout_marginLeft="40dp"
+                android:fontFamily="sans-serif-light"
                 android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/text_nom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
                 android:fontFamily="sans-serif-light"
                 android:text="Nom"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/text_nom1"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Prenom"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15sp"
-                android:fontFamily="sans-serif-light"
-                android:textColor="@color/black"
-                android:textSize="25sp"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
 
-
-
-
     </RelativeLayout>
-
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/linlay1"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/rellay1"-->
-    <!--        android:orientation="horizontal">-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:background="@color/followersBg"-->
-    <!--            android:gravity="center"-->
-    <!--            android:paddingBottom="5dp"-->
-    <!--            android:paddingTop="5dp">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center_horizontal"-->
-    <!--                android:orientation="vertical">-->
-
-    <!--                <TextView-->
-    <!--                    android:id="@+id/ratingClient"-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:fontFamily="sans-serif-light"-->
-    <!--                    android:text="453K"-->
-    <!--                    android:textColor="@color/white"-->
-    <!--                    android:textSize="25sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:fontFamily="sans-serif-light"-->
-    <!--                    android:text="followers"-->
-    <!--                    android:textAllCaps="true"-->
-    <!--                    android:textColor="@color/white"-->
-    <!--                    android:textSize="13sp" />-->
-
-    <!--            </LinearLayout>-->
-
-    <!--        </RelativeLayout>-->
-
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:background="@color/followingBg"-->
-    <!--            android:gravity="center"-->
-    <!--            android:paddingBottom="5dp"-->
-    <!--            android:paddingTop="5dp">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center_horizontal"-->
-    <!--                android:orientation="vertical">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:fontFamily="sans-serif-light"-->
-    <!--                    android:text="873"-->
-    <!--                    android:textColor="@color/white"-->
-    <!--                    android:textSize="25sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:fontFamily="sans-serif-light"-->
-    <!--                    android:text="following"-->
-    <!--                    android:textAllCaps="true"-->
-    <!--                    android:textColor="@color/white"-->
-    <!--                    android:textSize="13sp" />-->
-
-    <!--            </LinearLayout>-->
-
-    <!--        </RelativeLayout>-->
-
-    <!--    </LinearLayout>-->
 
 
 
@@ -169,7 +108,7 @@
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
+        app:cardElevation="2dp"
         android:layout_height="wrap_content"
         android:id="@+id/rellay2"
         android:layout_below="@id/rellay1" >
@@ -177,12 +116,12 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/jvgvj"
                 android:layout_width="28dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="1dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -210,8 +149,8 @@
                         android:layout_marginRight="10dp"
                         android:maxLines="3"
                         android:text="@string/ville_client"
-                        android:textColor="@color/TxthomeColor"
-                        android:textSize="22sp"
+                        android:textColor="@color/blueTxt"
+                        android:textSize="17sp"
                         />
 
                     <TextView
@@ -238,19 +177,19 @@
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
+        app:cardElevation="2dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/rellay2" >
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/btnEMila"
                 android:layout_width="28dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="1dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -278,8 +217,8 @@
                         android:layout_marginRight="10dp"
                         android:maxLines="3"
                         android:text="@string/tel_email_client"
-                        android:textColor="@color/TxthomeColor"
-                        android:textSize="22sp"
+                        android:textColor="@color/blueTxt"
+                        android:textSize="17sp"
                         />
 
                     <TextView
@@ -306,7 +245,7 @@
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
+        app:cardElevation="2dp"
         android:layout_height="wrap_content"
         android:id="@+id/rellay5"
         android:layout_below="@id/rellay3" >
@@ -314,12 +253,12 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/btnHome"
                 android:layout_width="28dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="1dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -346,9 +285,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:maxLines="3"
-                        android:text="@string/ville_client"
-                        android:textColor="@color/TxthomeColor"
-                        android:textSize="22sp"
+                        android:text="@string/cin_mod"
+                        android:textColor="@color/blueTxt"
+                        android:textSize="17sp"
                         />
 
                     <TextView
@@ -375,7 +314,7 @@
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
+        app:cardElevation="2dp"
         android:layout_height="wrap_content"
         android:id="@+id/rellay6"
         android:layout_below="@id/rellay5" >
@@ -383,7 +322,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="4dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -403,9 +342,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:maxLines="3"
-                        android:text="@string/ville_client"
-                        android:textColor="@color/TxthomeColor"
-                        android:textSize="22sp"
+                        android:text="@string/description"
+                        android:textColor="@color/blueTxt"
+                        android:textSize="18sp"
                         />
 
                     <TextView
@@ -464,20 +403,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-2dp"
+        android:layout_marginStart="-1dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="233dp"
-        android:alpha="0.2"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="216dp"
+        android:alpha="0.1"
         android:background="#585858" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_below="@id/rellay4"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
         android:orientation="horizontal">
 
 
@@ -510,11 +449,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginEnd="-3dp"
-        android:layout_marginBottom="181dp"
-        android:alpha="0.2"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="166dp"
+        android:alpha="0.1"
         android:background="#585858" />
+
+    <include
+        layout="@layout/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/SettngsText"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="1dp" />
 
 </RelativeLayout>
