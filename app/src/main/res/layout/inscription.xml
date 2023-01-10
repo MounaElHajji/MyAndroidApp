@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         tools:context=".Activities.inscription"
         tools:ignore="ExtraText"
+        android:background="@drawable/inscription_activity_bg"
         >
 
 
@@ -83,27 +84,12 @@
             app:layout_constraintTop_toBottomOf="@id/bievenue"
             tools:ignore="MissingConstraints"></EditText>
 
-        <TextView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bienvenue 👋"
-            android:textColor="@color/black"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.027"
-            tools:ignore="HardcodedText"
-            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/bievenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inscrivez vous"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="normal"
@@ -196,7 +182,7 @@
             android:layout_width="339dp"
             android:layout_height="44dp"
             android:layout_marginTop="560dp"
-            android:padding="@dimen/_6sdp"
+            android:padding="@dimen/_5sdp"
             android:background="@drawable/round_corner"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -223,12 +209,10 @@
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="130dp"
-
             android:layout_height="44dp"
-
             android:layout_marginTop="836dp"
             android:background="@drawable/round_corner"
-            android:backgroundTint="@color/gradEnd"
+            android:backgroundTint="@color/white"
             android:text="S'inscrire"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.459"
@@ -267,6 +251,7 @@
             android:layout_width="174dp"
             android:layout_height="137dp"
             android:src="@drawable/ic_baseline_account_circle_24"
+            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
