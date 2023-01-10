@@ -334,7 +334,7 @@ public class EditProfile extends AppCompatActivity {
     // -------- Footer icons listeners :
 
     public void onMessageClick(View view) {
-        Intent intent = new Intent(this, listeServices.class);
+        Intent intent = new Intent(this, MessagesActivity.class);
         startActivity(intent);
         finish();
     }

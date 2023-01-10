@@ -228,7 +228,7 @@ public class EmployeelistActivity extends AppCompatActivity {
         finish();
     }
     public void onMessageEmplClick(View view){
-        Intent intent = new Intent(this, EmployeelistActivity.class);
+        Intent intent = new Intent(this, MessagesActivity.class);
 
         startActivity(intent);
         finish();

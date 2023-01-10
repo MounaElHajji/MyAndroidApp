@@ -516,5 +516,10 @@
         android:layout_marginBottom="181dp"
         android:alpha="0.2"
         android:background="#585858" />
+    <include
+        layout="@layout/employee_footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </RelativeLayout>

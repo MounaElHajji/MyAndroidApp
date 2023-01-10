@@ -214,10 +214,7 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Rating>() {
             @Override
             public void onResponse(Call<Rating> call, Response<Rating> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
-                Rating responseFromAPI = response.body();
-                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI;
-                responseTV.setText(responseString);
+                Toast.makeText(EmployeesDetails.this, "Rating", Toast.LENGTH_SHORT).show();
             }
 
             @Override

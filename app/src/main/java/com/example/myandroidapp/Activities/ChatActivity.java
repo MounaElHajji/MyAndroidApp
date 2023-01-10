@@ -4,6 +4,7 @@ import static com.example.myandroidapp.Adapters.MessageAdapter.LAYOUT_ONE;
 import static com.example.myandroidapp.Adapters.MessageAdapter.LAYOUT_TWO;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -200,7 +201,8 @@ public class ChatActivity extends AppCompatActivity {
     /////////
 
     public void onBackClick(View view) {
-        finish();
+        Intent i = new Intent(this, MessagesActivity.class);
+        startActivity(i);
     }
 
 
