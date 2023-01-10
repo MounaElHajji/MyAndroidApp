@@ -3,6 +3,7 @@ package com.example.myandroidapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.example.myandroidapp.Models.Ville;
 import com.example.myandroidapp.R;
 import com.example.myandroidapp.retrofit.RetrofitClient;
 import com.example.myandroidapp.retrofit.RetrofitS;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,17 +60,13 @@ public class EditProfile extends AppCompatActivity {
     Spinner service;
 
     List<String> Ville =new ArrayList<>();
-    List<String> Servicelistt =new ArrayList<>();
+    List<String> Services =new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        ButterKnife.bind(this);
-        getUserDetails();
-
-        //  getVilles();
         iv = findViewById(R.id.imageView);
         ville=findViewById(R.id.ville);
         service=findViewById(R.id.service);
@@ -80,7 +78,27 @@ public class EditProfile extends AppCompatActivity {
         description =findViewById(R.id.desc);
         imageP= findViewById(R.id.imageView);
         msg = findViewById(R.id.msg);
-        getServices();
+        ;
+        getUserDetails();
+        ButterKnife.bind(this);
+        ArrayAdapter<String>  adapter2 = new ArrayAdapter<>(EditProfile.this, android.R.layout.simple_list_item_1, Services);
+        api.listServices().enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                List<String> lis = response.body();
+                for (String s :
+                        lis) {
+                    Services.add(s);
+                    adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    service.setAdapter(adapter2);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,24 +123,25 @@ public class EditProfile extends AppCompatActivity {
                 person.setLastName(lastname.getText().toString());
                 person.setTel(username.getText().toString());
                 Service serv= new Service();
-                serv.setService_title(service.getSelectedItem().toString());
-                serv.setService_id(service.getSelectedItemPosition());
-                System.out.println("service id "+ serv.getService_id());
-                person.setService(serv);
+                Service s= new Service();
+                if(service.getVisibility()==View.GONE) {
+                    s.setService_title("Client");
+                    s.setService_id(7);
+                    person.setService(s);
+                }else{
+                    s.setService_title(service.getSelectedItem().toString());
+                    s.setService_id(service.getSelectedItemPosition());
+                    person.setService(s);
+                }
                 account.setPassword ( password.getText().toString());
                 account.setUsername(username.getText().toString());
                 account.setPerson(person);
-
-
-                if(ville.getSelectedItemPosition()==0 ||
+                if(
                         username.getText().toString().matches("") || firstname.getText().toString().matches("") || lastname.getText().toString().matches("")
                         || cin.getText().toString().matches("") || password.getText().toString().matches("")) {
                     msg.setText("Veuillez remplir tous les champs!");
-                }else if(!isValidMail(username.getText().toString()) && !isValidMobile(username.getText().toString())){
+                }else if(!isValidMail(username.getText().toString()) ){
                     msg.setText("Email ou Tél n'est pas valide!");
-                }else if(!isValidPwd(password.getText().toString())){
-                    msg.setText("le mot de passe doit contenir des caractères majuscules, minuscules, des chiffres et" +
-                            "des symboles et de longueur minimale 8!");
                 }else{  EDIT();}
 
 
@@ -130,15 +149,13 @@ public class EditProfile extends AppCompatActivity {
             }
         });
     }
-    @OnItemSelected(R.id.ville)
-    public void clickVille(Spinner s,int pos) {
-        if (pos == 0) {
-            msg.setVisibility(View.VISIBLE);
-            msg.setText("Veuillez chosir une ville");
-        }
-        else {
-            msg.setText("");
-        }
+    private boolean isValidMail(String email) {
+
+        String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        return Pattern.compile(EMAIL_STRING).matcher(email).matches();
+
     }
     private void EDIT() {
 
@@ -162,47 +179,10 @@ public class EditProfile extends AppCompatActivity {
             }
         });
     }
-    ApiInterface apiInterface;
-    List<String> Services = new ArrayList<>();
+
     RetrofitS retrofitS = new RetrofitS();
     AccountApi api = retrofitS.getRetrofit().create(AccountApi.class);
 
-    private void  getServices(){
-        ArrayAdapter<String> serviceAdapter= new ArrayAdapter<>(EditProfile.this, android.R.layout.simple_list_item_1,Services);
-
-        api.listServices().enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                if(response.isSuccessful()) {
-                    for (String servicelistt :response.body()){
-                        // String nom_ville= servicelisttge();
-                        // Ville object = new Ville(nom_ville);
-                        Services.add(servicelistt);
-
-                        serviceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        service.setAdapter(serviceAdapter);
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-                Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-            }
-        });
-        ;
-        ArrayAdapter adapter2 = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                Services
-        );
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        service.setAdapter(adapter2);
-
-
-    }
     private void getUserDetails() {
         SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         int id= sh.getInt("id",0);
@@ -212,9 +192,6 @@ public class EditProfile extends AppCompatActivity {
         call.enqueue(new Callback<Employee>() {
             @Override
             public void onResponse(Call<Employee> call, Response<Employee> response) {
-
-
-                //get the data from the response
                 Employee reponseEmp = response.body();
                 String empVille = reponseEmp.getCity();
                 String empTel = response.body().getTel();
@@ -239,8 +216,6 @@ public class EditProfile extends AppCompatActivity {
 
                                 villeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 ville.setAdapter(villeAdapter);
-                                i[0] = villeAdapter.getPosition(empVille);
-                                System.out.println(i[0] + " "+ empVille);
                             }
 
                         }
@@ -252,30 +227,26 @@ public class EditProfile extends AppCompatActivity {
                         Toast.makeText(EditProfile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                ville.setSelection(i[0]);
                 username.setText(empTel);
-                firstname.setText(empNom +" "+empPrenom);
-                // emploiTxt.setText(empEmploie);
+                firstname.setText(empNom);
+                lastname.setText(empPrenom);
                 cin.setText(empCin);
                 description.setText(empDesc);
 
-              /*  Picasso.get()
+              Picasso.get()
                         .load(Uri.parse(imagep))
                         .centerCrop()
                         .resize(150,150)
-                        .into(imageP);*/
+                      .placeholder(R.drawable.personne)
+                        .into(imageP);
+
                 if(empEmploie.equals("Client")){
                     description.setVisibility(View.GONE);
                     service.setVisibility(View.GONE);
-
-
                 }else{
                     description.setVisibility(View.VISIBLE);
                     service.setVisibility(View.VISIBLE);
-
                 }
-
 
             }
 
@@ -298,33 +269,6 @@ public class EditProfile extends AppCompatActivity {
 
             }
         }
-    }
-
-    /********************************************* REGEX ************************************************/
-    private boolean isValidMail(String email) {
-
-        String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        return Pattern.compile(EMAIL_STRING).matcher(email).matches();
-
-    }
-
-    private boolean isValidMobile(String phone) {
-        if(!Pattern.matches("[a-zA-Z]+", phone)) {
-            return phone.length() > 6 && phone.length() <= 13;
-        }
-        return false;
-    }
-
-    private  boolean isValidPwd(String pwd){
-        String PASSWORD_PATTERN =
-                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-   /*String PASSWORD_PATTERN =
-            "[a-zA-Z]+";*/
-        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-        Matcher matcher = pattern.matcher(pwd);
-        return matcher.matches();
     }
 
     public void onBackClick(View view) {
@@ -355,13 +299,5 @@ public class EditProfile extends AppCompatActivity {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
         finish();
-
-   /* public void onProfilClick(View view) {
-        Intent intent = new Intent(this, CurrentProfile.class);
-        startActivity(intent);
-        finish();
-    }*/
-
-    // -------- Footer icons listeners /
 }
 }

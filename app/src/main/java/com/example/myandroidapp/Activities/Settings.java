@@ -144,7 +144,6 @@ public class Settings extends AppCompatActivity {
     }
 
     public void SwitchProfil(View view){
-        System.out.println("im here");
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("type_profil", "client");
