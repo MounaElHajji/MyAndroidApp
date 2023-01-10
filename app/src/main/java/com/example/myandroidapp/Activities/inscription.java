@@ -81,6 +81,9 @@ public class inscription extends AppCompatActivity {
     @BindView(R.id.cin)
     EditText cin;
 
+    @BindView(R.id.imageView)
+    ImageView imageView;
+
 
     //Retrofit
     RetrofitS retrofitS= new RetrofitS();
@@ -165,8 +168,8 @@ public class inscription extends AppCompatActivity {
             );
             adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             service.setAdapter(adapter2);
-            btn = findViewById(R.id.btnUpload);
-            btn.setOnClickListener(new View.OnClickListener() {
+           // btn = findViewById(R.id.btnUpload);
+            imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent iGallery = new Intent(Intent.ACTION_PICK);
