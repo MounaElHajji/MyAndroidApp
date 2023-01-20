@@ -236,7 +236,6 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Long responseFromAPI = response.body();
                 String ratTextAverage = String.valueOf(responseFromAPI);
                 ratingBarTotal.setRating(responseFromAPI);
@@ -259,7 +258,6 @@ public class EmployeesDetails extends AppCompatActivity {
         call.enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
-                Toast.makeText(EmployeesDetails.this, "Data updated to API", Toast.LENGTH_SHORT).show();
                 Long responseFromAPI = response.body();
                 String ratText = String.valueOf(responseFromAPI);
 
@@ -284,6 +282,18 @@ public class EmployeesDetails extends AppCompatActivity {
             return;
         }
         startActivity(call);
+    }
+
+    public void contactMe(View view){
+
+        Intent i = new Intent(this,ChatActivity.class);
+        i.putExtra("theirId", id_emp);
+        i.putExtra("theirFirstName", nom);
+        i.putExtra("theirLastName", lastNameEmp);
+        i.putExtra("theirImage", empPropfileImg);
+        i.putExtra("theirTypeProfil", typeProfile);
+
+        startActivity(i);
     }
 
     @Override
